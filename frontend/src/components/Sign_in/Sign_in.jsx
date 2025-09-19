@@ -57,7 +57,7 @@ const Sign_in = () => {
 
 
 	return (
-		<div className={styles.outercontainer}>
+		<div className={styles.background}>
 		<form className={styles.container} onSubmit={handleSubmit}>
 			<input
 				type="text"

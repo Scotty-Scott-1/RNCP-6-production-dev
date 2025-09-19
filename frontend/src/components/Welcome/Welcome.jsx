@@ -10,6 +10,8 @@ const Welcome = () => {
   };
 
   return (
+    <div className={styles.background}>
+
     <div className={styles.container}>
       <h1 className={styles.title}>Phishing Simulator</h1>
 	    <button type="button" onClick={goToLogin} className={styles.button}>Sign in</button>
@@ -17,6 +19,7 @@ const Welcome = () => {
         Don't have an account? Sign up
       </Link>
 
+    </div>
     </div>
   );
 };
