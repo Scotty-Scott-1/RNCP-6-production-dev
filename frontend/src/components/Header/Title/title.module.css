@@ -1,0 +1,62 @@
+.titleContainer {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 220px;         /* narrower */
+  padding: 6px 10px;    /* much less padding */
+  border: 2px solid #00fff7;
+  border-radius: 8px;
+  background-color: #0d1117;
+  font-family: 'Courier New', Courier, monospace;
+  box-shadow: 0 0 15px #00fff7, 0 0 30px #00fff7aa;
+  text-align: center;
+  color: #00fff7;
+  line-height: 1.1;     /* tight vertical spacing */
+}
+
+.title {
+  font-size: 1.2rem;    /* smaller title */
+  margin-bottom: 6px;   /* less space below title */
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+  .titleContainer {
+    width: 70%;
+    left: 10px;
+    top: 10px;
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    line-height: 1.05;
+  }
+
+  .title {
+    font-size: 1rem;
+    margin-bottom: 4px;
+  }
+}
+
+
+
+
+
+/*
+.button {
+  padding: 12px 24px;
+  background-color: #00d7e0;
+  border: none;
+  border-radius: 6px;
+  color: #0d1117;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 0 12px #00d7e0aa;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button:hover {
+  background-color: #00fff7;
+  box-shadow: 0 0 20px #00fff7;
+}
+*/

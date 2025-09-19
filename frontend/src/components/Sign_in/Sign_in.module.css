@@ -1,0 +1,93 @@
+/* Form container */
+.outercontainer {
+height: 100vh;
+width: 100vh;
+background-color: #000000;
+}
+
+.container {
+  max-width: 600px;
+  margin: 200px auto;
+  padding: 30px;
+  border: 2px solid #00fff7;           /* neon cyan frame */
+  border-radius: 8px;
+  background-color: #000000;           /* pure black */
+  font-family: 'Courier New', Courier, monospace;
+  color: #00fff7;
+  box-shadow: 0 0 15px #00fff7, 0 0 30px #00fff7aa;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: none;
+}
+
+/* Form title */
+.title {
+  font-size: 34px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #00fff7;
+}
+
+/* Input fields */
+.input {
+  width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 15px;
+  border: 1.5px solid #00fff7;         /* thin cyan border */
+  border-radius: 4px;
+  background-color: #000000;           /* black fill */
+  color: #00fff7;
+  font-size: 16px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.input:focus {
+  border-color: #00d7e0;
+  box-shadow: 0 0 8px #00d7e0;         /* glowing focus effect */
+  background-color: #000000;
+}
+
+/* Placeholder text */
+.input::placeholder {
+  color: #00fff7aa;                      /* dim cyan placeholder */
+  font-style: italic;
+}
+
+/* Button */
+.button {
+  width: 50%;
+  padding: 12px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background-color: #00d7e0;
+  border: none;
+  border-radius: 6px;
+  color: #0d1117;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 0 12px #00d7e0aa;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button:hover {
+  background-color: #00fff7;
+  box-shadow: 0 0 20px #00fff7;
+}
+
+/* Links */
+.link {
+  color: #00fff7;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: #00d7e0;
+}

@@ -1,0 +1,109 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* full screen height */
+  margin: 0;
+  background-color: #000; /* keep your dark theme */
+}
+
+
+.container {
+  max-width: 900px; /* wider, more dashboard feel */
+  margin: 100px auto;
+  padding: 40px;
+  border: 2px solid #00fff7;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #05080d, #0d1117);
+  font-family: 'Courier New', Courier, monospace;
+  color: #00fff7;
+
+  box-shadow: 0 0 20px #00fff7, 0 0 40px #00fff777, inset 0 0 15px #00fff733;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* dashboard-like layout */
+  gap: 1.5rem;
+  animation: glowPulse 3s infinite alternate;
+}
+
+/* Subtle pulsing glow */
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 20px #00fff7, 0 0 40px #00fff777, inset 0 0 10px #00fff733; }
+  100% { box-shadow: 0 0 35px #00fff7, 0 0 70px #00fff7aa, inset 0 0 20px #00fff755; }
+}
+
+.input {
+  grid-column: span 3;
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid #00fff7;
+  border-radius: 6px;
+  font-size: 16px;
+  background: linear-gradient(135deg, #121823, #1a2230);
+  color: #00fff7;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  border-color: #00d7e0;
+  box-shadow: 0 0 12px #00d7e0, inset 0 0 8px #00d7e077;
+  background: linear-gradient(135deg, #161f2a, #202b3a);
+}
+
+.button {
+  grid-column: span 1;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  border: 1.5px solid #00fff7;
+  border-radius: 6px;
+  background: transparent; /* outlined by default */
+  color: #00fff7;
+
+  box-shadow: 0 0 8px #00fff7;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: #00fff7;
+  color: #0d1117;
+  box-shadow: 0 0 15px #00fff7;
+  transform: translateY(-2px);
+}
+
+.title {
+  grid-column: span 3;
+  font-size: 38px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #00fff7;
+  text-shadow: 0 0 15px #00fff7, 0 0 30px #00fff777;
+}
+
+.link {
+  color: #00fff7;
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 1px dashed #00fff7;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.link:hover {
+  color: #00d7e0;
+  border-color: #00d7e0;
+}
+
+p {
+  grid-column: span 3;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+  color: #b0ffff;
+}

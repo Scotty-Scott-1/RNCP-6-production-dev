@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #0d1117;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 80px;
+
+  /* Remove border or box-shadow line */
+  border-bottom: none;
+  box-shadow: none;
+}

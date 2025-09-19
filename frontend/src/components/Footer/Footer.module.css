@@ -1,0 +1,17 @@
+.footer {
+  position: fixed;
+  bottom: 10px;  /* 👈 10px above the bottom */
+  left: 0;
+  right: 0;
+
+  border-top: 2px solid #00fff7;
+  border-bottom: 2px solid #00fff7;
+  padding: 15px;
+  text-align: center;
+  color: #00fff7;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #000;
+
+  /* neon glow top + bottom only */
+  box-shadow: 0 -5px 15px #00fff7aa, 0 5px 15px #00fff7aa;
+}

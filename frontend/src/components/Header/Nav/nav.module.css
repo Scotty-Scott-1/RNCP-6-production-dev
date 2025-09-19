@@ -1,0 +1,26 @@
+.navbar {
+  position: fixed;
+  top: 20px;
+  right: 400px; /* adjust so it sits just left of your lightbulb */
+  display: flex;
+  gap: 16px;
+  z-index: 1001;
+}
+
+.navLink {
+  font-family: 'Courier New', Courier, monospace;
+  color: #00fff7;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 6px 10px;
+  border: 1px solid #00fff7;
+  border-radius: 6px;
+  box-shadow: 0 0 8px #00fff7;
+  transition: 0.3s ease;
+}
+
+.navLink:hover {
+  background-color: #00fff7;
+  color: #0d1117;
+  box-shadow: 0 0 15px #00fff7;
+}

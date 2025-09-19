@@ -1,0 +1,228 @@
+/* Neon Theme Base */
+body {
+  background-color: #0e0e0e;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+p {
+  color: #00ffff;
+}
+
+/* Container styling */
+.container {
+  max-width: 1000px;
+  margin: 200px auto 0 auto; /* top margin + auto center horizontally */
+  padding: 1.5rem;
+  background-color: #0e0e0e;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px #00ffff33; /* subtle cyan glow */
+}
+
+/* Header */
+.header {
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  color: #00ffff;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Form Inputs */
+.input,
+.inputDatetime {
+  background: #0e0e0e;
+  color: #00ffff;
+  border: 1px solid #00ffff;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s ease;
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+
+.input:hover,
+.input:focus,
+.input-datetime:hover,
+.input-datetime:focus {
+  background: #00ffff11;
+  border-color: #00ffff;
+  box-shadow: 0 0 10px #00ffff88;
+  color: #00ffff;
+}
+
+/* Labels */
+label {
+  color: #00ffff;
+  font-weight: bold;
+  display: block;
+  text-align: left;
+  margin-bottom: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+/* Checkbox */
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: #00ffff;
+  cursor: pointer;
+}
+
+.checkboxContainer input {
+  accent-color: #00ffff; /* neon color for checkbox */
+}
+
+/* Buttoqns */
+.button {
+  background: #0e0e0e;
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 50%;
+  aspect-ratio: 16/9;
+  display: block;
+  margin: 0.5rem auto;
+  text-align: center;
+}
+
+.button:hover {
+  background: #00ffff;
+  color: #000;
+  box-shadow: 0 0 10px #00ffff88;
+}
+
+/* Grid/List styling for campaigns (if reused) */
+.listHeader,
+.listItem {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 80px; /* name | date | status | type | actions */
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+}
+
+.listHeader {
+  font-weight: bold;
+  border-bottom: 2px solid #00ffff55;
+  color: #00ffff;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.listItem {
+  border-bottom: 1px solid #00ffff33;
+  transition: background 0.2s ease;
+}
+
+.listItem:hover {
+  background-color: #00ffff11;
+}
+
+/* Campaign buttons inside list */
+.campaignButton {
+  background: transparent;
+  border: none;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.campaignButton:hover {
+  color: #00ffff;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.pagination button {
+  background: #0e0e0e;
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #00ffff;
+  color: #000;
+  box-shadow: 0 0 10px #00ffff88;
+}
+
+.button2 {
+  background: #0e0e0e;
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  aspect-ratio: 16/9;
+  display: block;
+  margin: 0.5rem auto;
+  text-align: center;
+  max-width: 50%;
+}
+
+.button2:hover {
+  background: #00ffff;
+  color: #000;
+  box-shadow: 0 0 10px #00ffff88;
+}
+
+
+/* Dropdown (Select) styling */
+select.input {
+  background: #0e0e0e;
+  color: #00ffff;
+  border: 1px solid #00ffff;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s ease;
+  width: 100%;
+  margin-bottom: 0.75rem;
+  appearance: none; /* hide default arrow */
+  cursor: pointer;
+}
+
+/* Hover/Focus effects */
+select.input:hover,
+select.input:focus {
+  background: #00ffff11;
+  border-color: #00ffff;
+  box-shadow: 0 0 10px #00ffff88;
+  color: #00ffff;
+}
+
+/* Option styling */
+select.input option {
+  background: #0e0e0e;
+  color: #00ffff;
+  padding: 0.5rem;
+}
