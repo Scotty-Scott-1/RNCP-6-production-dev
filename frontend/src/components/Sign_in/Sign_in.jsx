@@ -28,7 +28,7 @@ const Sign_in = () => {
 			and accessToken in the response body.
 		*/
 		try {
-			const res = await fetch("/api/auth", {
+			const res = await fetch("/api/user/auth", {
 				method: "POST",
 				headers: {"Content-Type": "application/json"},
 				body: JSON.stringify({ username, password }),

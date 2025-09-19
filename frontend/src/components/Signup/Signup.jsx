@@ -26,7 +26,7 @@ const SignUp = () => {
 		}
 		/*TRY SENDING DATA TO BACKEND: Send the form data to the backend*/
 		try {
-			const response = await fetch("/api/users", {
+			const response = await fetch("/api/user/new", {
 				method: "POST",
 				headers: {"Content-Type": "application/json"},
 				body: JSON.stringify({

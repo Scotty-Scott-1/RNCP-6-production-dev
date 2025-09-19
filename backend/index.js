@@ -29,13 +29,23 @@ app.use(cookieParser());
 app.use(express.json());
 
 // --- API Routes ---
-const authRoutes = require("./api/auth.js");
-app.use("/api/auth", authRoutes);
+const authUser = require("./api/Users/authUser.js");
+app.use("/api/user/auth", authUser);
 
-// Test API route
-app.get("/api", (req, res) => {
-  res.json({ message: "Hello from Express API!" });
-});
+const newUser = require("./api/Users/newUser.js");
+app.use("/api/user/new", newUser);
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Serve built React frontend in production
 if (isProduction) {
