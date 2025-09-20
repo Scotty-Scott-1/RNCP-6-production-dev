@@ -41,12 +41,6 @@ const Sign_in = () => {
 				console.log("Login successful:", data);
 				setAccessToken(data.accessToken);
 				setTimeout(() => navigate("/dashboard"), 0);
-
-				localStorage.setItem("user", JSON.stringify({
-					id: data.user.id,
-					username: data.user.username
-				}));
-
 			} else {
 				alert("Login failed. Please try again.");
 			}

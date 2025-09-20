@@ -8,7 +8,7 @@ export const getOneCampaign = (id, accessToken) => {
 
 	const fetchCampaign = async () => {
 	  try {
-		const response = await fetch("http://localhost:3000/api/campaign/get/one", {
+		const response = await fetch("/api/campaign/get/one", {
 		  method: "POST",
 		  headers: {
 			"Authorization": `Bearer ${accessToken}`,

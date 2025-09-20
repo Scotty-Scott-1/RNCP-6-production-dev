@@ -10,7 +10,7 @@ const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
 
 
 // RETURN SUCCESS: If both checks pass success message*/
-router.post("/", async (req, res) => {
+router.post("/auth", async (req, res) => {
 	// GET CREDENTIALS: From request body
 	const { username, password } = req.body;
 	console.log("Received login attempt:");

@@ -8,7 +8,7 @@ export const getOneMailingList = (id, accessToken) => {
 
 	const fetchList = async () => {
 	  try {
-		const response = await fetch("http://localhost:3000/api/mailinglist/get/one", {
+		const response = await fetch("/api/mailinglist/get/one", {
 		  method: "POST",
 		  headers: {
 			"Authorization": `Bearer ${accessToken}`,
@@ -19,6 +19,8 @@ export const getOneMailingList = (id, accessToken) => {
 		if (response.ok) {
 		  const data = await response.json();
 		  setMyList(data);
+		} else {
+			console.log("TEST");
 		}
 	  } catch (err) {
 		console.error(err);

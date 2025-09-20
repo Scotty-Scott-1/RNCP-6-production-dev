@@ -30,16 +30,31 @@ app.use(express.json());
 
 // --- API Routes ---
 const authUser = require("./api/Users/authUser.js");
-app.use("/api/user/auth", authUser);
+app.use("/api/user", authUser);
 
 const newUser = require("./api/Users/newUser.js");
-app.use("/api/user/new", newUser);
+app.use("/api/user", newUser);
 
+const getCampaign = require("./api/Campaigns/getCampaign.js");
+app.use("/api/campaign", getCampaign);
 
+const newCampaign = require("./api/Campaigns/newCampaign.js");
+app.use("/api/campaign", newCampaign);
 
+const getOneCampaign = require("./api/Campaigns/getOneCampaign.js");
+app.use("/api/campaign/get", getOneCampaign);
 
+const updateCampaign = require("./api/Campaigns/updateCampaign.js");
+app.use("/api/campaign", updateCampaign);
 
+const getMailingLists = require("./api/Mailing_Lists/getMailingLists.js");
+app.use("/api/mailinglist", getMailingLists);
 
+const getOneMailingList = require("./api/Mailing_Lists/getOneMailingList.js");
+app.use("/api/mailinglist/get", getOneMailingList);
+
+const updateMailingList = require("./api/Mailing_Lists/updateMailingList.js");
+app.use("/api/mailinglist", updateMailingList);
 
 
 

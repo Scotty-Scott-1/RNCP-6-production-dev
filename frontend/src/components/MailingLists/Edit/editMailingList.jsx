@@ -38,7 +38,7 @@ const EditMailingList = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/mailinglist/update", {
+      const response = await fetch("/api/mailinglist/update", {
         method: "PUT",
         headers: {
           "Authorization": `Bearer ${accessToken}`,
@@ -89,92 +89,97 @@ const EditMailingList = () => {
   };
 
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
-      <h1 className={styles.title}>Edit Mailing List</h1>
+    <div className={styles.background}>
+      <form className={styles.container} onSubmit={handleSubmit}>
+        <h1 className={styles.title}>Edit Mailing List</h1>
+        <label htmlFor="listame"><p>Mailing List Name</p></label>
+        <input
+          type="text"
+          value={listName}
+          onChange={(e) => setListName(e.target.value)}
+          className={styles.input}
+          placeholder="Mailing List Name"
+          required
+          id='listname'
+          />
+        <label htmlFor="desc"><p>Description</p></label>
+        <input
+          type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className={styles.input}
+          placeholder="Description"
+          required
+          id='desc'
+          />
 
-      <input
-        type="text"
-        value={listName}
-        onChange={(e) => setListName(e.target.value)}
-        className={styles.input}
-        placeholder="Mailing List Name"
-        required
-      />
-      <input
-        type="text"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        className={styles.input}
-        placeholder="Description"
-        required
-      />
-
-      <div className={styles.listHeader} style={{ marginTop: '1rem' }}>
-        <span>First Name</span>
-        <span>Last Name</span>
-        <span>Email</span>
-        <span>Department</span>
-        <span>Role</span>
-      </div>
-      <div className={styles.list}>
-        {contacts?.length > 0 ? (
-          contacts.map((c, i) => (
-            <div key={c._id ?? i} className={styles.listItem}>
-              <input className={styles.input} value={c.name || ''} readOnly />
-              <input className={styles.input} value={c.lastName || ''} readOnly />
-              <input className={styles.input} value={c.email || ''} readOnly />
-              <input className={styles.input} value={c.department || ''} readOnly />
-              <input className={styles.input} value={c.role || ''} readOnly />
+        <div className={styles.listHeader} style={{ marginTop: '1rem' }}>
+          <span>First Name</span>
+          <span>Last Name</span>
+          <span>Email</span>
+          <span>Department</span>
+          <span>Role</span>
+        </div>
+        <div className={styles.list}>
+          {contacts?.length > 0 ? (
+            contacts.map((c, i) => (
+              <div key={c._id ?? i} className={styles.listItem}>
+                <input className={styles.input} value={c.name || ''} readOnly />
+                <input className={styles.input} value={c.lastName || ''} readOnly />
+                <input className={styles.input} value={c.email || ''} readOnly />
+                <input className={styles.input} value={c.department || ''} readOnly />
+                <input className={styles.input} value={c.role || ''} readOnly />
+              </div>
+            ))
+          ) : (
+            <div style={{ padding: '0.75rem 1rem', color: '#00ffff66' }}>
+              No contacts yet.
             </div>
-          ))
-        ) : (
-          <div style={{ padding: '0.75rem 1rem', color: '#00ffff66' }}>
-            No contacts yet.
-          </div>
-        )}
-      </div>
+          )}
+        </div>
 
-      <h2 style={{ marginTop: "1.5rem" }}>Add New Contact</h2>
-      <div className={styles.listItem}>
-        <input
-          className={styles.input}
-          placeholder="First Name"
-          value={newContact.name}
-          onChange={(e) => setNewContact({ ...newContact, name: e.target.value })}
-        />
-        <input
-          className={styles.input}
-          placeholder="Last Name"
-          value={newContact.lastName}
-          onChange={(e) => setNewContact({ ...newContact, lastName: e.target.value })}
-        />
-        <input
-          className={styles.input}
-          placeholder="Email"
-          value={newContact.email}
-          onChange={(e) => setNewContact({ ...newContact, email: e.target.value })}
-        />
-        <input
-          className={styles.input}
-          placeholder="Department"
-          value={newContact.department}
-          onChange={(e) => setNewContact({ ...newContact, department: e.target.value })}
-        />
-        <input
-          className={styles.input}
-          placeholder="Role"
-          value={newContact.role}
-          onChange={(e) => setNewContact({ ...newContact, role: e.target.value })}
-        />
-      </div>
-      <button type="button" className={styles.button2} onClick={handleAddContact}>
-        Add Contact
-      </button>
+        <h2 style={{ marginTop: "1.5rem" }}>Add New Contact</h2>
+        <div className={styles.listItem}>
+          <input
+            className={styles.input}
+            placeholder="First Name"
+            value={newContact.name}
+            onChange={(e) => setNewContact({ ...newContact, name: e.target.value })}
+            />
+          <input
+            className={styles.input}
+            placeholder="Last Name"
+            value={newContact.lastName}
+            onChange={(e) => setNewContact({ ...newContact, lastName: e.target.value })}
+            />
+          <input
+            className={styles.input}
+            placeholder="Email"
+            value={newContact.email}
+            onChange={(e) => setNewContact({ ...newContact, email: e.target.value })}
+            />
+          <input
+            className={styles.input}
+            placeholder="Department"
+            value={newContact.department}
+            onChange={(e) => setNewContact({ ...newContact, department: e.target.value })}
+            />
+          <input
+            className={styles.input}
+            placeholder="Role"
+            value={newContact.role}
+            onChange={(e) => setNewContact({ ...newContact, role: e.target.value })}
+            />
+        </div>
+        <button type="button" className={styles.button2} onClick={handleAddContact}>
+          Add Contact
+        </button>
 
-      <button type="submit" className={styles.button2} style={{ marginTop: "1rem" }}>
-        Save Changes
-      </button>
-    </form>
+        <button type="submit" className={styles.button2} style={{ marginTop: "1rem" }}>
+          Save Changes
+        </button>
+      </form>
+    </div>
   );
 };
 

@@ -24,7 +24,7 @@ const NewCampaignComponent = () => {
 	useEffect(() => {
 		const fetchMailingLists = async () => {
 			try {
-				const response = await fetch("http://localhost:3000/api/mailinglist/get", {
+				const response = await fetch("/api/mailinglist/get", {
 					headers: {
 						"Authorization": `Bearer ${accessToken}`
 					}
@@ -58,7 +58,7 @@ const NewCampaignComponent = () => {
 		}
 
 		try {
-			const response = await fetch("https://localhost:3000/api/campaign/new", {
+			const response = await fetch("/api/campaign/new", {
 				method: "POST",
 				headers: {
 					"Authorization": `Bearer ${accessToken}`,

@@ -48,11 +48,8 @@ const EditCampaign = () => {
       alert("All required fields must be filled.");
       return;
     }
-
-
-
     try {
-      const response = await fetch("http://localhost:3000/api/campaign/update", {
+      const response = await fetch("/api/campaign/update", {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -62,8 +59,8 @@ const EditCampaign = () => {
           id,
           campaignName,
           description,
-					startTime: startTime.toISOString(),
-					endTime: endTime.toISOString(),
+  startTime: new Date(startTime).toISOString(),
+  endTime: new Date(endTime).toISOString(),
           emailSenderName,
           emailTemplate,
           landingPageTemplate,
@@ -84,99 +81,93 @@ const EditCampaign = () => {
   };
 
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
-      <h1 className={styles.title}>Edit Campaign</h1>
-
-      <label htmlFor="campaignName">Campaign Name:</label>
-      <input
-        type="text"
-        id="campaignName"
-        value={campaignName}
-        onChange={(e) => setCampaignName(e.target.value)}
-        className={styles.input}
-        placeholder="Campaign Name"
-        required
-      />
-
-      <label htmlFor="description">Description:</label>
-      <input
-        type="text"
-        id="description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        className={styles.input}
-        placeholder="Description"
-        required
-      />
-
-			<label htmlFor="startTime">Start Time:</label>
-			<DateTimePicker
-				id="startTime"
-				value={startTime}
-				onChange={setStartTime}
-				className={styles.inputDatetime}
-			/>
-
-			<label htmlFor="endTime">End Time:</label>
-			  <DateTimePicker
-				  id="endTime"
-				  value={endTime}
-				  onChange={setEndTime}
-				  className={styles.inputDatetime}
-			 />
-
-      <label htmlFor="Mailing list">Mailing List:</label>
-      <input
-        type="text"
-        id="Mailing list"
-        value={myList?.listName || ""}
-        className={styles.input}
-        placeholder="Mailing list"
-        readOnly
-      />
-
-      <label htmlFor="emailSenderName">Email Sender Name:</label>
-      <input
-        type="text"
-        id="emailSenderName"
-        value={emailSenderName}
-        onChange={(e) => setEmailSenderName(e.target.value)}
-        className={styles.input}
-        placeholder="Email Sender Name"
-        required
-      />
-      <label htmlFor="emailTemplate">Email Template:</label>
-      <input
-        type="text"
-        id="emailTemplate"
-        value={emailTemplate}
-        onChange={(e) => setEmailTemplate(e.target.value)}
-        className={styles.input}
-        placeholder="Email Template"
-      />
-      <label htmlFor="Landing Page Template">Landing Page Template:</label>
-      <input
-        type="text"
-        id="landingPageTemplate"
-        value={landingPageTemplate}
-        onChange={(e) => setLandingPageTemplate(e.target.value)}
-        className={styles.input}
-        placeholder="Landing Page Template"
-      />
-
-      <label className={styles.checkboxContainer}>
+    <div className={styles.background}>
+      <form className={styles.container} onSubmit={handleSubmit}>
+        <h1 className={styles.title}>Edit Campaign</h1>
+        <label className={styles.label} htmlFor="campaignName">Campaign Name:</label>
         <input
-          type="checkbox"
-          checked={landingPage}
-          onChange={(e) => setLandingPage(e.target.checked)}
+          type="text"
+          id="campaignName"
+          value={campaignName}
+          onChange={(e) => setCampaignName(e.target.value)}
+          className={styles.input}
+          placeholder="Campaign Name"
+          required
         />
-        Create a landing page for this campaign
-      </label>
+        <label className={styles.label} htmlFor="description">Description:</label>
+        <input
+          type="text"
+          id="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className={styles.input}
+          placeholder="Description"
+          required
+        />
+        <label className={styles.label} htmlFor="startTime">Start Time:</label>
+        <DateTimePicker
+          id="startTime"
+          value={startTime}
+          onChange={setStartTime}
+          className={styles.inputDatetime}
+        />
+        <label className={styles.label} htmlFor="endTime">End Time:</label>
+			  <DateTimePicker
+          id="endTime"
+          value={endTime}
+          onChange={setEndTime}
+          className={styles.inputDatetime}
+        />
+        <label className={styles.label} htmlFor="Mailing list">Mailing List:</label>
+        <input
+          type="text"
+          id="Mailing list"
+          value={myList?.listName || ""}
+          className={styles.input}
+          placeholder="Mailing list"
+          readOnly
+        />
+       <label className={styles.label} htmlFor="emailSenderName">Email Sender Name:</label>
+       <input
+         type="text"
+         id="emailSenderName"
+         value={emailSenderName}
+         onChange={(e) => setEmailSenderName(e.target.value)}
+         className={styles.input}
+         placeholder="Email Sender Name"
+         required
+       />
+       <label className={styles.label} htmlFor="emailTemplate">Email Template:</label>
+       <input
+         type="text"
+         id="emailTemplate"
+         value={emailTemplate}
+         onChange={(e) => setEmailTemplate(e.target.value)}
+         className={styles.input}
+         placeholder="Email Template"
+       />
+       <label className={styles.label} htmlFor="LandingPageTemplate">Landing Page Template:</label>
+       <input
+         type="text"
+         id="landingPageTemplate"
+         value={landingPageTemplate}
+         onChange={(e) => setLandingPageTemplate(e.target.value)}
+         className={styles.input}
+         placeholder="Landing Page Template"
+       />
+       <p>
+        <input
+           type="checkbox"
+           checked={landingPage}
+           onChange={(e) => setLandingPage(e.target.checked)}
+           id="ch"
+        />
+          Create a landing page for this campaign
+        </p>
 
-      <button type="submit" className={styles.button2}>
-        Save Changes
-      </button>
-    </form>
+        <button type="submit" className={styles.button2}>Save Changes</button>
+      </form>
+    </div>
   );
 };
 

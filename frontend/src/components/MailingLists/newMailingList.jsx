@@ -28,7 +28,7 @@ const NewMailingList = () => {
           createdBy: user.id,
         }),
       });*/
-      const response = await fetch("http://localhost:3000/api/mailinglist/new", {
+      const response = await fetch("api/mailinglist/new", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${accessToken}`,
@@ -56,29 +56,35 @@ const NewMailingList = () => {
   };
 
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
-      <h1 className={styles.title}>Mailing Lists</h1>
-      <input
-        type="text"
-        value={listName}
-        onChange={(e) => setListName(e.target.value)}
-        className={styles.input}
-        placeholder="Mailing List Name"
-        required
-      />
-      <input
-        type="text"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        className={styles.input}
-        placeholder="Description"
-        required
-      />
+    <div className={styles.background}>
+      <form className={styles.container} onSubmit={handleSubmit}>
+        <h1 className={styles.title}>Mailing Lists</h1>
+        <label htmlFor="mailing"><p>Mailing List Name</p></label>
+        <input
+          type="text"
+          value={listName}
+          onChange={(e) => setListName(e.target.value)}
+          className={styles.input}
+          placeholder="Mailing List Name"
+          required
+          id='mailing'
+          />
+          <label htmlFor="desc"><p>Description</p></label>
+        <input
+          type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className={styles.input}
+          placeholder="Description"
+          required
+          id='desc'
+          />
 
-      <button type="submit" className={styles.button2}>
-        Submit
-      </button>
-    </form>
+        <button type="submit" className={styles.button2}>
+          Submit
+        </button>
+      </form>
+    </div>
   );
 };
 
