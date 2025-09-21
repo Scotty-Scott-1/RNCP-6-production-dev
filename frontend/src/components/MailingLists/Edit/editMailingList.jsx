@@ -66,7 +66,7 @@ const EditMailingList = () => {
     }
 
     try {
-      const response = await fetch("https://localhost:3000/api/mailinglist/addcontact", {
+      const response = await fetch("/api/mailinglist/addcontact", {
         method: "PUT",
         headers: {
           "Authorization": `Bearer ${accessToken}`,

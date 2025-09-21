@@ -92,6 +92,8 @@ const NewCampaignComponent = () => {
 	};
 
 	return (
+		<div className={styles.background}>
+
 		<form className={styles.container} onSubmit={handleSubmit}>
 			<input
 				type="text"
@@ -106,7 +108,7 @@ const NewCampaignComponent = () => {
 				onChange={(e) => setDescription(e.target.value)}
 				className={styles.input}
 				placeholder="Description"
-			/>
+				/>
 
 			<label htmlFor="startTime">Start Time:</label>
 			<DateTimePicker
@@ -114,7 +116,7 @@ const NewCampaignComponent = () => {
 				value={startTime}
 				onChange={setStartTime}
 				className={styles.inputDatetime}
-			/>
+				/>
 
 			<label htmlFor="endTime">End Time:</label>
 			<DateTimePicker
@@ -122,14 +124,14 @@ const NewCampaignComponent = () => {
 				value={endTime}
 				onChange={setEndTime}
 				className={styles.inputDatetime}
-			/>
+				/>
 
 			{/* Mailing List Dropdown */}
 			<select
 				value={mailingListId}
 				onChange={(e) => setMailingListId(e.target.value)}
 				className={styles.input}
-			>
+				>
 				<option value="">Select Mailing List</option>
 				{mailingLists.map((list) => (
 					<option key={list._id} value={list._id}>
@@ -144,33 +146,34 @@ const NewCampaignComponent = () => {
 				onChange={(e) => setEmailSenderName(e.target.value)}
 				className={styles.input}
 				placeholder="Email Sender Name"
-			/>
+				/>
 			<input
 				type="text"
 				value={emailTemplate}
 				onChange={(e) => setEmailTemplate(e.target.value)}
 				className={styles.input}
 				placeholder="Email Template"
-			/>
+				/>
 			<input
 				type="text"
 				value={landingPageTemplate}
 				onChange={(e) => setLandingPageTemplate(e.target.value)}
 				className={styles.input}
 				placeholder="Landing Page Template"
-			/>
+				/>
 
 			<label className={styles.checkboxContainer}>
 				<input
 					type="checkbox"
 					checked={landingPage}
 					onChange={(e) => setLandingPage(e.target.checked)}
-				/>
+					/>
 				Create a landing page for this campaign
 			</label>
 
 			<button type="submit" className={styles.button2}>Submit</button>
 		</form>
+		</div>
 	);
 };
 

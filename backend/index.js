@@ -47,6 +47,9 @@ app.use("/api/campaign/get", getOneCampaign);
 const updateCampaign = require("./api/Campaigns/updateCampaign.js");
 app.use("/api/campaign", updateCampaign);
 
+const newMailingList = require("./api/Mailing_Lists/newMailingList.js");
+app.use("/api/mailinglist", newMailingList);
+
 const getMailingLists = require("./api/Mailing_Lists/getMailingLists.js");
 app.use("/api/mailinglist", getMailingLists);
 
@@ -56,7 +59,8 @@ app.use("/api/mailinglist/get", getOneMailingList);
 const updateMailingList = require("./api/Mailing_Lists/updateMailingList.js");
 app.use("/api/mailinglist", updateMailingList);
 
-
+const addContactMailingList = require("./api/Mailing_Lists/addContact.js");
+app.use("/api/mailinglist", addContactMailingList);
 
 
 

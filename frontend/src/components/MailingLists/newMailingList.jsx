@@ -18,16 +18,6 @@ const NewMailingList = () => {
     }
 
     try {
-      /*
-      const response = await fetch("https://localhost:5001/api/mailinglist/new", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          listName,
-          description,
-          createdBy: user.id,
-        }),
-      });*/
       const response = await fetch("api/mailinglist/new", {
         method: "POST",
         headers: {
