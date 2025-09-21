@@ -19,7 +19,7 @@ const ProtectRoute = ({ children }) => {
 			}
 		/*TRY VALIDATING TOKEN: Send the accessToken to the backend for validation*/
 		try {
-			const response = await fetch("api/security/frontend", {
+			const response = await fetch("/api/security/frontend", {
 				method: "POST",
 				headers: {"Content-Type": "application/json"},
 				body: JSON.stringify({ token: accessToken }),
