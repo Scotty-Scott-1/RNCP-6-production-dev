@@ -1,5 +1,5 @@
 .navbar {
-  position: fixed;
+  position:absolute;
   top: 20px;
   right: 400px; /* adjust so it sits just left of your lightbulb */
   display: flex;
