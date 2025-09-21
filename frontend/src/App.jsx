@@ -15,7 +15,11 @@ import MailingLists from '../src/pages/MailingLists.jsx';
 import NewMailingListPage from '../src/pages/newMailingListsPage.jsx';
 import EditMailingListPage from '../src/pages/editMailingList.jsx';
 import EditCampaignPage from "../src/pages/editCampaign.jsx";
-import ResetPassword from "../src/pages/Templates/ResetPassword.jsx";
+import ResetPassword from "./pages/Template/ResetPassword.jsx";
+import ClaimVoucher from "./pages/Template/ClaimVoucher.jsx";
+import AppraisalAlert from "./pages/Template/AppraisalAlert.jsx";
+import Payroll from './pages/Template/PayrollAlert.jsx';
+import TemplatesPage from "./pages/Template/TemplatesList.jsx";
 
 const App = () => (
   <AuthProvider>
@@ -54,7 +58,11 @@ const App = () => (
           path="/campaign/edit/:id/:listid"
           element={<ProtectRoute><EditCampaignPage /></ProtectRoute>}
         />
+        <Route path="/template" element={<TemplatesPage />} />
         <Route path="/reset" element={<ResetPassword />} />
+        <Route path="/claim" element={<ClaimVoucher />} />
+        <Route path="/appraisal" element={<AppraisalAlert />} />
+        <Route path="/payroll" element={<Payroll />} />
       </Routes>
     </Router>
   </AuthProvider>

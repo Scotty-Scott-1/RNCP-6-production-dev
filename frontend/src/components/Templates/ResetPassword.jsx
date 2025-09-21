@@ -29,9 +29,9 @@ const ResetPW = () => {
 						id="newpw"
 						placeholder="New Password"
 					/>
-
+<br></br>
+<br></br>
 					<button className={styles.button}>
-
 						Update
 					</button>
 

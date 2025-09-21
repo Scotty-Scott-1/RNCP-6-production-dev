@@ -26,17 +26,10 @@
   border-radius: 12px;
   background-color: rgba(0, 0, 0, 0.85);
   box-shadow: 0 0 30px #00fff7, 0 0 60px #00fff7 inset;
-  z-index: 1; /* container above falling letters */
+  z-index: 1;
   text-align: center;
   justify-content: center;
   align-items: center;
-}
-
-.title {
-  font-size: 2rem;
-  color: #00fff7;
-  margin-bottom: 20px;
-  text-shadow: 0 0 10px #00fff7, 0 0 20px #00fff7;
 }
 
 .button {
@@ -63,19 +56,4 @@
 .button:active {
   transform: scale(0.98);
   box-shadow: 0 0 15px #00fff7 inset;
-}
-
-.text {
-  font-size: 1rem;
-  margin-top: 10px;
-  color: #00fff7;
-}
-
-.link {
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.link:hover {
-  color: #fff;
 }

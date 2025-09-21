@@ -1,13 +1,19 @@
 import React, { useEffect, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import styles from "./Welcome.module.css";
+import { useNavigate } from "react-router-dom";
+import styles from "./TemplatesList.module.css";
 
-const Welcome = () => {
+const TemplatesList = () => {
   const navigate = useNavigate();
   const canvasRef = useRef(null);
 
-  const goToLogin = () => {
-    navigate("/signin");
+  const handleClick = (section) => {
+    switch (section) {
+      case "1": navigate("/appraisal"); break;
+      case "2": navigate("/claim"); break;
+      case "3": navigate("/payroll"); break;
+      case "4": navigate("/reset"); break;
+      default: break;
+    }
   };
 
   // Matrix rain effect
@@ -57,16 +63,13 @@ const Welcome = () => {
     <div className={styles.background}>
       <canvas ref={canvasRef} className={styles.canvas}></canvas>
       <div className={styles.container}>
-        <h1 className={styles.title}>Phishing Simulator</h1>
-        <button type="button" onClick={goToLogin} className={styles.button}>
-          Sign in
-        </button>
-        <Link to="/signup" className={`${styles.text} ${styles.link}`}>
-          Don&apos;t have an account? Sign up
-        </Link>
+        <button className={styles.button} onClick={() => handleClick("1")}>Appraisal Alert</button>
+        <button className={styles.button} onClick={() => handleClick("2")}>Claim Voucher</button>
+        <button className={styles.button} onClick={() => handleClick("3")}>Payroll Alert</button>
+        <button className={styles.button} onClick={() => handleClick("4")}>Reset Password</button>
       </div>
     </div>
   );
 };
 
-export default Welcome;
+export default TemplatesList;

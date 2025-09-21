@@ -1,0 +1,82 @@
+/* voucher.module.css */
+
+.body {
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #ff7eb3, #ff758c, #ffca7b);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', Courier, monospace;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+.container {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 30px;
+  border: 3px dashed #ffeb3b; /* festive border */
+  border-radius: 12px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 0 25px rgba(255, 235, 59, 0.7);
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+  }
+  to {
+    box-shadow: 0 0 30px rgba(255, 235, 59, 1);
+  }
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: 2px solid #ffeb3b;
+  border-radius: 6px;
+  outline: none;
+  font-size: 1rem;
+  background: #fff;
+  color: #333;
+}
+
+.input:focus {
+  border-color: #00ffcc;
+  box-shadow: 0 0 10px #00ffcc;
+}
+
+.button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #00ffcc, #00bfff);
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #00bfff, #00ffcc);
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  text-shadow: 2px 2px 5px #000;
+}
+
+h6 {
+  margin-top: 20px;
+  font-style: italic;
+  color: #ffe57f;
+}

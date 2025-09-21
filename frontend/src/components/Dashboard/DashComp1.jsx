@@ -16,6 +16,9 @@ const Comp1 = () => {
       case "3":
         navigate("/mailinglists");
         break;
+      case "5":
+        navigate("/template");
+        break;
       default:
         break
     }
