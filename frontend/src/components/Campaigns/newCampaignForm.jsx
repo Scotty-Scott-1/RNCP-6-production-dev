@@ -95,22 +95,25 @@ const NewCampaignComponent = () => {
 		<div className={styles.background}>
 
 		<form className={styles.container} onSubmit={handleSubmit}>
+			<label htmlFor="name"><p>Campaign Name</p></label>
 			<input
 				type="text"
 				value={campaignName}
 				onChange={(e) => setCampaignName(e.target.value)}
 				className={styles.input}
 				placeholder="Campaign Name"
+				id="name"
 			/>
+			<label htmlFor="desc"><p>Description</p></label>
 			<input
 				type="text"
 				value={description}
 				onChange={(e) => setDescription(e.target.value)}
 				className={styles.input}
 				placeholder="Description"
+				id="desc"
 				/>
-
-			<label htmlFor="startTime">Start Time:</label>
+			<label htmlFor="startTime"><p>Start Time:</p></label>
 			<DateTimePicker
 				id="startTime"
 				value={startTime}
@@ -118,7 +121,7 @@ const NewCampaignComponent = () => {
 				className={styles.inputDatetime}
 				/>
 
-			<label htmlFor="endTime">End Time:</label>
+			<label htmlFor="endTime"><p>End Time:</p></label>
 			<DateTimePicker
 				id="endTime"
 				value={endTime}
@@ -127,11 +130,13 @@ const NewCampaignComponent = () => {
 				/>
 
 			{/* Mailing List Dropdown */}
+			<label htmlFor="mail"><p>Mailing List:</p></label>
 			<select
 				value={mailingListId}
 				onChange={(e) => setMailingListId(e.target.value)}
 				className={styles.input}
-				>
+				id="mailing"
+			>
 				<option value="">Select Mailing List</option>
 				{mailingLists.map((list) => (
 					<option key={list._id} value={list._id}>
@@ -140,28 +145,33 @@ const NewCampaignComponent = () => {
 				))}
 			</select>
 
+			<label htmlFor="emailsender"><p>Email Sender Name</p></label>
 			<input
 				type="text"
 				value={emailSenderName}
 				onChange={(e) => setEmailSenderName(e.target.value)}
 				className={styles.input}
 				placeholder="Email Sender Name"
-				/>
+				id='emailsender'
+			/>
+			<label htmlFor="emailtemp"><p>Email Template</p></label>
 			<input
 				type="text"
 				value={emailTemplate}
 				onChange={(e) => setEmailTemplate(e.target.value)}
 				className={styles.input}
 				placeholder="Email Template"
+				id="emailtemp"
 				/>
+			<label htmlFor="temp"><p>Landing Page Template</p></label>
 			<input
 				type="text"
 				value={landingPageTemplate}
 				onChange={(e) => setLandingPageTemplate(e.target.value)}
 				className={styles.input}
 				placeholder="Landing Page Template"
+				id='temp'
 				/>
-
 			<label className={styles.checkboxContainer}>
 				<input
 					type="checkbox"
