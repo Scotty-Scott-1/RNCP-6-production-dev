@@ -62,7 +62,11 @@ app.use("/api/mailinglist", updateMailingList);
 const addContactMailingList = require("./api/Mailing_Lists/addContact.js");
 app.use("/api/mailinglist", addContactMailingList);
 
+const securityFrontend = require("./api/Security/verifyTokenFrontend.js");
+app.use("/api/security", securityFrontend);
 
+const securityRefresh = require("./api/Security/refreshToken.js");
+app.use("/api/security", securityRefresh);
 
 
 

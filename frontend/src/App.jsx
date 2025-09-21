@@ -28,13 +28,34 @@ const App = () => (
         <Route path="/signup" element={<Signupform />} />
         <Route path="/test" element={<Test />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/campaigns" element={<Campaigns />} />
-        <Route path="/campaign/new" element={<NewCampaignPage />} />
-        <Route path="/mailinglists" element={<MailingLists />} />
-        <Route path="/newmailinglist" element={<NewMailingListPage />} />
-        <Route path="/mailinglist/edit/:id" element={<EditMailingListPage />} />
-        <Route path="/campaign/edit/:id/:listid" element={<EditCampaignPage />} />
+        <Route
+          path="/dashboard"
+          element={<ProtectRoute><Dashboard /></ProtectRoute>}
+        />
+        <Route
+          path="/campaigns"
+          element={<ProtectRoute><Campaigns /></ProtectRoute>}
+        />
+        <Route
+          path="/campaign/new"
+          element={<ProtectRoute><NewCampaignPage /></ProtectRoute>}
+        />
+        <Route
+          path="/mailinglists"
+          element={<ProtectRoute><MailingLists /></ProtectRoute>}
+        />
+        <Route
+          path="/newmailinglist"
+          element={<ProtectRoute><NewMailingListPage /></ProtectRoute>}
+        />
+        <Route
+          path="/mailinglist/edit/:id"
+          element={<ProtectRoute><EditMailingListPage /></ProtectRoute>}
+        />
+        <Route
+          path="/campaign/edit/:id/:listid"
+          element={<ProtectRoute><EditCampaignPage /></ProtectRoute>}
+        />
         <Route path="/reset" element={<ResetPassword />} />
       </Routes>
     </Router>

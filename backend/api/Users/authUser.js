@@ -31,7 +31,7 @@ router.post("/auth", async (req, res) => {
 		const accessToken = jwt.sign(
 			{ id: userToCheck._id, username: userToCheck.username },
 			JWT_SECRET,
-			{ expiresIn: "15m" }
+			{ expiresIn: "1m" }
 		);
 
 		const refreshToken = jwt.sign(
@@ -62,7 +62,5 @@ router.post("/auth", async (req, res) => {
 		res.status(500).json({ message: "Internal server error" });
 	}
 });
-
-
 
 module.exports = router;

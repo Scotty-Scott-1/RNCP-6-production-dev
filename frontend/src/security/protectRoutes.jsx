@@ -7,7 +7,7 @@ const ProtectRoute = ({ children }) => {
 	const { accessToken, setAccessToken } = useAuth();
 	const location = useLocation();
 	const [status, setStatus] = useState("loading"); // "loading" | "valid" | "invalid" | "expired"
-	console.log("Protected");
+	console.log("Protected page. Trying to authenticate...");
 
 	/*EFFECT TO VALIDATE TOKEN: On component mount or when accessToken changes, validate the token with the backend*/
 	useEffect(() => {
@@ -19,7 +19,7 @@ const ProtectRoute = ({ children }) => {
 			}
 		/*TRY VALIDATING TOKEN: Send the accessToken to the backend for validation*/
 		try {
-			const response = await fetch("http://localhost:3000/api/checkaccess", {
+			const response = await fetch("api/security/frontend", {
 				method: "POST",
 				headers: {"Content-Type": "application/json"},
 				body: JSON.stringify({ token: accessToken }),
@@ -54,9 +54,9 @@ const ProtectRoute = ({ children }) => {
 		if (status !== "expired") return;
 		const refresh = async () => {
 			try {
-				const response = await fetch("https://localhost:5001/api/refresh_token", {
+				const response = await fetch("/api/security/refresh", {
 					method: "POST",
-					credentials: "include", // Include cookies
+					credentials: "include",
 				});
 				const data = await response.json();
 				console.log("Trying to refresh token1111");
