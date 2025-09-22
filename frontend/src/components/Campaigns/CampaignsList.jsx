@@ -45,9 +45,28 @@ const Campaigns = () => {
 
   const handleAddCampaign = () => navigate("/campaign/new");
 
-  const handleDeleteCampaign = (id) => {
+  const handleDeleteCampaign = async (id) => {
     console.log("Delete campaign:", id);
-    //Add delete API call
+    const confirmed = window.confirm("Are you sure you want to delete this campaign?");
+    if (!confirmed) return;
+    try {
+      const response = await fetch(`/api/campaign/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+      });
+      if (response.ok) {
+        alert("Campaign deleted successfully!");
+        setMyCampaigns((prev) => prev.filter(c => c._id !== id));
+      } else {
+        const errorData = await response.json();
+        console.error("Delete failed:", errorData);
+      }
+    } catch (error) {
+      console.error("Error deleting campaign:", error);
+    }
   };
 
   return (

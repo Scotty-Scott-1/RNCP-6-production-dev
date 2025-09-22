@@ -68,6 +68,11 @@ app.use("/api/security", securityFrontend);
 const securityRefresh = require("./api/Security/refreshToken.js");
 app.use("/api/security", securityRefresh);
 
+const deleteCampaign = require("./api/Campaigns/deleteCampaign.js");
+app.use("/api/campaign/delete", deleteCampaign);
+
+
+
 
 
 // Serve built React frontend in production
