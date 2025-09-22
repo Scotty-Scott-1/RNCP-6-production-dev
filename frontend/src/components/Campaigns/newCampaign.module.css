@@ -1,8 +1,8 @@
-/* Outer container */
+
 .outerContainer {
   height: 100vh;
   width: 100vw;
-  background: none; /* transparent for MatrixRain */
+  background: none;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -13,7 +13,6 @@
   color: #00fff7;
 }
 
-/* Main form container */
 .container {
   width: 95%;
   max-width: 800px;
@@ -29,7 +28,6 @@
   box-sizing: border-box;
 }
 
-/* Title */
 .title {
   font-size: 2rem;
   font-weight: bold;
@@ -39,30 +37,26 @@
   margin-bottom: 20px;
 }
 
-/* Form row wrapper: labels left, inputs right */
 .row {
   display: flex;
   align-items: flex-start;
-  gap: 20px; /* horizontal gap between label and input column */
+  gap: 20px;
 }
 
-/* Column wrapper for labels */
 .labelColumn {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  min-width: 180px; /* fixed width for all labels */
+  min-width: 180px;
 }
 
-/* Column wrapper for inputs */
 .inputColumn {
   display: flex;
   flex-direction: column;
-  flex: 1; /* take remaining horizontal space */
-  gap: 8px; /* vertical gap between stacked inputs */
+  flex: 1;
+  gap: 8px;
 }
 
-/* Labels */
 .row label p {
   margin: 0;
   color: #00fff7;
@@ -70,7 +64,7 @@
   text-shadow: 0 0 5px #00fff755;
 }
 
-/* Inputs, datetime, select */
+
 .input,
 .inputDatetime,
 select.input {
@@ -93,7 +87,6 @@ select.input:focus {
   background-color: #121823;
 }
 
-/* Checkbox row */
 .checkboxContainer {
   display: flex;
   align-items: center;
@@ -107,11 +100,10 @@ select.input:focus {
 }
 
 .checkboxContainer span {
-  display: inline-block; /* text inline with checkbox */
+  display: inline-block;
   margin: 0;
 }
 
-/* Buttons */
 .button,
 .button2 {
   width: 100%;
@@ -144,7 +136,6 @@ select.input:focus {
   box-shadow: 0 0 15px #00fff7 inset;
 }
 
-/* Responsive: stack columns on small screens */
 @media (max-width: 600px) {
   .row {
     flex-direction: column;

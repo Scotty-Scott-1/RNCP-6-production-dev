@@ -99,12 +99,13 @@ const EditCampaign = () => {
 
   <div className={styles.formRow}>
     <label className={styles.label}>Description:</label>
-    <input
+    <textarea
       type="text"
       value={description}
       onChange={(e) => setDescription(e.target.value)}
       className={styles.input}
       required
+      rows={4}
     />
   </div>
 
@@ -132,8 +133,8 @@ const EditCampaign = () => {
     <div></div> {/* empty cell for alignment */}
     <button type="submit" className={styles.button2}>Save Changes</button>
   </div>
+<button type="button" className={styles.launch}>LAUNCH CAMPAIGN</button>
 </form>
-
     </div>
   );
 };

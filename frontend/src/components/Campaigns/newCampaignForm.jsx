@@ -99,16 +99,17 @@ const NewCampaignComponent = () => {
             <label htmlFor="desc"><p>Description</p></label>
           </div>
           <div className={styles.inputColumn}>
-            <input
-              type="text"
+            <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className={styles.input}
+              className={styles.input}  
               placeholder="Description"
               id="desc"
+              rows={4}
             />
           </div>
         </div>
+
 
         <div className={styles.row}>
           <div className={styles.labelColumn}>

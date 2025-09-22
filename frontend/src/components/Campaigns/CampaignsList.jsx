@@ -114,7 +114,7 @@ const Campaigns = () => {
                 <p>{c.mailingList?.listName || "No mailing list"}</p>
               </span>
               <button
-                className={styles.button}
+                className={styles.trashcan}
                 onClick={() => handleDeleteCampaign(c._id)}
               >
                 <FaTrash />
