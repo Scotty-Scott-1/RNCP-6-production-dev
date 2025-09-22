@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../security/authContext.jsx";
-import styles from '../../Campaigns/Campaign.module.css';
+import styles from './editCampaign.module.css';
 import { getOneCampaign } from "./hooks/GetOneCampaign.jsx";
 import { getOneMailingList } from "./hooks/GetOneMailingList.jsx";
 import DateTimePicker from '../../DateInput/DateInputComponent.jsx';
@@ -81,7 +81,7 @@ const EditCampaign = () => {
   };
 
   return (
-    <div className={styles.background}>
+    <div className={styles.outerContainer}>
       <form className={styles.container} onSubmit={handleSubmit}>
         <h1 className={styles.title}>Edit Campaign</h1>
         <label className={styles.label} htmlFor="campaignName">Campaign Name:</label>

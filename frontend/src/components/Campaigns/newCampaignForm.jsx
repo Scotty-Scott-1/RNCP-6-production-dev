@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from './Campaign.module.css';
+import styles from './Edit/editCampaign.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../security/authContext.jsx";
 import DateTimePicker from '../DateInput/DateInputComponent.jsx';
@@ -84,9 +84,10 @@ const NewCampaignComponent = () => {
     };
 
     return (
-        <div className={styles.background}>
+        <div className={styles.outerContainer}>
 
         <form className={styles.container} onSubmit={handleSubmit}>
+            <h1 className={styles.title}>New Campaign</h1>
             <label htmlFor="name"><p>Campaign Name</p></label>
             <input
                 type="text"
