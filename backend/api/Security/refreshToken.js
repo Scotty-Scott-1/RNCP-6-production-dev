@@ -18,7 +18,7 @@ router.post("/refresh", (req, res) => {
     const newAccessToken = jwt.sign(
       { id: payload.id, username: payload.username },
       JWT_SECRET,
-      { expiresIn: "1m" }
+      { expiresIn: "15m" }
     );
     res.status(200).json({
       message: "Token refreshed",
