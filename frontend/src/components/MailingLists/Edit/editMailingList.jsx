@@ -126,15 +126,16 @@ const EditMailingList = () => {
           id='listname'
         />
         <label htmlFor="desc"><p>Description</p></label>
-        <input
-          type="text"
+        <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           className={styles.input}
           placeholder="Description"
           required
-          id='desc'
+          id="desc"
+          rows={4}
         />
+
 
         <div className={styles.listHeader} style={{ marginTop: '1rem' }}>
           <span>First Name</span>

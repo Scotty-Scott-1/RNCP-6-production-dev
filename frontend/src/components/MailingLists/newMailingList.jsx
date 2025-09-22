@@ -60,14 +60,14 @@ const NewMailingList = () => {
           id='mailing'
           />
           <label htmlFor="desc"><p>Description</p></label>
-        <input
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className={styles.input}
-          placeholder="Description"
-          required
-          id='desc'
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className={styles.input}
+            placeholder="Description"
+            required
+            id="desc"
+            rows={4}
           />
 
         <button type="submit" className={styles.button2}>
