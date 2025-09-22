@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
-import styles from '../../MailingLists/MailingLists.module.css';
+import styles from './editMailingList.module.css';
 import { useAuth } from "../../../security/authContext.jsx";
 import { getOneMailingList } from "./hooks/GetOneList.jsx";
+import { FaTrash } from "react-icons/fa";
 
 const EditMailingList = () => {
   const navigate = useNavigate();
   const { accessToken } = useAuth();
   const [listName, setListName] = useState("");
   const [description, setDescription] = useState("");
-  const [contacts, setContacts] = useState([]); // === ADDED: local contacts state
-  const [newContact, setNewContact] = useState({   // === ADDED: form state for new contact
+  const [contacts, setContacts] = useState([]);
+  const [newContact, setNewContact] = useState({
     name: "",
     lastName: "",
     email: "",
@@ -25,7 +26,7 @@ const EditMailingList = () => {
     if (myList) {
       setListName(myList.listName || "");
       setDescription(myList.description || "");
-      setContacts(myList.contacts || []); // === ADDED: populate contacts
+      setContacts(myList.contacts || []);
     }
   }, [myList]);
 
@@ -57,9 +58,7 @@ const EditMailingList = () => {
     }
   };
 
-  // === ADDED: Handle add new contact ===
   const handleAddContact = async () => {
-    // basic validation
     if (!newContact.name || !newContact.email) {
       alert("Name and email are required.");
       return;
@@ -78,13 +77,37 @@ const EditMailingList = () => {
       if (response.ok) {
         const updated = await response.json();
         setContacts(updated.contacts);
-        setNewContact({ name: "", lastName: "", email: "", department: "", role: "" }); // clear form
+        setNewContact({ name: "", lastName: "", email: "", department: "", role: "" });
       } else {
         alert("Failed to add contact");
       }
     } catch (err) {
       console.error("Add contact error:", err);
       alert("Something went wrong adding the contact.");
+    }
+  };
+
+  const handleDeleteContact = async (contactid, listid) => {
+    if (!window.confirm("Are you sure you want to delete this contact?")) return;
+
+    try {
+      const response = await fetch(`/api/mailinglist/${listid}/${contactid}/delete`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${accessToken}`
+        }
+      });
+
+      if (response.ok) {
+        const updated = await response.json();
+        setContacts(updated.contacts);
+        alert("deleted contact")
+      } else {
+        alert("Failed to delete contact");
+      }
+    } catch (err) {
+      console.error("Delete contact error:", err);
+      alert("Something went wrong deleting the contact.");
     }
   };
 
@@ -101,7 +124,7 @@ const EditMailingList = () => {
           placeholder="Mailing List Name"
           required
           id='listname'
-          />
+        />
         <label htmlFor="desc"><p>Description</p></label>
         <input
           type="text"
@@ -111,7 +134,7 @@ const EditMailingList = () => {
           placeholder="Description"
           required
           id='desc'
-          />
+        />
 
         <div className={styles.listHeader} style={{ marginTop: '1rem' }}>
           <span>First Name</span>
@@ -119,6 +142,7 @@ const EditMailingList = () => {
           <span>Email</span>
           <span>Department</span>
           <span>Role</span>
+          <span>Delete</span>
         </div>
         <div className={styles.list}>
           {contacts?.length > 0 ? (
@@ -129,6 +153,13 @@ const EditMailingList = () => {
                 <input className={styles.input} value={c.email || ''} readOnly />
                 <input className={styles.input} value={c.department || ''} readOnly />
                 <input className={styles.input} value={c.role || ''} readOnly />
+                <button
+                  type="button"
+                  className={styles.deleteButton}
+                  onClick={() => handleDeleteContact(c._id, id)}
+                >
+                  <FaTrash />
+                </button>
               </div>
             ))
           ) : (
@@ -145,31 +176,31 @@ const EditMailingList = () => {
             placeholder="First Name"
             value={newContact.name}
             onChange={(e) => setNewContact({ ...newContact, name: e.target.value })}
-            />
+          />
           <input
             className={styles.input}
             placeholder="Last Name"
             value={newContact.lastName}
             onChange={(e) => setNewContact({ ...newContact, lastName: e.target.value })}
-            />
+          />
           <input
             className={styles.input}
             placeholder="Email"
             value={newContact.email}
             onChange={(e) => setNewContact({ ...newContact, email: e.target.value })}
-            />
+          />
           <input
             className={styles.input}
             placeholder="Department"
             value={newContact.department}
             onChange={(e) => setNewContact({ ...newContact, department: e.target.value })}
-            />
+          />
           <input
             className={styles.input}
             placeholder="Role"
             value={newContact.role}
             onChange={(e) => setNewContact({ ...newContact, role: e.target.value })}
-            />
+          />
         </div>
         <button type="button" className={styles.button2} onClick={handleAddContact}>
           Add Contact

@@ -71,6 +71,14 @@ app.use("/api/security", securityRefresh);
 const deleteCampaign = require("./api/Campaigns/deleteCampaign.js");
 app.use("/api/campaign/delete", deleteCampaign);
 
+const deleteContact = require("./api/Mailing_Lists/deleteContact.js");
+app.use("/api/mailinglist", deleteContact);
+
+const deleteMailingList = require("./api/Mailing_Lists/deleteMailingList.js");
+app.use("/api/mailinglist", deleteMailingList);
+
+
+
 
 
 

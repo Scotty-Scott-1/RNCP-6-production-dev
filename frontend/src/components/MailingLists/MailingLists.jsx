@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import styles from "./MailingLists.module.css";
+import styles from "./mailingListList.module.css";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../security/authContext.jsx";
+import { FaTrash } from "react-icons/fa";
 
 const MailingLists = () => {
   const navigate = useNavigate();
@@ -38,29 +39,41 @@ const MailingLists = () => {
   const totalPages = Math.ceil(myLists.length / itemsPerPage);
 
   const handleListClick = (id) => {
-    console.log("Clicked mailing list:", id);
     navigate(`/mailinglist/edit/${id}`);
-
   };
 
   const handleAddList = () => {
     navigate("/newmailinglist");
   };
 
+  const handleDeleteList = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this mailing list?")) return;
+    try {
+      const response = await fetch(`/api/mailinglist/${id}/delete`, {
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${accessToken}` }
+      });
+      if (response.ok) {
+        const data = await response.json()
+        console.log(data.message);
+        setMyLists(myLists.filter(list => list._id !== id));
+      }
+    } catch (error) {
+      console.error("Delete failed", error);
+    }
+  };
+
   return (
-    <div className={styles.background}>
+    <div className={styles.outerContainer}>
       <div className={styles.container}>
         <div className={styles.header}>
           <h1 className={styles.title}>Mailing Lists</h1>
-          {myLists.length === 0 && (
-            <button className={styles.button} onClick={handleAddList}>
-              + Add Mailing List
-            </button>
-          )}
+          <button className={styles.button2} onClick={handleAddList}>
+            + Add Mailing List
+          </button>
         </div>
 
-        {/* Table-like header row */}
-        {myLists.length > 0 && (
+        {myLists.length > 0 ? (
           <>
             <div className={styles.listHeader}>
               <span>Name</span>
@@ -75,13 +88,16 @@ const MailingLists = () => {
                   <button
                     className={styles.campaignButton}
                     onClick={() => handleListClick(list._id)}
-                    >
+                  >
                     {list.listName}
                   </button>
                   <span>{list.contacts?.length || 0}</span>
                   <span>{new Date(list.createdAt).toLocaleDateString()}</span>
-                  <button className={styles.button} onClick={handleAddList}>
-                    +
+                  <button
+                    className={styles.button}
+                    onClick={() => handleDeleteList(list._id)}
+                  >
+                    <FaTrash />
                   </button>
                 </div>
               ))}
@@ -92,7 +108,7 @@ const MailingLists = () => {
               <button
                 onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                 disabled={currentPage === 1}
-                >
+              >
                 Prev
               </button>
               <span>
@@ -101,11 +117,13 @@ const MailingLists = () => {
               <button
                 onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                >
+              >
                 Next
               </button>
             </div>
           </>
+        ) : (
+          <p>No mailing lists found.</p>
         )}
       </div>
     </div>
