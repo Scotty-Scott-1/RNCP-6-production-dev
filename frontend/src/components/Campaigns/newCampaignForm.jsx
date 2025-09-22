@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styles from './newCampaign.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../security/authContext.jsx";
-import DateTimePicker from '../DateInput/DateInputComponent.jsx';
 
 const NewCampaignComponent = () => {
   const navigate = useNavigate();
@@ -12,12 +11,9 @@ const NewCampaignComponent = () => {
   const [campaignName, setCampaignName] = useState("");
   const [description, setDescription] = useState("");
   const [mailingListId, setMailingListId] = useState("");
-  const [emailSenderName, setEmailSenderName] = useState("");
-  const [emailTemplate, setEmailTemplate] = useState("");
-  const [landingPageTemplate, setLandingPageTemplate] = useState("");
-  const [landingPage, setLandingPage] = useState(false);
-  const [startTime, setStartTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date());
+  const [template, setTemplate] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [mailingLists, setMailingLists] = useState([]);
 
   // Fetch mailing lists
@@ -42,7 +38,7 @@ const NewCampaignComponent = () => {
   // Handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!campaignName || !description || !startTime || !endTime || !mailingListId || !emailSenderName) {
+    if (!campaignName || !description || !startTime || !endTime || !mailingListId) {
       alert("Please fill in all fields and agree to the terms.");
       return;
     }
@@ -56,13 +52,10 @@ const NewCampaignComponent = () => {
         body: JSON.stringify({
           campaignName,
           description,
-          startTime: startTime.toISOString(),
-          endTime: endTime.toISOString(),
+          startTime: new Date(startTime).toISOString(),
+          endTime: new Date(endTime).toISOString(),
           mailingList: mailingListId,
-          emailSenderName,
-          emailTemplate,
-          landingPageTemplate,
-          landingPage,
+          template,
         }),
       });
       if (response.ok) {
@@ -122,11 +115,12 @@ const NewCampaignComponent = () => {
             <label htmlFor="startTime"><p>Start Time</p></label>
           </div>
           <div className={styles.inputColumn}>
-            <DateTimePicker
+            <input
+              type="datetime-local"
               id="startTime"
               value={startTime}
-              onChange={setStartTime}
-              className={styles.inputDatetime}
+              onChange={(e) => setStartTime(e.target.value)}
+              className={styles.input}
             />
           </div>
         </div>
@@ -136,11 +130,12 @@ const NewCampaignComponent = () => {
             <label htmlFor="endTime"><p>End Time</p></label>
           </div>
           <div className={styles.inputColumn}>
-            <DateTimePicker
+            <input
+              type="datetime-local"
               id="endTime"
               value={endTime}
-              onChange={setEndTime}
-              className={styles.inputDatetime}
+              onChange={(e) => setEndTime(e.target.value)}
+              className={styles.input}
             />
           </div>
         </div>
@@ -168,71 +163,23 @@ const NewCampaignComponent = () => {
 
         <div className={styles.row}>
           <div className={styles.labelColumn}>
-            <label htmlFor="emailsender"><p>Email Sender Name</p></label>
+            <label htmlFor="temp"><p>Landing Page Template</p></label>
           </div>
           <div className={styles.inputColumn}>
-            <input
-              type="text"
-              value={emailSenderName}
-              onChange={(e) => setEmailSenderName(e.target.value)}
+            <select
+              id="temp"
+              value={template}
+              onChange={(e) => setTemplate(e.target.value)}
               className={styles.input}
-              placeholder="Email Sender Name"
-              id='emailsender'
-            />
+            >
+              <option value="">-- Select a template --</option>
+              <option value="voucher">Voucher Claim</option>
+              <option value="appraisal">Appraisal Alert</option>
+              <option value="payroll">Payroll Confirmation</option>
+              <option value="hrNotice">HR Notice</option>
+            </select>
           </div>
         </div>
-
-        <div className={styles.row}>
-          <div className={styles.labelColumn}>
-            <label htmlFor="emailtemp"><p>Email Template</p></label>
-          </div>
-          <div className={styles.inputColumn}>
-            <input
-              type="text"
-              value={emailTemplate}
-              onChange={(e) => setEmailTemplate(e.target.value)}
-              className={styles.input}
-              placeholder="Email Template"
-              id="emailtemp"
-            />
-          </div>
-        </div>
-
-        <div className={styles.checkboxContainer}>
-          <input
-            type="checkbox"
-            checked={landingPage}
-            onChange={(e) => {
-              const checked = e.target.checked;
-              setLandingPage(checked);
-              if (!checked) setLandingPageTemplate("");
-            }}
-          />
-          <span>Create a landing page for this campaign</span>
-        </div>
-
-        {landingPage && (
-          <div className={styles.row}>
-            <div className={styles.labelColumn}>
-              <label htmlFor="temp"><p>Landing Page Template</p></label>
-            </div>
-            <div className={styles.inputColumn}>
-              <select
-                id="temp"
-                value={landingPageTemplate}
-                onChange={(e) => setLandingPageTemplate(e.target.value)}
-                className={styles.input}
-              >
-                <option value="">-- Select a template --</option>
-                <option value="voucher">Voucher Claim</option>
-                <option value="appraisal">Appraisal Alert</option>
-                <option value="payroll">Payroll Confirmation</option>
-                <option value="hrNotice">HR Notice</option>
-              </select>
-            </div>
-          </div>
-        )}
-
         <button type="submit" className={styles.button2}>Submit</button>
       </form>
     </div>

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import styles from "./CampaignsList.module.css";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../security/authContext.jsx";
-import { FaTrash, FaPlus } from 'react-icons/fa'; // react-icons for icons
+import { FaTrash } from 'react-icons/fa';
+import { DateTime } from "luxon";
 
 const Campaigns = () => {
   const navigate = useNavigate();
@@ -46,21 +47,19 @@ const Campaigns = () => {
 
   const handleDeleteCampaign = (id) => {
     console.log("Delete campaign:", id);
-    // TODO: Add delete API call
+    //Add delete API call
   };
 
   return (
     <div className={styles.outerContainer}>
       <div className={styles.container}>
-        {/* Header with top-right Add button */}
-<div className={styles.header}>
-  <h1 className={styles.title}>Campaigns</h1>
-  <button className={styles.button2} onClick={handleAddCampaign}>
-    + Add Campaign
-  </button>
-</div>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Campaigns</h1>
+          <button className={styles.button2} onClick={handleAddCampaign}>
+            + Add Campaign
+          </button>
+        </div>
 
-        {/* Table-like header row */}
         <div className={styles.listHeader}>
           <span>Name</span>
           <span>Date Created</span>
@@ -69,7 +68,6 @@ const Campaigns = () => {
           <span>Actions</span>
         </div>
 
-        {/* Campaign entries */}
         <div className={styles.list}>
           {currentItems.map((c) => (
             <div key={c._id} className={styles.listItem}>
@@ -79,23 +77,45 @@ const Campaigns = () => {
               >
                 {c.campaignName}
               </button>
-              <span><p>{new Date(c.startTime).toLocaleDateString()}</p></span>
-              <span><p>{new Date(c.endTime).toLocaleDateString()}</p></span>
-              <span><p>{c.mailingList?.listName || "No mailing list"}</p></span>
-              <button className={styles.button} onClick={() => handleDeleteCampaign(c._id)}>
+              <span>
+                <p>
+                  {DateTime.fromISO(c.startTime, { zone: "utc" })
+                    .toLocal()
+                    .toFormat("yyyy-LL-dd HH:mm")}
+                </p>
+              </span>
+              <span>
+                <p>
+                  {DateTime.fromISO(c.endTime, { zone: "utc" })
+                    .toLocal()
+                    .toFormat("yyyy-LL-dd HH:mm")}
+                </p>
+              </span>
+              <span>
+                <p>{c.mailingList?.listName || "No mailing list"}</p>
+              </span>
+              <button
+                className={styles.button}
+                onClick={() => handleDeleteCampaign(c._id)}
+              >
                 <FaTrash />
               </button>
             </div>
           ))}
         </div>
 
-        {/* Pagination controls */}
         <div className={styles.pagination}>
-          <button onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} disabled={currentPage === 1}>
+          <button
+            onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+            disabled={currentPage === 1}
+          >
             Prev
           </button>
           <span>Page {currentPage} / {totalPages}</span>
-          <button onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} disabled={currentPage === totalPages}>
+          <button
+            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
             Next
           </button>
         </div>

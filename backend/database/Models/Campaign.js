@@ -10,10 +10,7 @@ const campaignSchema = new mongoose.Schema({
 		ref: "MailingList",  // Reference to MailingList model
 		required: true
 	},
-	emailSenderName: String,
-	emailTemplate: String,
-	landingPageTemplate: String,
-	landingPage: Boolean,
+	template: String,
 	createdBy: String
 }, { versionKey: false });
 

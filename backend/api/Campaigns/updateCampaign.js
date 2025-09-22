@@ -11,7 +11,7 @@ router.put("/update", verifyAccessToken, async (req, res) => {
 		const campaignId = req.body.id;
 		console.log("USERID:", userId);
 		console.log("campiagnID:", campaignId);
-		const { campaignName, description, startTime, endTime, emailSenderName, emailTemplate, landingPageTemplate, landingPage } = req.body;
+		const { campaignName, description } = req.body;
 
 		const myCampaign = await Campaign.findById(campaignId);
 
@@ -26,12 +26,6 @@ router.put("/update", verifyAccessToken, async (req, res) => {
 		// Update values
 		myCampaign.campaignName = campaignName;
 		myCampaign. description = description;
-		myCampaign.startTime = startTime;
-		myCampaign.endTime = endTime;
-		myCampaign.emailSenderName = emailSenderName;
-		myCampaign. emailTemplate = emailTemplate;
-		myCampaign.landingPage = landingPageTemplate;
-		myCampaign.landingPage = landingPage;
 
     await myCampaign.save();
 
