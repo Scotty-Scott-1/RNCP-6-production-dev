@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./DashComp1.module.css";
 import { useNavigate } from "react-router-dom";
 
@@ -20,22 +20,23 @@ const Comp1 = () => {
         navigate("/template");
         break;
       default:
-        break
+        break;
     }
   };
 
   return (
-    <div className={styles.background}>
+    <div className={styles.outerContainer}>
       <div className={styles.container}>
-        <button className={styles.button} name="1" onClick={() => handleClick("1")}>Campaigns</button>
-        <button className={styles.button} name="2" onClick={() => handleClick("2")}>User Management</button>
-        <button className={styles.button} name="3" onClick={() => handleClick("3")}>Mailing Lists</button>
-        <button className={styles.button} name="4" onClick={() => handleClick("4")}>Reports & Analytics</button>
-        <button className={styles.button} name="5" onClick={() => handleClick("5")}>Templates</button>
-        <button className={styles.button} name="6" onClick={() => handleClick("6")}>Training library</button>
-		  </div>
-		</div>
-	);
+        <h2 className={styles.title}>Dashboard</h2>
+        <button className={styles.button} onClick={() => handleClick("1")}>Campaigns</button>
+        <button className={styles.button} onClick={() => handleClick("2")}>User Management</button>
+        <button className={styles.button} onClick={() => handleClick("3")}>Mailing Lists</button>
+        <button className={styles.button} onClick={() => handleClick("4")}>Reports & Analytics</button>
+        <button className={styles.button} onClick={() => handleClick("5")}>Templates</button>
+        <button className={styles.button} onClick={() => handleClick("6")}>Training Library</button>
+      </div>
+    </div>
+  );
 };
 
 export default Comp1;

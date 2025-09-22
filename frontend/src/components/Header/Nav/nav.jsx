@@ -5,6 +5,8 @@ import styles from "./nav.module.css";
 
 const Navbar = () => {
   return (
+	<div>
+
 	<nav className={styles.navbar}>
 		<Link to="/" className={styles.navLink}>Home </Link>
 		<Link to="/about" className={styles.navLink}>About</Link>
@@ -12,6 +14,7 @@ const Navbar = () => {
 		<Link to="/mailinglists" className={styles.navLink}>Mailing Lists</Link>
 		<Link to="/templates" className={styles.navLink}>Templates</Link>
 	</nav>
+	</div>
   );
 };
 

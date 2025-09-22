@@ -20,10 +20,12 @@ import ClaimVoucher from "./pages/Template/ClaimVoucher.jsx";
 import AppraisalAlert from "./pages/Template/AppraisalAlert.jsx";
 import Payroll from './pages/Template/PayrollAlert.jsx';
 import TemplatesPage from "./pages/Template/TemplatesList.jsx";
+import Rain from "./components/Background/Rain.jsx";
 
 const App = () => (
   <AuthProvider>
     <Router>
+      <Rain />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

@@ -51,7 +51,7 @@ const Sign_in = () => {
 
 
 	return (
-		<div className={styles.background}>
+		<div className={styles.outerContainer}>
 		<form className={styles.container} onSubmit={handleSubmit}>
 			<input
 				type="text"
@@ -66,7 +66,7 @@ const Sign_in = () => {
 				placeholder="Password"
 				/>
 		<button type="submit" className={styles.button}> Sign In</button>
-		<p>Don’t have an account? <Link to="/register">Register</Link></p>
+		<p>Don’t have an account? <Link to="/signup">Sign up</Link></p>
 	</form>
 	</div>
   );

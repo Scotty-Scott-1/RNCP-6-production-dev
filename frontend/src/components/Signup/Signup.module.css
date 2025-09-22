@@ -1,71 +1,57 @@
-.background {
+.outerContainer {
   height: 100vh;
   width: 100vw;
-  background-color: #000000;
-  display: flex;              /* make parent a flex container */
-  justify-content: center;    /* center horizontally */
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
   align-items: center;
-
 }
 
 .container {
-  max-width: 600px; /* bigger width */
-
+  max-width: 700px;
   margin-top: 200px;
-  margin-bottom: auto;
   margin-left: auto;
   margin-right: auto;
-  padding: 30px;    /* a bit more padding */
+  padding: 30px;
   border: 2px solid #00fff7;
-  border-radius: 8px;
-  background-color: #000000;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.85); /* subtle transparency */
   font-family: 'Courier New', Courier, monospace;
-  box-shadow: 0 0 15px #00fff7, 0 0 30px #00fff7aa;
+  box-shadow: 0 0 20px #00fff7, 0 0 35px #00fff777 inset;
   color: #00fff7;
 
   display: flex;
-
-  align-items: center;     /* centers vertically */
-  height: auto;
-    flex-direction: column; /* stack items vertically */
-
+  flex-direction: column;
+  align-items: center;
 }
 
-
-
+/* Inputs */
 .input {
-  display: block;
   width: 100%;
   padding: 12px 16px;
   margin-bottom: 18px;
   border: 1.5px solid #00fff7;
   border-radius: 6px;
   font-size: 16px;
-  font-family: 'Courier New', Courier, monospace; /* matches the container */
-  background-color: #0a0f16;  /* darker for contrast */
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #0a0f16;
   color: #00fff7;
   outline: none;
   transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  box-shadow: 0 0 4px #00fff733;   /* faint glow */
 }
 
 .input:focus {
   border-color: #00d7e0;
-  box-shadow: 0 0 10px #00d7e0, 0 0 20px #00d7e077;
-  background-color: #121823;
-}
-
-
-.input:focus {
-  border-color: #00d7e0;
-  box-shadow: 0 0 8px #00d7e0;
+  box-shadow: 0 0 6px #00d7e0aa;
   background-color: #161f2a;
 }
 
+/* Buttons */
 .button {
   width: 50%;
   padding: 12px;
-  margin-top: 15px ;
-  margin-bottom: 15px;
+  margin: 15px 0;
   background-color: #00d7e0;
   border: none;
   border-radius: 6px;
@@ -74,45 +60,47 @@
   font-weight: bold;
   cursor: pointer;
   text-transform: uppercase;
-  box-shadow: 0 0 12px #00d7e0aa;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px #00d7e0aa;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 
 .button:hover {
   background-color: #00fff7;
-  box-shadow: 0 0 20px #00fff7;
+  box-shadow: 0 0 16px #00fff7;
+  transform: scale(1.05);
 }
 
+.button:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 10px #00fff7 inset;
+}
 
+/* Title */
 .title {
-  font-size: 34px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-align: center;
+  font-size: 2rem;
   color: #00fff7;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #00fff7, 0 0 20px #00fff7;
 }
 
+/* Links */
 .link {
   color: #00fff7;
   text-decoration: underline;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 .link:hover {
   color: #00d7e0;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-}
-
+/* Checkbox group */
 .checkboxContainer {
-  display: flex;            /* align side by side */
-  align-items: center;      /* vertical centering */
-  gap: 8px;                 /* space between box and text */
-  margin-top: 10px;
-  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 15px;
 }
 
 .checkbox {
@@ -129,7 +117,7 @@ ul {
 
 .checkbox:checked {
   background-color: #00d7e0;
-  box-shadow: 0 0 8px #00d7e0;
+  box-shadow: 0 0 6px #00d7e0; /* softer glow */
 }
 
 .checkbox:checked::after {
@@ -147,4 +135,3 @@ ul {
   cursor: pointer;
   user-select: none;
 }
-
