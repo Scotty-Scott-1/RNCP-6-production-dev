@@ -1,41 +1,35 @@
-import React, { useState, useEffect, use } from "react";
-import styles from "./Campaign.module.css";
+import React, { useState, useEffect } from "react";
+import styles from "./CampaignsList.module.css";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../security/authContext.jsx";
-
+import { FaTrash, FaPlus } from 'react-icons/fa'; // react-icons for icons
 
 const Campaigns = () => {
-	const navigate = useNavigate();
-	const {accessToken} = useAuth()
-	const [myCampaigns, setMyCampaigns] = useState([]);
+  const navigate = useNavigate();
+  const { accessToken } = useAuth();
+  const [myCampaigns, setMyCampaigns] = useState([]);
 
-	useEffect(() => {
-		const getCampaigns = async() => {
-			try {
-				const response = await fetch("/api/campaign/get", {
-					method: "GET",
-					headers: {
-						"Authorization": `Bearer ${accessToken}`,
-						"Content-Type": "application/json"
-					}
-				});
-					if (response.ok) {
-						const data = await response.json();
-						console.log(data);
-						setMyCampaigns(data);
-						return;
-					}
-			} catch(error) {
-				console.log(error);
-				return;
-			}
-		}
-		if (accessToken) {
-			console.log("trying to fetch campaigns owned by this user")
-			getCampaigns();
+  useEffect(() => {
+    const getCampaigns = async () => {
+      try {
+        const response = await fetch("/api/campaign/get", {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${accessToken}`,
+            "Content-Type": "application/json"
+          }
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setMyCampaigns(data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-		}
-	}, [accessToken]);
+    if (accessToken) getCampaigns();
+  }, [accessToken]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -45,35 +39,33 @@ const Campaigns = () => {
   const totalPages = Math.ceil(myCampaigns.length / itemsPerPage);
 
   const handleCampaignClick = (id, listid) => {
-    console.log("Clicked campaign list:", id);
-    console.log("associsated list", listid);
     navigate(`/campaign/edit/${id}/${listid}`);
   };
 
-  const handleAddCampaign = () => {
-    console.log("Add new campaign");
-    navigate("/campaign/new");
+  const handleAddCampaign = () => navigate("/campaign/new");
+
+  const handleDeleteCampaign = (id) => {
+    console.log("Delete campaign:", id);
+    // TODO: Add delete API call
   };
 
   return (
     <div className={styles.outerContainer}>
       <div className={styles.container}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>Campaigns</h1>
-        {myCampaigns.length === 0 && (
-            <button className={styles.button2} onClick={handleAddCampaign }>
-              + Add Campaign
-            </button>
-          )}
-        </div>
-
+        {/* Header with top-right Add button */}
+<div className={styles.header}>
+  <h1 className={styles.title}>Campaigns</h1>
+  <button className={styles.button2} onClick={handleAddCampaign}>
+    + Add Campaign
+  </button>
+</div>
 
         {/* Table-like header row */}
         <div className={styles.listHeader}>
           <span>Name</span>
           <span>Date Created</span>
-          <span>End time</span>
-          <span>mailing list</span>
+          <span>End Time</span>
+          <span>Mailing List</span>
           <span>Actions</span>
         </div>
 
@@ -83,15 +75,15 @@ const Campaigns = () => {
             <div key={c._id} className={styles.listItem}>
               <button
                 className={styles.campaignButton}
-                onClick={() => handleCampaignClick(c._id, c.mailingList._id)}
+                onClick={() => handleCampaignClick(c._id, c.mailingList?._id)}
               >
                 {c.campaignName}
               </button>
               <span><p>{new Date(c.startTime).toLocaleDateString()}</p></span>
               <span><p>{new Date(c.endTime).toLocaleDateString()}</p></span>
               <span><p>{c.mailingList?.listName || "No mailing list"}</p></span>
-              <button className={styles.button} onClick={handleAddCampaign}>
-                +
+              <button className={styles.button} onClick={() => handleDeleteCampaign(c._id)}>
+                <FaTrash />
               </button>
             </div>
           ))}
@@ -99,19 +91,11 @@ const Campaigns = () => {
 
         {/* Pagination controls */}
         <div className={styles.pagination}>
-          <button
-            onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-            disabled={currentPage === 1}
-          >
+          <button onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} disabled={currentPage === 1}>
             Prev
           </button>
-          <span>
-            Page {currentPage} / {totalPages}
-          </span>
-          <button
-            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-            disabled={currentPage === totalPages}
-          >
+          <span>Page {currentPage} / {totalPages}</span>
+          <button onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} disabled={currentPage === totalPages}>
             Next
           </button>
         </div>
