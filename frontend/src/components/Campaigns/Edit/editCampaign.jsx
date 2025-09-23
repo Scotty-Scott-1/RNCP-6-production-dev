@@ -17,6 +17,7 @@ const EditCampaign = () => {
   const [endTime, setEndTime] = useState("");
   const [mailingList, setMailingList] = useState("");
   const [template, setTemplate] = useState("");
+  const [status, setStatus] = useState("");
 
   // load campaign
   const myCampaign = getOneCampaign(id, accessToken);
@@ -44,6 +45,7 @@ const EditCampaign = () => {
 
       setMailingList(myList?.listName || "");
       setTemplate(myCampaign.template || "");
+      setStatus(myCampaign.status || "");
     }
   }, [myCampaign, myList]);
 
@@ -80,6 +82,42 @@ const EditCampaign = () => {
       alert("Something went wrong updating the campaign.");
     }
   };
+
+  const handleLaunch = async (e) => {
+    e.preventDefault();
+    if (!campaignName || !description) {
+      alert("Campaign name and description are required.");
+      return;
+    }
+    if (status === "launched") {
+      alert("Campaign already launched");
+      return;
+    }
+    try {
+      const response = await fetch(`/api/campaign/launch`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          listid,
+          template,
+         }),
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Launch failed:", errorData);
+        alert("Failed to launch campaign");
+        return;
+      }
+      alert("Campaign launched successfully!");
+    } catch (err) {
+      console.error("Error launching campaign:", err);
+      alert("Something went wrong launching the campaign.");
+    }
+  }
 
   return (
     <div className={styles.outerContainer}>
@@ -128,12 +166,15 @@ const EditCampaign = () => {
     <label className={styles.label}>Landing Page Template:</label>
     <p className={styles.readonly}>{template}</p>
   </div>
-
+  <div className={styles.formRow}>
+    <label className={styles.label}>Status:</label>
+    <p className={styles.readonly}>{status}</p>
+  </div>
   <div className={styles.formRow}>
     <div></div> {/* empty cell for alignment */}
     <button type="submit" className={styles.button2}>Save Changes</button>
   </div>
-<button type="button" className={styles.launch}>LAUNCH CAMPAIGN</button>
+<button type="button" onClick={handleLaunch} className={styles.launch}>LAUNCH CAMPAIGN</button>
 </form>
     </div>
   );

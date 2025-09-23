@@ -203,3 +203,8 @@ select.input option {
   transform: scale(0.97);
   box-shadow: 0 0 12px #ff3b3b inset;
 }
+
+.launch:disabled {
+  transform: scale(0.97);
+  box-shadow: 0 0 12px #615f5f inset;
+}

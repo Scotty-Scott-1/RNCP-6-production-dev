@@ -77,7 +77,8 @@ app.use("/api/mailinglist", deleteContact);
 const deleteMailingList = require("./api/Mailing_Lists/deleteMailingList.js");
 app.use("/api/mailinglist", deleteMailingList);
 
-
+const launchCampiagn = require("./api/Campaigns/launchCampaign.js");
+app.use("/api/campaign", launchCampiagn);
 
 
 

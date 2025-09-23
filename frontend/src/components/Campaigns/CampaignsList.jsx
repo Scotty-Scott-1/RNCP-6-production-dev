@@ -85,43 +85,43 @@ const Campaigns = () => {
           <span>End Time</span>
           <span>Mailing List</span>
           <span>Actions</span>
+          <span>Status</span>
         </div>
 
-        <div className={styles.list}>
-          {currentItems.map((c) => (
-            <div key={c._id} className={styles.listItem}>
-              <button
-                className={styles.campaignButton}
-                onClick={() => handleCampaignClick(c._id, c.mailingList?._id)}
-              >
-                {c.campaignName}
-              </button>
-              <span>
-                <p>
-                  {DateTime.fromISO(c.startTime, { zone: "utc" })
-                    .toLocal()
-                    .toFormat("yyyy-LL-dd HH:mm")}
-                </p>
-              </span>
-              <span>
-                <p>
-                  {DateTime.fromISO(c.endTime, { zone: "utc" })
-                    .toLocal()
-                    .toFormat("yyyy-LL-dd HH:mm")}
-                </p>
-              </span>
-              <span>
-                <p>{c.mailingList?.listName || "No mailing list"}</p>
-              </span>
-              <button
-                className={styles.trashcan}
-                onClick={() => handleDeleteCampaign(c._id)}
-              >
-                <FaTrash />
-              </button>
-            </div>
-          ))}
-        </div>
+<div className={styles.list}>
+  {currentItems.map((c) => (
+    <div key={c._id} className={styles.listItem}>
+      <button
+        className={styles.campaignButton}
+        onClick={() => handleCampaignClick(c._id, c.mailingList?._id)}
+      >
+        {c.campaignName}
+      </button>
+      <span>
+        {DateTime.fromISO(c.startTime, { zone: "utc" })
+          .toLocal()
+          .toFormat("yyyy-LL-dd HH:mm")}
+      </span>
+      <span>
+        {DateTime.fromISO(c.endTime, { zone: "utc" })
+          .toLocal()
+          .toFormat("yyyy-LL-dd HH:mm")}
+      </span>
+      <span>{c.mailingList?.listName || "No mailing list"}</span>
+      <span>
+        <button
+          className={styles.trashcan}
+          onClick={() => handleDeleteCampaign(c._id)}
+        >
+          <FaTrash />
+        </button>
+      </span>
+      <span className={`${styles.status} ${styles[c.status?.toLowerCase()]}`}>
+        {c.status || "Pending"}
+      </span>
+    </div>
+  ))}
+</div>
 
         <div className={styles.pagination}>
           <button

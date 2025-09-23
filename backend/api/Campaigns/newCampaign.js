@@ -8,7 +8,8 @@ router.post("/new", verifyAccessToken, async (req, res) => {
 		const userId = req.user.id;
 		const campaign = new Campaign({
 			...req.body,
-			createdBy: userId
+			createdBy: userId,
+			status: "active"
 		});
 		await campaign.save();
 		console.log(campaign);
