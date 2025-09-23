@@ -7,7 +7,7 @@ const mailingListSchema = new mongoose.Schema({
   contacts: [
     {
       name: String,
-	  lastName: String,
+      lastName: String,
       email: String,
       department: String,
       role: String
