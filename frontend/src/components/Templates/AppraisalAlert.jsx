@@ -1,11 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import styles from "./AppraisalAlert.module.css";
 
 const AppraisalAlert = () => {
-  const handleAcknowledge = (e) => {
+
+
+  const handleAcknowledge =  async (e) => {
     e.preventDefault();
-    alert("✅ Response recorded. Please proceed to complete your appraisal.");
+    const params = new URLSearchParams(window.location.search);
+    const logid = params.get("logid");
+
+    if (logid) {
+      try {
+        const res = await fetch(`/api/emaillog/submit/${logid}`, {method: "POST"});
+        const data = await res.json();
+        console.log("Creds marked as entered");
+        alert("this is a training simulation")
+      } catch (err) {
+        console.error(err);
+      }
+    }
   };
+
+  useEffect(() => {
+    const recordClick = async () => {
+      const params = new URLSearchParams(window.location.search);
+      const logid = params.get("logid");
+      if (!logid) return;
+      try {
+        const res = await fetch(`/api/emaillog/clicked/${logid}`, { method: "POST" });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    recordClick();
+  }, []);
 
   return (
     <div className={styles.body}>

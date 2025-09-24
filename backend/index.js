@@ -80,6 +80,14 @@ app.use("/api/mailinglist", deleteMailingList);
 const launchCampiagn = require("./api/Campaigns/launchCampaign.js");
 app.use("/api/campaign", launchCampiagn);
 
+const updateEmailLog = require("./api/Email_Log/updateEmailLog.js");
+app.use("/api/emaillog", updateEmailLog);
+
+const updateEmailLogCreds = require("./api/Email_Log/udpateEmailLogCreds.js");
+app.use("/api/emaillog", updateEmailLogCreds);
+
+
+
 
 
 
