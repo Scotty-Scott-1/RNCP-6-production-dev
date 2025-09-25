@@ -52,6 +52,7 @@ const Sign_in = () => {
 
 	return (
 		<div className={styles.outerContainer}>
+		<h1 className={styles.title}>Sign in or create an account</h1>
 		<form className={styles.container} onSubmit={handleSubmit}>
 			<input
 				type="text"

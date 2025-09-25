@@ -59,8 +59,8 @@ const SignUp = () => {
     /*RENDER FORM: Render the signup form. On field change, update the corresponding state variable*/
     return (
         <div className={styles.outerContainer}>
+        <h1 className={styles.title}>Create an account</h1>
         <form className={styles.container} onSubmit={handleSubmit}>
-            <h1 className={styles.title}>Phishing Simulator</h1>
             <input
                 type="text"
                 value={firstName} onChange={(e) => setFirstName(e.target.value)}

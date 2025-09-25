@@ -26,8 +26,8 @@ const Comp1 = () => {
 
   return (
     <div className={styles.outerContainer}>
+      <h1 className={styles.title}>Dashboard</h1>
       <div className={styles.container}>
-        <h2 className={styles.title}>Dashboard</h2>
         <button className={styles.button} onClick={() => handleClick("1")}>Campaigns</button>
         <button className={styles.button} onClick={() => handleClick("2")}>User Management</button>
         <button className={styles.button} onClick={() => handleClick("3")}>Mailing Lists</button>

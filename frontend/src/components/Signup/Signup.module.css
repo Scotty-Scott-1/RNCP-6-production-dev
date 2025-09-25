@@ -1,15 +1,18 @@
 .outerContainer {
   height: 100vh;
   width: 100vw;
-  background-color: transparent;
+  background: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Courier New', Courier, monospace;
+  overflow: hidden;
+  position: relative;
+  flex-direction: column;
 }
 
 .container {
   max-width: 700px;
-  margin-top: 200px;
   margin-left: auto;
   margin-right: auto;
   padding: 30px;
@@ -77,10 +80,15 @@
 
 /* Title */
 .title {
+  display: block;
   font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
   color: #00fff7;
-  margin-bottom: 20px;
   text-shadow: 0 0 10px #00fff7, 0 0 20px #00fff7;
+  margin-bottom: 30px;
+  z-index: 1;
 }
 
 /* Links */
