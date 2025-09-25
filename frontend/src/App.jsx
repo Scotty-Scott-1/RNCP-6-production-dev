@@ -21,6 +21,8 @@ import AppraisalAlert from "./pages/Template/AppraisalAlert.jsx";
 import Payroll from './pages/Template/PayrollAlert.jsx';
 import TemplatesPage from "./pages/Template/TemplatesList.jsx";
 import Rain from "./components/Background/Rain.jsx";
+import ReportListPage from "./pages/Reporting/ReportList.jsx";
+import ReportPage from "./pages/Reporting/Report.jsx";
 
 const App = () => (
   <AuthProvider>
@@ -59,6 +61,14 @@ const App = () => (
         <Route
           path="/campaign/edit/:id/:listid"
           element={<ProtectRoute><EditCampaignPage /></ProtectRoute>}
+        />
+        <Route
+          path="/report"
+          element={<ProtectRoute><ReportListPage /></ProtectRoute>}
+        />
+        <Route
+          path="/report/:id/:listid"
+          element={<ProtectRoute><ReportPage /></ProtectRoute>}
         />
         <Route path="/template" element={<TemplatesPage />} />
         <Route path="/reset" element={<ResetPassword />} />

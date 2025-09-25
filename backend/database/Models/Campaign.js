@@ -13,6 +13,8 @@ const campaignSchema = new mongoose.Schema({
 	template: String,
 	createdBy: String,
 	status: String,
+	emailsSent: Number,
+	emailsFailed: Number,
 }, { versionKey: false });
 
 module.exports = mongoose.model("Campaign", campaignSchema);

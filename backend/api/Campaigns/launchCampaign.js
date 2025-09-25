@@ -22,8 +22,10 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
     if (!myList) {
       return res.status(404).json({ message: "Mailing list not found" });
     }
-    const contacts = myList.contacts;
 
+    const contacts = myList.contacts;
+    let emailsSent = 0;
+    let emailsFailed = 0;
     const errors = [];
 
     for (let contact of contacts) {
@@ -107,10 +109,11 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
         }
 
         await sendMail(info);
-
+        emailsSent++;
       } catch (err) {
         console.error("EmailLog or sendMail error:", err);
         errors.push({ contact: contact.email, error: err.message });
+        emailsFailed++;
       }
     }
 
@@ -121,6 +124,7 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
       });
     }
 
+    const updatedCampaign = await Campaign.findByIdAndUpdate(campaignID, { status: "launched", emailsSent: emailsSent, emailsFailed: emailsFailed },{ new: true });
     return res.status(200).json({ message: "All emails sent successfully" });
 
   } catch (err) {
