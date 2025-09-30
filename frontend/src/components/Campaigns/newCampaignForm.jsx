@@ -102,7 +102,7 @@ const NewCampaignComponent = () => {
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className={styles.input}  
+              className={styles.input}
               placeholder="Description"
               id="desc"
               rows={4}
@@ -177,7 +177,6 @@ const NewCampaignComponent = () => {
               <option value="voucher">Voucher Claim</option>
               <option value="appraisal">Appraisal Alert</option>
               <option value="payroll">Payroll Confirmation</option>
-              <option value="hrNotice">HR Notice</option>
             </select>
           </div>
         </div>

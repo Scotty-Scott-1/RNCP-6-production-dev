@@ -12,9 +12,11 @@ const campaignSchema = new mongoose.Schema({
 	},
 	template: String,
 	createdBy: String,
-	status: String,
-	emailsSent: Number,
-	emailsFailed: Number,
+	status: { type: String, default: "active" },
+	emailsSent: { type: Number, default: 0 },
+	emailsFailed: { type: Number, default: 0 },
+	linksClicked: { type: Number, default: 0 },
+	credentialsSumbitted: { type: Number, default: 0 }
 }, { versionKey: false });
 
 module.exports = mongoose.model("Campaign", campaignSchema);

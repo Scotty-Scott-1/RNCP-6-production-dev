@@ -47,16 +47,14 @@ return (
 
   <div className={styles.section}>
     <h2>Engagement</h2>
-    <p><strong>Links Clicked:</strong> {myCampaign?.emailsClicked}</p>
-    <p><strong>Acknowledgements / Creds Submitted:</strong> {myCampaign?.emailsAcknowledged}</p>
+    <p><strong>Links Clicked:</strong> {myCampaign?.linksClicked}</p>
+    <p><strong>Credentials Submitted:</strong> {myCampaign?.credentialsSumbitted}</p>
   </div>
 
-  <button className={styles.backButton} onClick={() => navigate("/reports")}>
+  <button className={styles.backButton} onClick={() => navigate("/report")}>
     Back to Reports
   </button>
 </div>
-
-
 
 
 
