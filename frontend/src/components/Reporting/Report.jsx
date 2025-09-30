@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../security/authContext.jsx";
 import { getOneCampaign } from "./hooks/GetOneCampaign.jsx";
 import { getOneMailingList } from "./hooks/GetOneMailingList.jsx";
+import { getEmailLogsClicked } from "./hooks/GetEmailLogsClicked.jsx";
 import { DateTime } from "luxon";
 import styles from "./Report.module.css";
 import { Bar } from "react-chartjs-2";
@@ -25,6 +26,8 @@ const Report = () => {
   const { id, listid } = useParams();
   const myCampaign = getOneCampaign(id, accessToken);
   const myList = getOneMailingList(listid, accessToken);
+  const emailLogsClicked = getEmailLogsClicked(id, accessToken);
+
 
   const chartData = {
     labels: ["Emails Sent", "Links Clicked", "Credentials Submitted", "Emails Failed"],
@@ -111,6 +114,23 @@ const Report = () => {
           redraw
         />
       </div>
+
+      <div className={styles.section}>
+  <h2>Clicked Emails</h2>
+  {emailLogsClicked && emailLogsClicked.length > 0 ? (
+    <ul>
+      {emailLogsClicked.map((log) => (
+        <li key={log._id}>
+          {log.contactName || "Unknown"}  Clicked: {log.clicked ? "yes" : "no"} -- Credentials Sumbitted: {log.credentialsSubmitted ? "yes" : "no"}
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p>No clicked emails yet.</p>
+  )}
+</div>
+
+
     </div>
   );
 };

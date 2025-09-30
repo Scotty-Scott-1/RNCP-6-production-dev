@@ -86,9 +86,8 @@ app.use("/api/emaillog", updateEmailLog);
 const updateEmailLogCreds = require("./api/Email_Log/udpateEmailLogCreds.js");
 app.use("/api/emaillog", updateEmailLogCreds);
 
-
-
-
+const getEmailLogsClicked = require("./api/Email_Log/getEmailLogsClicked.js");
+app.use("/api/emaillog", getEmailLogsClicked);
 
 
 

@@ -30,10 +30,15 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
 
     for (let contact of contacts) {
       try {
+
+        const contactName = `${contact.name} ${contact.lastName}`
+
+
         const emailLog = await EmailLog.create({
           campaign: campaignID,
           contact: contact._id,
-          template
+          template,
+          contactName: contactName
         });
 
         console.log("EmailLog created:", emailLog);
