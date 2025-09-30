@@ -10,9 +10,10 @@
 }
 
 .title {
-  text-align: center;
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin-bottom: 1.5rem;
+  text-align: center;
+  color: #00fff7;
 }
 
 .section {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../security/authContext.jsx";
 import { getOneCampaign } from "./hooks/GetOneCampaign.jsx";
@@ -13,16 +13,16 @@ import {
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 } from "chart.js";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
 
 const Report = () => {
   const navigate = useNavigate();
   const { accessToken } = useAuth();
   const { id, listid } = useParams();
-
   const myCampaign = getOneCampaign(id, accessToken);
   const myList = getOneMailingList(listid, accessToken);
 
@@ -49,17 +49,20 @@ const Report = () => {
       title: { display: true, text: "Campaign Engagement Overview" }
     },
       scales: {
-    y: {
-      beginAtZero: true,
-      ticks: {
-        stepSize: 1
+        y: {
+          beginAtZero: true,
+          ticks: {
+            stepSize: 1
+          }
+        }
       }
-    }
   }
-  };
+
 
   return (
+
     <div className={styles.reportContainer}>
+<button className={styles.backButton} onClick={() => navigate("/report")}>Back to Reports</button>
       <h1 className={styles.title}>Campaign Report</h1>
 
       <div className={styles.section}>
@@ -102,7 +105,11 @@ const Report = () => {
 
       <div className={styles.section}>
         <h2>Visual Report</h2>
-        <Bar data={chartData} options={chartOptions} redraw />
+        <Bar
+          data={chartData}
+          options={chartOptions}
+          redraw
+        />
       </div>
     </div>
   );
