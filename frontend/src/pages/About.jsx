@@ -4,6 +4,7 @@ import Header from '../components/Header/Header.jsx'
 const About = () => (
   <div>
     <Header />
+    <p>token invalid</p>
   </div>
 );
 

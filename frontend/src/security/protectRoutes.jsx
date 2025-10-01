@@ -11,7 +11,6 @@ const ProtectRoute = ({ children }) => {
 
 	/*EFFECT TO VALIDATE TOKEN: On component mount or when accessToken changes, validate the token with the backend*/
 	useEffect(() => {
-		console.log("Current accessToken111:", accessToken);
 		const validateToken = async () => {
 			if (!accessToken) {
 				setStatus("invalid");
@@ -59,20 +58,20 @@ const ProtectRoute = ({ children }) => {
 					credentials: "include",
 				});
 				const data = await response.json();
-				console.log("Trying to refresh token1111");
+				console.log("Frontend. Token expired. Trying to refresh token");
 				if (response.status === 200) {
 					setAccessToken(data.accessToken);
 					setStatus("valid");
-					console.log("Token refreshed successfully:", data);
+					console.log("Frontend. Token refreshed successfully:", data);
 					return;
 				}
 				if (response.status === 403) {
 					setStatus("invalid");
-					console.log("Token not refreshed:", data);
+					console.log("Frontend. Token not refreshed:", data);
 					return;
 				}
 			} catch (error) {
-				console.log("Refresh token error:", error);
+				console.log("Frontend. Refresh token error:", error);
 				setStatus("invalid");
 			}
 		};

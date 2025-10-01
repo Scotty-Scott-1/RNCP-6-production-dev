@@ -42,3 +42,40 @@
   background-color: #00fff7;
   color: #000;
 }
+
+
+.resulatCard,
+.email-log-card {
+  background-color: rgba(0, 0, 0, 0.85);
+  border: 2px solid #00fff7;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  font-family: 'Courier New', Courier, monospace;
+  color: #00fff7;
+  box-shadow: 0 0 20px #00fff7, 0 0 40px #00fff7 inset;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.resulatCard:hover,
+.email-log-card:hover {
+  box-shadow: 0 0 30px #00fff7, 0 0 60px #00fff7 inset;
+  transform: scale(1.02);
+}
+
+.email-log-card div {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.date {
+  color: #00fff7aa;
+  font-style: italic;
+  text-shadow: 0 0 6px #00fff7;
+}
+
+.email-log-card strong {
+  color: #00fff7;
+  text-shadow: 0 0 8px #00fff7, 0 0 16px #00fff7;
+}

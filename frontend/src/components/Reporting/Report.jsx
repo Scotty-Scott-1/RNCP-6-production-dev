@@ -65,9 +65,8 @@ const Report = () => {
   return (
 
     <div className={styles.reportContainer}>
-<button className={styles.backButton} onClick={() => navigate("/report")}>Back to Reports</button>
+      <button className={styles.backButton} onClick={() => navigate("/report")}>Back to Reports</button>
       <h1 className={styles.title}>Campaign Report</h1>
-
       <div className={styles.section}>
         <h2>Campaign Details</h2>
         <p><strong>Name:</strong> {myCampaign?.campaignName}</p>
@@ -116,18 +115,29 @@ const Report = () => {
       </div>
 
       <div className={styles.section}>
-  <h2>Clicked Emails</h2>
-  {emailLogsClicked && emailLogsClicked.length > 0 ? (
-    <ul>
-      {emailLogsClicked.map((log) => (
-        <li key={log._id}>
-          {log.contactName || "Unknown"}  Clicked: {log.clicked ? "yes" : "no"} -- Credentials Sumbitted: {log.credentialsSubmitted ? "yes" : "no"}
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <p>No clicked emails yet.</p>
-  )}
+        <h2>Clicked Emails</h2>
+        {emailLogsClicked && emailLogsClicked.length > 0 ? (
+          emailLogsClicked.map((log) => (
+            <div key={log._id} className={styles.resulatCard}>
+              <div><strong>Contact:</strong> {log.contactName || "Unknown"}</div>
+              <div>
+                <strong>Clicked:</strong> {log.clicked ? "yes" : "no"}{" "}
+                {log.clickedAt && (
+                  <span className={styles.date}>({new Date(log.clickedAt).toLocaleString()})</span>
+                )}
+              </div>
+              <div>
+                <strong>Credentials Submitted:</strong>{" "}
+                {log.credentialsSubmitted ? "yes" : "no"}{" "}
+                {log.submittedAt && (
+                  <span className={styles.date}>({new Date(log.submittedAt).toLocaleString()})</span>
+                )}
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No clicked emails yet.</p>
+        )}
 </div>
 
 
