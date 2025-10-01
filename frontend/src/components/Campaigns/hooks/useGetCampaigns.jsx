@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useGetCampaigns = (accessToken) => {
+export const useGetCampaigns = (accessToken, filter) => {
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,7 +10,7 @@ export const useGetCampaigns = (accessToken) => {
     setLoading(true);
     setError(null);
       try {
-        const response = await fetch("/api/campaign/get", {
+        const response = await fetch(`/api/campaign/get/${filter}`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${accessToken}`,
@@ -33,7 +33,7 @@ export const useGetCampaigns = (accessToken) => {
 	};
 
 	if (accessToken) fetchCampaigns();
-  }, [accessToken]);
+  }, [accessToken, filter]);
 
   return { campaigns, loading, error, setCampaigns };
 }

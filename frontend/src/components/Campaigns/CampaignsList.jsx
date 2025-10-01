@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import styles from "./CampaignsList.module.css";
 import { useNavigate } from "react-router-dom";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaCheck } from "react-icons/fa";
 import { DateTime } from "luxon";
 import { useAuth } from "../../security/authContext.jsx";
 import { useGetCampaigns } from "./hooks/useGetCampaigns.jsx";
 import { useDeleteCampaign } from "./hooks/useDeleteCampaign.jsx";
+import { useCompleteCampaign } from "./hooks/useCompleteCampaign.jsx";
 
 const Campaigns = () => {
   const navigate = useNavigate();
+  const [filter, setFilter] = useState("all");
   const { accessToken } = useAuth();
-  const { campaigns, loading, error, setCampaigns } = useGetCampaigns(accessToken);
+  const { campaigns, loading, error, setCampaigns } = useGetCampaigns(accessToken, filter);
   const deleteCampaign = useDeleteCampaign(accessToken, setCampaigns);
-
+  const completeCampaign = useCompleteCampaign(accessToken, setCampaigns);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -25,6 +27,7 @@ const Campaigns = () => {
   const handleCampaignClick = (id, listid) => {
     navigate(`/campaign/edit/${id}/${listid}`);
   };
+
   const handleAddCampaign = () => navigate("/campaign/new");
 
 
@@ -34,10 +37,16 @@ const Campaigns = () => {
       <div className={styles.container}>
 
         <div className={styles.header}>
+          <div className={styles.filterBox}>
+            <select id="statusFilter" value={filter} onChange={(e) => setFilter(e.target.value)}>
+              <option value="All">All</option>
+              <option value="Active">Active</option>
+              <option value="Completed">Completed</option>
+              <option value="Launched">Launched</option>
+            </select>
+          </div>
           <h1 className={styles.title}>Campaigns</h1>
-          <button className={styles.button2} onClick={handleAddCampaign}>
-            + Add Campaign
-          </button>
+          <button className={styles.button2} onClick={handleAddCampaign}>+ Add Campaign</button>
         </div>
 
         {loading && <p>Loading campaigns...</p>}
@@ -74,8 +83,9 @@ const Campaigns = () => {
                       .toFormat("yyyy-LL-dd HH:mm")}
                   </span>
                   <span>{c.mailingList?.listName || "No mailing list"}</span>
-                  <span>
+                  <span className={styles.actions}>
                     <button className={styles.trashcan} onClick={() => deleteCampaign(c._id)}><FaTrash /></button>
+                    {c.status?.toLowerCase() === "launched" && (<button className={styles.tickButton} onClick={() => completeCampaign(c._id) }><FaCheck /></button>)}
                   </span>
                   <span className={`${styles.status} ${styles[c.status?.toLowerCase()]}`}>
                     {c.status || "Pending"}

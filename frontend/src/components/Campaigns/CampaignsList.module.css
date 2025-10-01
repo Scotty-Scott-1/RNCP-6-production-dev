@@ -40,6 +40,7 @@
   font-weight: bold;
   color: #00fff7;
   text-shadow: 0 0 10px #00fff7, 0 0 20px #00fff7;
+  width: auto;
 }
 
 .button2 {
@@ -200,4 +201,73 @@
 .pagination button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+
+
+
+
+.filterBox option {
+  background-color: #000000;
+  color: #00fff7;
+  font-weight: bold;
+  padding: 10px;
+  border: #00d7e0;
+}
+
+/* Hover effect on options */
+.filterBox option:hover {
+  background-color: #00fff7;
+  color: #000;
+}
+
+select {
+  flex-shrink: 0;
+  padding: 10px 18px;
+  border: 2px solid #00fff7;
+  border-radius: 8px;
+  background: transparent;
+  color: #00fff7;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 10px #00fff7;
+  transition: all 0.3s ease;
+}
+select:hover {
+    background-color: #00fff7;
+  color: #000;
+  box-shadow: 0 0 20px #00fff7, 0 0 40px #00fff7 inset;
+  transform: scale(1.05);
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tickButton {
+  border: 2px solid #00ff00;
+  border-radius: 6px;
+  background: transparent;
+  color: #00ff00;
+  font-weight: bold;
+  padding: 6px 10px;
+  cursor: pointer;
+  box-shadow: 0 0 8px #00ff00;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tickButton:hover {
+  background-color: #00ff00;
+  color: #000;
+  box-shadow: 0 0 16px #00ff00, 0 0 25px #00ff00 inset;
+  transform: translateY(-2px) scale(1.03);
+}
+
+.tickButton:active {
+  transform: scale(0.97);
+  box-shadow: 0 0
 }

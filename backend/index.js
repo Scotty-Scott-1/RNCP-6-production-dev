@@ -44,6 +44,9 @@ app.use("/api/campaign", newCampaign);
 const getOneCampaign = require("./api/Campaigns/getOneCampaign.js");
 app.use("/api/campaign/get", getOneCampaign);
 
+const completeCampaign = require("./api/Campaigns/completeCampaign.js");
+app.use("/api/campaign", completeCampaign);
+
 const updateCampaign = require("./api/Campaigns/updateCampaign.js");
 app.use("/api/campaign", updateCampaign);
 
