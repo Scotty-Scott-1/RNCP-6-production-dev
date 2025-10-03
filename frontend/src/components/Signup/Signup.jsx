@@ -45,7 +45,7 @@ const SignUp = () => {
             const data = await response.json();
             if (response.ok) {
                 alert("Signup successful! Please log in.");
-                navigate("/login");
+                navigate("/signin");
             } else {
                 alert(data.message || "Signup failed. Please try again.");
             }

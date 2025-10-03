@@ -9,13 +9,12 @@ export const getOneMailingList = (id, accessToken) => {
 
     const fetchList = async () => {
       try {
-        const response = await fetch("/api/mailinglist/get/one", {
-          method: "POST",
+        const response = await fetch(`/api/mailinglist/get/${id}`, {
+          method: "GET",
           headers: {
             "Authorization": `Bearer ${accessToken}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ listID: id }),
         });
         if (response.ok) {
           const data = await response.json();

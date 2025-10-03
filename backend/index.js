@@ -60,13 +60,13 @@ const getMailingLists = require("./api/Mailing_Lists/getMailingLists.js");
 app.use("/api/mailinglist", getMailingLists);
 
 const getOneMailingList = require("./api/Mailing_Lists/getOneMailingList.js");
-app.use("/api/mailinglist/get", getOneMailingList);
+app.use("/api/mailinglist", getOneMailingList);
 
 const updateMailingList = require("./api/Mailing_Lists/updateMailingList.js");
 app.use("/api/mailinglist", updateMailingList);
 
 const addContactMailingList = require("./api/Mailing_Lists/addContact.js");
-app.use("/api/mailinglist", addContactMailingList);
+app.use("/api", addContactMailingList);
 
 const securityFrontend = require("./api/Security/verifyTokenFrontend.js");
 app.use("/api/security", securityFrontend);
@@ -76,9 +76,6 @@ app.use("/api/security", securityRefresh);
 
 const deleteCampaign = require("./api/Campaigns/deleteCampaign.js");
 app.use("/api/campaign/delete", deleteCampaign);
-
-const deleteContact = require("./api/Mailing_Lists/deleteContact.js");
-app.use("/api/mailinglist", deleteContact);
 
 const deleteMailingList = require("./api/Mailing_Lists/deleteMailingList.js");
 app.use("/api/mailinglist", deleteMailingList);
@@ -94,6 +91,13 @@ app.use("/api/emaillog", updateEmailLogCreds);
 
 const getEmailLogsClicked = require("./api/Email_Log/getEmailLogsClicked.js");
 app.use("/api/emaillog", getEmailLogsClicked);
+
+// Contacts
+const deleteContact = require("./api/Mailing_Lists/deleteContact.js");
+app.use("/api/mailinglist", deleteContact);
+
+const getContactList = require("./api/Contact/getContactList.js");
+app.use("/api", getContactList);
 
 
 

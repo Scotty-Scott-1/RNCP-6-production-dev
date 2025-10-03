@@ -11,7 +11,6 @@ const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
 // LOGIN ROUTE
 router.post("/auth", async (req, res) => {
   const { username, password } = req.body;
-  console.log("Received login attempt:");
 
   try {
     // Find user by username

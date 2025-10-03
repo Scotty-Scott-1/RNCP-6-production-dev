@@ -56,7 +56,7 @@ const MailingLists = () => {
       if (response.ok) {
         const data = await response.json()
         console.log(data.message);
-        setMyLists(myLists.filter(list => list._id !== id));
+        setMyLists(myLists.filter(list => list.id !== id));
       }
     } catch (error) {
       console.error("Delete failed", error);
@@ -84,10 +84,10 @@ const MailingLists = () => {
 
             <div className={styles.list}>
               {currentItems.map((list) => (
-                <div key={list._id} className={styles.listItem}>
+                <div key={list.id} className={styles.listItem}>
                   <button
                     className={styles.campaignButton}
-                    onClick={() => handleListClick(list._id)}
+                    onClick={() => handleListClick(list.id)}
                   >
                     {list.listName}
                   </button>
@@ -95,7 +95,7 @@ const MailingLists = () => {
                   <span>{new Date(list.createdAt).toLocaleDateString()}</span>
                   <button
                     className={styles.button}
-                    onClick={() => handleDeleteList(list._id)}
+                    onClick={() => handleDeleteList(list.id)}
                   >
                     <FaTrash />
                   </button>

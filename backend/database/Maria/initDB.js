@@ -1,6 +1,23 @@
 // dbInit.js
 const sequelize = require('../Maria/connect.js');
-const MDB_User = require('../Maria/Models/User.js');
+const User = require("./Models/User.js");
+const MailingList = require("./Models/MailingList.js");
+const Contact = require("./Models/Contact.js");
+
+// Associations
+User.hasMany(MailingList, {
+  foreignKey: "createdBy",
+  onDelete: "CASCADE",
+  hooks: true
+});
+MailingList.belongsTo(User, { foreignKey: "createdBy" });
+
+MailingList.hasMany(Contact, {
+  foreignKey: "mailingListId",
+  onDelete: "CASCADE",
+  hooks: true
+});
+Contact.belongsTo(MailingList, { foreignKey: "mailingListId" });
 
 async function initDB() {
   try {
