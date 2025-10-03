@@ -1,6 +1,8 @@
 // server.js
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
+const sequelize = require('./database/Maria/connect.js');
+const initDB = require("./database/Maria/initDB.js");
 
 const express = require("express");
 const connectDB = require("./database/connect.js");
@@ -19,6 +21,7 @@ const PORT = process.env.PORT || 3000;
 
 // Connect to database
 connectDB();
+initDB();
 
 // Middleware
 app.use(cors({

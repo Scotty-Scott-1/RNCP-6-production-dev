@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from "./security/authContext.jsx";
 import ProtectRoute from './security/protectRoutes.jsx';
 
-import Home from '../src/pages/Home.jsx';
-import About from '../src/pages/About.jsx';
-import Signupform from '../src/pages/Signup.jsx';
-import SignIn from '../src/pages/Signin.jsx';
+import Home from './pages/Entry/Home.jsx';
+import About from './pages/Entry/About.jsx';
+import Signupform from './pages/Entry/Signup.jsx';
+import SignIn from './pages/Entry/Signin.jsx';
 import Dashboard from '../src/pages/Dashboard.jsx';
 import Campaigns from '../src/pages/Campaigns.jsx';
 import NewCampaignPage from '../src/pages/newCampaignPage.jsx';
