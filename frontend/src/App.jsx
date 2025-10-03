@@ -5,7 +5,6 @@ import ProtectRoute from './security/protectRoutes.jsx';
 
 import Home from '../src/pages/Home.jsx';
 import About from '../src/pages/About.jsx';
-import Login from '../src/pages/Login.jsx';
 import Signupform from '../src/pages/Signup.jsx';
 import SignIn from '../src/pages/Signin.jsx';
 import Dashboard from '../src/pages/Dashboard.jsx';
@@ -31,7 +30,6 @@ const App = () => (
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signupform />} />
         <Route path="/signin" element={<SignIn />} />
         <Route
