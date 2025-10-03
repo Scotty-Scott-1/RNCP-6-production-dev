@@ -1,6 +1,6 @@
 const express = require("express");
 const Joi = require("joi");
-const User = require("../../database/Models/User");
+const User = require("../../database/Maria/Models/User.js");
 const router = express.Router();
 
 const userSchema = Joi.object({
@@ -85,23 +85,22 @@ const userSchema = Joi.object({
 });
 
 router.post("/new", async (req, res) => {
+  try {
 
-  // check constraints
-  const { error } = userSchema.validate(req.body);
-  if (error) {
-    return res.status(400).json({ message: error.details[0].message });
+    const { error } = userSchema.validate(req.body);
+    if (error) return res.status(400).json({ message: error.details[0].message });
+
+    const existingUser = await User.findOne({ where: { email: req.body.email } });
+    if (existingUser) return res.status(400).json({ message: "Email already in use" });
+
+    const user = await User.create(req.body);
+
+    const { password, ...userData } = user.toJSON();
+    res.status(201).json(userData);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
   }
-
-  // check is email exists already
-  const email = req.body.email;
-  const existingUser = await User.findOne({ email: email });
-  if (existingUser) {
-    return res.status(400).json({ message: "Email already in use" });
-  }
-
-  const user = new User(req.body);
-  await user.save();
-  res.status(201).json(user);
 });
 
 module.exports = router;

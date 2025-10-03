@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require('../connect.js');
+const bcrypt = require("bcrypt");
 
 const SALT_ROUNDS = 10;
 
