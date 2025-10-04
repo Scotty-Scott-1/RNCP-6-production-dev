@@ -1,9 +1,8 @@
 const express = require("express");
-const MailingList = require("../../database/Models/MailingList.js");
+const MailingList = require("../../database/Maria/Models/MailingList.js");
 const verifyAccessToken = require("../Security/verifyTokenBackend.js");
 const router = express.Router();
 
-// Update mailing list
 router.put("/update", verifyAccessToken, async (req, res) => {
   try {
     const userId = req.user.id; // from token
@@ -13,8 +12,7 @@ router.put("/update", verifyAccessToken, async (req, res) => {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    // Find mailing list and check ownership
-    const mailingList = await MailingList.findById(id);
+    const mailingList = await MailingList.findByPk(id);
     if (!mailingList) {
       return res.status(404).json({ message: "Mailing list not found" });
     }
@@ -23,13 +21,12 @@ router.put("/update", verifyAccessToken, async (req, res) => {
       return res.status(403).json({ message: "Not authorized to edit this list" });
     }
 
-    // Update values
     mailingList.listName = listName;
     mailingList.description = description;
 
     await mailingList.save();
 
-    res.status(200).json({message: "updated"});
+    res.status(200).json({ message: "Mailing list updated successfully" });
   } catch (error) {
     console.error("Update error:", error);
     res.status(500).json({ message: "Server error updating mailing list" });

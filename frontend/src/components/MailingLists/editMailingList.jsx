@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import styles from './editMailingList.module.css';
-import { useAuth } from "../../../security/authContext.jsx";
+import { useAuth } from "../../security/authContext.jsx";
 import { getOneMailingList } from "./hooks/useGetOneList.jsx";
 import { useGetContactList } from "./hooks/useGetContactList.jsx";
 import { FaTrash } from "react-icons/fa";
+import { useUpdateMailingList } from "./hooks/useUpdateMailingList.jsx";
 
 const EditMailingList = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const EditMailingList = () => {
   const { id } = useParams();
   const myList = getOneMailingList(id, accessToken);
   const { contactList, setContactList, loading, error } = useGetContactList(id, accessToken);
-
+  const { updateMailingList, updateLoading, updateError } = useUpdateMailingList(accessToken);
 
   useEffect(() => {
     if (myList) {
@@ -30,32 +31,9 @@ const EditMailingList = () => {
     }
   }, [myList]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!listName || !description) {
-      alert("Attrs should not be empty.");
-      return;
-    }
-
-    try {
-      const response = await fetch("/api/mailinglist/update", {
-        method: "PUT",
-        headers: {
-          "Authorization": `Bearer ${accessToken}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ id, listName, description })
-      });
-
-      if (response.ok) {
-        console.log("List updated");
-      }
-      navigate(`/mailinglists`);
-    } catch (err) {
-      console.error("Update error:", err);
-      alert("Something went wrong updating the list.");
-    }
+    updateMailingList({ id, listName, description });
   };
 
   const handleAddContact = async () => {
@@ -189,7 +167,8 @@ return (
         <input className={styles.input} placeholder="Role" value={newContact.role} onChange={(e) => setNewContact({ ...newContact, role: e.target.value })} />
       </div>
       <button type="button" className={styles.button2} onClick={handleAddContact}> Add Contact </button>
-      <button type="submit" className={styles.button2} style={{ marginTop: "1rem" }}> Save Changes </button>
+      <button type="submit" className={styles.button2} style={{ marginTop: "1rem" }}> {loading ? "Updating..." : "Update"} </button>
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </form>
   </div>
 );
