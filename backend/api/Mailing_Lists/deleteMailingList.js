@@ -1,17 +1,19 @@
 const express = require("express");
-const MailingList = require("../../database/Models/MailingList.js");
+const MailingList = require("../../database/Maria/Models/MailingList.js");
 const verifyAccessToken = require("../Security/verifyTokenBackend.js")
 const router = express.Router();
 
-router.delete("/:id/delete", verifyAccessToken, async (req, res) => {
-	try {
-		const userID = req.user.id;
-		const mailignListID = req.params.id;
+router.delete("/:id", verifyAccessToken, async (req, res) => {
+  try {
+    const userID = req.user.id;
+    const id = req.params.id;
 
-		console.log("User ID: ", userID);
-		console.log("Mailing List ID: ", mailignListID);
+    const mailingList = await MailingList.findOne({ where: { id, createdBy: userID } });
+    if (!mailingList) {
+      return res.status(404).json({ message: "Mailing list not found or not authorized" });
+    }
 
-		await MailingList.findByIdAndDelete(mailignListID);
+		await MailingList.destroy( {where: { id } } );
 
 		res.status(200).json({ message: "List deleted" });
 	} catch (error) {

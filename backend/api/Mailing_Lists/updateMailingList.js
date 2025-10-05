@@ -3,10 +3,11 @@ const MailingList = require("../../database/Maria/Models/MailingList.js");
 const verifyAccessToken = require("../Security/verifyTokenBackend.js");
 const router = express.Router();
 
-router.put("/update", verifyAccessToken, async (req, res) => {
+router.put("/:id", verifyAccessToken, async (req, res) => {
   try {
     const userId = req.user.id; // from token
-    const { id, listName, description } = req.body;
+    const { listName, description } = req.body;
+    const id = req.params.id;
 
     if (!id || !listName || !description) {
       return res.status(400).json({ message: "Missing required fields" });

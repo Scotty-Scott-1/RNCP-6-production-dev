@@ -6,9 +6,10 @@ import { getOneMailingList } from "./hooks/useGetOneList.jsx";
 import { useGetContactList } from "./hooks/useGetContactList.jsx";
 import { FaTrash } from "react-icons/fa";
 import { useUpdateMailingList } from "./hooks/useUpdateMailingList.jsx";
+import { useAddContact } from "./hooks/useAddContact.jsx";
+import { useDeleteContact } from "./hooks/useDeleteContact.jsx";
 
 const EditMailingList = () => {
-  const navigate = useNavigate();
   const { accessToken } = useAuth();
   const [listName, setListName] = useState("");
   const [description, setDescription] = useState("");
@@ -21,8 +22,10 @@ const EditMailingList = () => {
   });
   const { id } = useParams();
   const myList = getOneMailingList(id, accessToken);
-  const { contactList, setContactList, loading, error } = useGetContactList(id, accessToken);
-  const { updateMailingList, updateLoading, updateError } = useUpdateMailingList(accessToken);
+  const { contactList, setContactList } = useGetContactList(id, accessToken);
+  const { updateMailingList } = useUpdateMailingList(accessToken);
+  const { addContact } = useAddContact(accessToken, id, setContactList);
+  const { deleteContact } = useDeleteContact(accessToken, setContactList);
 
   useEffect(() => {
     if (myList) {
@@ -36,63 +39,17 @@ const EditMailingList = () => {
     updateMailingList({ id, listName, description });
   };
 
-  const handleAddContact = async () => {
-    if (!newContact.name || !newContact.email) {
-      alert("Name and email are required.");
-      return;
-    }
+const handleAddContact = () => {
+  addContact(newContact);
+  setNewContact({ name: "", lastName: "", email: "", department: "", role: "" });
+};
 
-    try {
-      const response = await fetch("/api/addcontact", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${accessToken}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ id, contact: newContact })
-      });
+const handleDeleteContact = async (contactId) => {
+  const success = await deleteContact(contactId);
+  if (success) alert("Contact deleted successfully");
+};
 
-      if (response.ok) {
-          setContactList((prevList) => [...prevList, newContact]);
-          setNewContact({
-            name: "",
-            lastName: "",
-            email: "",
-            department: "",
-            role: ""
-          })
-      } else {
-        alert("Failed to add contact");
-      }
-    } catch (err) {
-      console.error("Add contact error:", err);
-      alert("Something went wrong adding the contact.");
-    }
-  };
 
-  const handleDeleteContact = async (contactid, listid) => {
-    if (!window.confirm("Are you sure you want to delete this contact?")) return;
-
-    try {
-      const response = await fetch(`/api/mailinglist/${listid}/${contactid}/delete`, {
-        method: "DELETE",
-        headers: {
-          "Authorization": `Bearer ${accessToken}`
-        }
-      });
-
-      if (response.ok) {
-        const updated = await response.json();
-        setContacts(updated.contacts);
-        alert("deleted contact")
-      } else {
-        alert("Failed to delete contact");
-      }
-    } catch (err) {
-      console.error("Delete contact error:", err);
-      alert("Something went wrong deleting the contact.");
-    }
-  };
 
 return (
   <div className={styles.background}>
@@ -131,11 +88,7 @@ return (
       </div>
 
       <div className={styles.list}>
-        {loading ? (
-          <p>Loading contacts...</p>
-        ) : error ? (
-          <p>Error: {error}</p>
-        ) : contactList.length > 0 ? (
+        {contactList.length > 0 ? (
           contactList.map((c) => (
             <div key={c.id} className={styles.listItem}>
               <input className={styles.input} value={c.name || ''} readOnly />
@@ -146,7 +99,7 @@ return (
               <button
                 type="button"
                 className={styles.deleteButton}
-                onClick={() => handleDeleteContact(c.id, id)}
+                onClick={() => handleDeleteContact(c.id)}
               >
                 <FaTrash />
               </button>
@@ -158,6 +111,7 @@ return (
           </div>
         )}
       </div>
+
       <h2 style={{ marginTop: "1.5rem" }}>Add New Contact</h2>
       <div className={styles.listItem}>
         <input className={styles.input} placeholder="First Name" value={newContact.name} onChange={(e) => setNewContact({ ...newContact, name: e.target.value })} />
@@ -167,8 +121,7 @@ return (
         <input className={styles.input} placeholder="Role" value={newContact.role} onChange={(e) => setNewContact({ ...newContact, role: e.target.value })} />
       </div>
       <button type="button" className={styles.button2} onClick={handleAddContact}> Add Contact </button>
-      <button type="submit" className={styles.button2} style={{ marginTop: "1rem" }}> {loading ? "Updating..." : "Update"} </button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <button type="submit" className={styles.button2} style={{ marginTop: "1rem" }}> Save </button>
     </form>
   </div>
 );

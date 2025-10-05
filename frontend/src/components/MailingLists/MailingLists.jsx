@@ -3,11 +3,14 @@ import styles from "./mailingListList.module.css";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../security/authContext.jsx";
 import { FaTrash } from "react-icons/fa";
+import { useDeleteMailingList } from "./hooks/useDeleteMailingList.jsx";
+
 
 const MailingLists = () => {
   const navigate = useNavigate();
   const { accessToken } = useAuth();
   const [myLists, setMyLists] = useState([]);
+  const { deleteMailingList } = useDeleteMailingList(accessToken, setMyLists);
 
   useEffect(() => {
     const getMailingLists = async () => {
@@ -46,22 +49,11 @@ const MailingLists = () => {
     navigate("/newmailinglist");
   };
 
-  const handleDeleteList = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this mailing list?")) return;
-    try {
-      const response = await fetch(`/api/mailinglist/${id}/delete`, {
-        method: "DELETE",
-        headers: { "Authorization": `Bearer ${accessToken}` }
-      });
-      if (response.ok) {
-        const data = await response.json()
-        console.log(data.message);
-        setMyLists(myLists.filter(list => list.id !== id));
-      }
-    } catch (error) {
-      console.error("Delete failed", error);
-    }
-  };
+const handleDeleteList = async (id) => {
+  const success = await deleteMailingList(id);
+  if (success) alert("Mailing list deleted successfully");
+};
+
 
   return (
     <div className={styles.outerContainer}>

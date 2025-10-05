@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const useUpdateMailingList = (accessToken) => {
-  const [updateLoading, setUpdateLoading] = useState(false);
-  const [updateError, setUpdateError] = useState(null);
   const navigate = useNavigate();
 
   const updateMailingList = async ({ id, listName, description }) => {
@@ -12,17 +10,14 @@ export const useUpdateMailingList = (accessToken) => {
       return;
     }
 
-    setUpdateLoading(true);
-    setUpdateError(null);
-
     try {
-      const response = await fetch("/api/mailinglist/update", {
+      const response = await fetch(`/api/mailinglists/${id}`, {
         method: "PUT",
         headers: {
           "Authorization": `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id, listName, description }),
+        body: JSON.stringify({ listName, description }),
       });
 
       if (!response.ok) {
@@ -34,11 +29,8 @@ export const useUpdateMailingList = (accessToken) => {
       navigate("/mailinglists");
     } catch (err) {
       console.error("Update error:", err);
-      setUpdateError(err.message);
-    } finally {
-      setUpdateLoading(false);
     }
   };
 
-  return { updateMailingList, updateLoading, updateError };
+  return { updateMailingList };
 };
