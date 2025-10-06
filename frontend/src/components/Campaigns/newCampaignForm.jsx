@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './newCampaign.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../security/authContext.jsx";
+import { useGetMailingLists } from "../Hooks/useGetMailingLists.jsx";
 
 const NewCampaignComponent = () => {
   const navigate = useNavigate();
@@ -14,26 +15,8 @@ const NewCampaignComponent = () => {
   const [template, setTemplate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [mailingLists, setMailingLists] = useState([]);
-
-  // Fetch mailing lists
-  useEffect(() => {
-    const fetchMailingLists = async () => {
-      try {
-        const response = await fetch("/api/mailinglist/get", {
-          headers: {"Authorization": `Bearer ${accessToken}`}
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setMailingLists(data);
-        } else console.error("Failed to fetch mailing lists");
-      } catch (error) {
-        console.error("Error fetching mailing lists:", error);
-      }
-    };
-
-    if (accessToken) fetchMailingLists();
-  }, [accessToken]);
+  const [myLists, setMyLists] = useState([]);
+  const { loading, error } = useGetMailingLists(accessToken, setMyLists);
 
   // Handle submit
   const handleSubmit = async (e) => {
@@ -54,7 +37,7 @@ const NewCampaignComponent = () => {
           description,
           startTime: new Date(startTime).toISOString(),
           endTime: new Date(endTime).toISOString(),
-          mailingList: mailingListId,
+          mailingListId: mailingListId,
           template,
         }),
       });
@@ -153,8 +136,8 @@ const NewCampaignComponent = () => {
               id="mailing"
             >
               <option value="">Select Mailing List</option>
-              {mailingLists.map((list) => (
-                <option key={list._id} value={list._id}>
+              {myLists.map((list) => (
+                <option key={list.id} value={list.id}>
                   {list.listName}
                 </option>
               ))}

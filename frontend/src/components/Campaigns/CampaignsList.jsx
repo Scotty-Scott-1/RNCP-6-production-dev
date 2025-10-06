@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { FaTrash, FaCheck } from "react-icons/fa";
 import { DateTime } from "luxon";
 import { useAuth } from "../../security/authContext.jsx";
-import { useGetCampaigns } from "./hooks/useGetCampaigns.jsx";
-import { useDeleteCampaign } from "./hooks/useDeleteCampaign.jsx";
-import { useCompleteCampaign } from "./hooks/useCompleteCampaign.jsx";
+import { useGetCampaigns } from "../Hooks/useGetCampaigns.jsx";
+import { useDeleteCampaign } from "../Hooks/useDeleteCampaign.jsx";
+import { useCompleteCampaign } from "../Hooks/useCompleteCampaign.jsx";
 
 const Campaigns = () => {
   const navigate = useNavigate();
