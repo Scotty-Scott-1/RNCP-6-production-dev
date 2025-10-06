@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const getOneCampaign = (id, accessToken) => {
+export const useGetOneCampaign = (id, accessToken) => {
   const [myCampaign, setMyCampaign] = useState(null);
 
   useEffect(() => {
@@ -8,13 +8,12 @@ export const getOneCampaign = (id, accessToken) => {
 
 	const fetchCampaign = async () => {
 	  try {
-		const response = await fetch("/api/campaign/get/one", {
-		  method: "POST",
+		const response = await fetch(`/api/campaign/${id}`, {
+		  method: "GET",
 		  headers: {
 			"Authorization": `Bearer ${accessToken}`,
 			"Content-Type": "application/json",
 		  },
-		  body: JSON.stringify({ campaignID: id }),
 		});
 		if (response.ok) {
 		  const data = await response.json();

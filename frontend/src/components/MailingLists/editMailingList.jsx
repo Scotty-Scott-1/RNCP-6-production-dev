@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import styles from './editMailingList.module.css';
 import { useAuth } from "../../security/authContext.jsx";
-import { getOneMailingList } from "./hooks/useGetOneList.jsx";
-import { useGetContactList } from "./hooks/useGetContactList.jsx";
+import { getOneMailingList } from "../Hooks/useGetOneMailingList.jsx";
+import { useGetContactList } from "../Hooks/useGetContactList.jsx";
 import { FaTrash } from "react-icons/fa";
-import { useUpdateMailingList } from "./hooks/useUpdateMailingList.jsx";
-import { useAddContact } from "./hooks/useAddContact.jsx";
-import { useDeleteContact } from "./hooks/useDeleteContact.jsx";
+import { useUpdateMailingList } from "../Hooks/useUpdateMailingList.jsx";
+import { useAddContact } from "../Hooks/useAddContact.jsx";
+import { useDeleteContact } from "../Hooks/useDeleteContact.jsx";
 
 const EditMailingList = () => {
   const { accessToken } = useAuth();

@@ -2,85 +2,49 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../security/authContext.jsx";
 import styles from './editCampaign.module.css';
-import { getOneCampaign } from "./hooks/GetOneCampaign.jsx";
-import { getOneMailingList } from "./hooks/GetOneMailingList.jsx";
+import { useGetOneCampaign } from "../../Hooks/useGetOneCampaign.jsx";
+import { getOneMailingList } from "../../Hooks/useGetOneMailingList.jsx";
 import { DateTime } from "luxon";
+const { updateCampaign } = useUpdateCampaign(accessToken);
 
 const EditCampaign = () => {
   const navigate = useNavigate();
   const { accessToken } = useAuth();
-  const { id, listid } = useParams();
+  const { id } = useParams();
 
   const [campaignName, setCampaignName] = useState("");
   const [description, setDescription] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [mailingList, setMailingList] = useState("");
   const [template, setTemplate] = useState("");
   const [status, setStatus] = useState("");
+  const [mailingListId, setMailingListId] = useState("");
+  const [listId, setListId] = useState("");
 
-  // load campaign
-  const myCampaign = getOneCampaign(id, accessToken);
-  const myList = getOneMailingList(listid, accessToken);
+  // load campaign and mailing list objs
+  const myCampaign = useGetOneCampaign(id, accessToken);
+  const myList = getOneMailingList(mailingListId, accessToken);
 
-  useEffect(() => {
-    if (myCampaign) {
-      setCampaignName(myCampaign.campaignName || "");
-      setDescription(myCampaign.description || "");
+useEffect(() => {
+  if (!myCampaign) return;
 
-      setStartTime(
-        myCampaign.startTime
-          ? DateTime.fromISO(myCampaign.startTime, { zone: "utc" })
-              .toLocal()
-              .toLocaleString(DateTime.DATETIME_MED)
-          : ""
-      );
-      setEndTime(
-        myCampaign.endTime
-          ? DateTime.fromISO(myCampaign.endTime, { zone: "utc" })
-              .toLocal()
-              .toLocaleString(DateTime.DATETIME_MED)
-          : ""
-      );
-
-      setMailingList(myList?.listName || "");
-      setTemplate(myCampaign.template || "");
-      setStatus(myCampaign.status || "");
-    }
-  }, [myCampaign, myList]);
+  setCampaignName(myCampaign.campaignName || "");
+  setDescription(myCampaign.description || "");
+  setStartTime(myCampaign.startTime ? DateTime.fromISO(myCampaign.startTime, { zone: "utc" }).toLocal().toLocaleString(DateTime.DATETIME_MED) : "");
+  setEndTime(myCampaign.endTime ? DateTime.fromISO(myCampaign.endTime, { zone: "utc" }).toLocal().toLocaleString(DateTime.DATETIME_MED) : "");
+  setTemplate(myCampaign.template);
+  setStatus(myCampaign.status);
+  setMailingListId(myCampaign.mailingListId);
+}, [myCampaign]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!campaignName || !description) {
       alert("Campaign name and description are required.");
       return;
     }
-
-    try {
-      const response = await fetch("/api/campaign/update", {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id,
-          campaignName,
-          description,
-        }),
-      });
-
-      if (response.ok) {
-        console.log("Campaign updated");
-        navigate("/campaigns");
-      } else {
-        alert("Failed to update campaign.");
-      }
-    } catch (err) {
-      console.error("Update error:", err);
-      alert("Something went wrong updating the campaign.");
-    }
+    const success = await updateCampaign(id, campaignName, description);
+    if (success) navigate("/campaigns");
   };
 
   const handleLaunch = async (e) => {
@@ -159,7 +123,7 @@ const EditCampaign = () => {
 
   <div className={styles.formRow}>
     <label className={styles.label}>Mailing List:</label>
-    <p className={styles.readonly}>{mailingList}</p>
+    <p className={styles.readonly}>{myList?.listName || ""}</p>
   </div>
 
   <div className={styles.formRow}>

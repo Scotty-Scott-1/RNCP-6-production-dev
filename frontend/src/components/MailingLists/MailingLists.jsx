@@ -3,8 +3,8 @@ import styles from "./mailingListList.module.css";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../security/authContext.jsx";
 import { FaTrash } from "react-icons/fa";
-import { useDeleteMailingList } from "./hooks/useDeleteMailingList.jsx";
-import { useGetMailingLists } from "./hooks/useGetMailingLists.jsx";
+import { useDeleteMailingList } from "../Hooks/useDeleteMailingList.jsx";
+import { useGetMailingLists } from "../Hooks/useGetMailingLists.jsx";
 
 
 

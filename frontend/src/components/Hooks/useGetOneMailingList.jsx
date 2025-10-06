@@ -6,6 +6,7 @@ export const getOneMailingList = (id, accessToken) => {
 
   useEffect(() => {
     if (!accessToken) return;
+    if (!id) return;
 
     const fetchList = async () => {
       try {

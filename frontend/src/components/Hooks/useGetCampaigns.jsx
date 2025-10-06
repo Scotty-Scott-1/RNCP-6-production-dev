@@ -1,39 +1,42 @@
 import { useState, useEffect } from "react";
 
-export const useGetCampaigns = (accessToken, filter) => {
-  const [campaigns, setCampaigns] = useState([]);
-  const [loading, setLoading] = useState(true);
+export const useGetCampaigns = (accessToken, filter, setCampaigns) => {
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!accessToken) return;
+
     const fetchCampaigns = async () => {
-    setLoading(true);
-    setError(null);
+      setLoading(true);
+      setError(null);
+
       try {
-        const response = await fetch(`/api/campaign/get/${filter}`, {
+        const res = await fetch(`/api/campaign/get/${filter}`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${accessToken}`,
-            "Content-Type": "application/json"
-          }
+            "Content-Type": "application/json",
+          },
         });
 
-		if (response.ok) {
-		  const data = await response.json();
-		  setCampaigns(data);
-		} else {
-          const error = await response.json();
-          setError(error.message || "Failed to fetch campaigns");
-		}
-	  } catch (err) {
-		setError(err.message);
-	  } finally {
-		setLoading(false);
-	  }
-	};
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.message || "Failed to fetch campaigns");
+        }
 
-	if (accessToken) fetchCampaigns();
+        const data = await res.json();
+        setCampaigns(data);
+      } catch (err) {
+        console.error("Error fetching campaigns:", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCampaigns();
   }, [accessToken, filter]);
 
-  return { campaigns, loading, error, setCampaigns };
-}
+  return { loading, error };
+};

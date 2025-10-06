@@ -12,7 +12,10 @@ const Campaigns = () => {
   const navigate = useNavigate();
   const [filter, setFilter] = useState("all");
   const { accessToken } = useAuth();
-  const { campaigns, loading, error, setCampaigns } = useGetCampaigns(accessToken, filter);
+  const [campaigns, setCampaigns] = useState([]);
+
+  const { loading, error } = useGetCampaigns(accessToken, filter, setCampaigns);
+
   const deleteCampaign = useDeleteCampaign(accessToken, setCampaigns);
   const completeCampaign = useCompleteCampaign(accessToken, setCampaigns);
 
@@ -24,13 +27,14 @@ const Campaigns = () => {
   const totalPages = Math.ceil(campaigns.length / itemsPerPage);
 
 
-  const handleCampaignClick = (id, listid) => {
-    navigate(`/campaign/edit/${id}/${listid}`);
+  const handleCampaignClick = (id) => {
+    navigate(`/campaign/${id}`);
   };
 
   const handleAddCampaign = () => navigate("/campaign/new");
 
-
+  if (loading) return <p>Loading campaigns...</p>;
+  if (error) return <p>Error: {error}</p>;
   return (
     <div className={styles.outerContainer}>
 
@@ -49,11 +53,6 @@ const Campaigns = () => {
           <button className={styles.button2} onClick={handleAddCampaign}>+ Add Campaign</button>
         </div>
 
-        {loading && <p>Loading campaigns...</p>}
-        {error && <p style={{ color: "red" }}>{error}</p>}
-
-        {!loading && !error && (
-          <>
             <div className={styles.listHeader}>
               <span>Name</span>
               <span>Date Created</span>
@@ -65,10 +64,10 @@ const Campaigns = () => {
 
             <div className={styles.list}>
               {currentItems.map((c) => (
-                <div key={c._id} className={styles.listItem}>
+                <div key={c.id} className={styles.listItem}>
                   <button
                     className={styles.campaignButton}
-                    onClick={() => handleCampaignClick(c._id, c.mailingList?._id)}
+                    onClick={() => handleCampaignClick(c.id, c.mailingList?.id)}
                   >
                     {c.campaignName}
                   </button>
@@ -112,8 +111,6 @@ const Campaigns = () => {
               </button>
             </div>
 
-          </>
-        )}
       </div>
     </div>
   );

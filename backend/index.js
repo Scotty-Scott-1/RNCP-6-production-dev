@@ -38,20 +38,6 @@ app.use("/api/user", authUser);
 const newUser = require("./api/Users/newUser.js");
 app.use("/api/user", newUser);
 
-const getCampaign = require("./api/Campaigns/getCampaign.js");
-app.use("/api/campaign", getCampaign);
-
-const newCampaign = require("./api/Campaigns/newCampaign.js");
-app.use("/api/campaign", newCampaign);
-
-const getOneCampaign = require("./api/Campaigns/getOneCampaign.js");
-app.use("/api/campaign/get", getOneCampaign);
-
-const completeCampaign = require("./api/Campaigns/completeCampaign.js");
-app.use("/api/campaign", completeCampaign);
-
-const updateCampaign = require("./api/Campaigns/updateCampaign.js");
-app.use("/api/campaign", updateCampaign);
 
 
 
@@ -76,14 +62,16 @@ app.use("/api/emaillog", updateEmailLogCreds);
 const getEmailLogsClicked = require("./api/Email_Log/getEmailLogsClicked.js");
 app.use("/api/emaillog", getEmailLogsClicked);
 
-const launchCampiagn = require("./api/Campaigns/launchCampaign.js");
-app.use("/api/campaign", launchCampiagn);
 
 // CONTACTS
+
+// DELETE
 const deleteContact = require("./api/Contact/deleteContact.js");
 app.use("/api/contact", deleteContact);
+// GET
 const getContactList = require("./api/Contact/getContactList.js");
 app.use("/api", getContactList);
+// NEW
 const addContact = require("./api/Contact/addContact.js");
 app.use("/api", addContact);
 
@@ -95,13 +83,39 @@ app.use("/api/mailinglist", getMailingLists);
 // GET ONE
 const getOneMailingList = require("./api/Mailing_Lists/getOneMailingList.js");
 app.use("/api/mailinglist", getOneMailingList);
-
+// UPDATE
 const updateMailingList = require("./api/Mailing_Lists/updateMailingList.js");
 app.use("/api/mailinglists", updateMailingList);
+// NEW
 const newMailingList = require("./api/Mailing_Lists/newMailingList.js");
 app.use("/api/mailinglist", newMailingList);
+// DELETE
 const deleteMailingList = require("./api/Mailing_Lists/deleteMailingList.js");
 app.use("/api/mailinglist", deleteMailingList);
+
+
+// CAMPAIGNS
+
+// GET ALL
+const getCampaign = require("./api/Campaigns/getCampaign.js");
+app.use("/api/campaign", getCampaign);
+// GET ONE
+const getOneCampaign = require("./api/Campaigns/getOneCampaign.js");
+app.use("/api/campaign", getOneCampaign);
+// NEW
+const newCampaign = require("./api/Campaigns/newCampaign.js");
+app.use("/api/campaign", newCampaign);
+// UPDATE (COMPLETE)
+const completeCampaign = require("./api/Campaigns/completeCampaign.js");
+app.use("/api/campaign", completeCampaign);
+// UPDATE
+const updateCampaign = require("./api/Campaigns/updateCampaign.js");
+app.use("/api/campaign", updateCampaign);
+// LAUNCH
+const launchCampiagn = require("./api/Campaigns/launchCampaign.js");
+app.use("/api/campaign", launchCampiagn);
+
+
 
 
 // Serve built React frontend in production

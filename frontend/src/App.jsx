@@ -57,7 +57,7 @@ const App = () => (
           element={<ProtectRoute><EditMailingListPage /></ProtectRoute>}
         />
         <Route
-          path="/campaign/edit/:id/:listid"
+          path="/campaign/:id"
           element={<ProtectRoute><EditCampaignPage /></ProtectRoute>}
         />
         <Route
