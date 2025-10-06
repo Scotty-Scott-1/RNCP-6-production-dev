@@ -9,7 +9,7 @@ export const getOneMailingList = (id, accessToken) => {
 
     const fetchList = async () => {
       try {
-        const response = await fetch(`/api/mailinglist/get/${id}`, {
+        const response = await fetch(`/api/mailinglist/${id}`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${accessToken}`,

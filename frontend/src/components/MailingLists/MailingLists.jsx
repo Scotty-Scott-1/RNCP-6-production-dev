@@ -4,35 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../security/authContext.jsx";
 import { FaTrash } from "react-icons/fa";
 import { useDeleteMailingList } from "./hooks/useDeleteMailingList.jsx";
+import { useGetMailingLists } from "./hooks/useGetMailingLists.jsx";
+
 
 
 const MailingLists = () => {
   const navigate = useNavigate();
   const { accessToken } = useAuth();
   const [myLists, setMyLists] = useState([]);
+  const { loading, error } = useGetMailingLists(accessToken, setMyLists);
   const { deleteMailingList } = useDeleteMailingList(accessToken, setMyLists);
-
-  useEffect(() => {
-    const getMailingLists = async () => {
-      try {
-        const response = await fetch("/api/mailinglist/get", {
-          method: "GET",
-          headers: {
-            "Authorization": `Bearer ${accessToken}`,
-            "Content-Type": "application/json"
-          }
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setMyLists(data);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    if (accessToken) getMailingLists();
-  }, [accessToken]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;

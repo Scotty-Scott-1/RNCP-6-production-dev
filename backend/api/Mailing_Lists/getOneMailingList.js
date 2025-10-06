@@ -4,7 +4,7 @@ const router = express.Router();
 const verifyAccessToken = require("../Security/verifyTokenBackend.js");
 
 // GET one mailing list by ID
-router.get("/get/:id", verifyAccessToken, async (req, res) => {
+router.get("/:id", verifyAccessToken, async (req, res) => {
   try {
     const userId = req.user.id;         // authenticated user
     const listId = req.params.id;       // ID from the URL

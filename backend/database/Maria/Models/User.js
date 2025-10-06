@@ -23,7 +23,7 @@ const User = sequelize.define(
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: { name: 'email_unique', msg: 'Email must be unique' },
       validate: {
         isEmail: true,
       },
@@ -31,7 +31,7 @@ const User = sequelize.define(
     username: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: { name: 'username_unique', msg: 'Username must be unique' }
     },
     password: {
       type: DataTypes.STRING,

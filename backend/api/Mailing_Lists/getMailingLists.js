@@ -4,7 +4,7 @@ const verifyAccessToken = require("../Security/verifyTokenBackend.js");
 const router = express.Router();
 
 // GET all mailing lists owned by the authenticated user
-router.get("/get", verifyAccessToken, async (req, res) => {
+router.get("/", verifyAccessToken, async (req, res) => {
   try {
     const userId = req.user.id;
 

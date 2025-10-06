@@ -53,14 +53,6 @@ app.use("/api/campaign", completeCampaign);
 const updateCampaign = require("./api/Campaigns/updateCampaign.js");
 app.use("/api/campaign", updateCampaign);
 
-const newMailingList = require("./api/Mailing_Lists/newMailingList.js");
-app.use("/api/mailinglist", newMailingList);
-
-const getMailingLists = require("./api/Mailing_Lists/getMailingLists.js");
-app.use("/api/mailinglist", getMailingLists);
-
-const getOneMailingList = require("./api/Mailing_Lists/getOneMailingList.js");
-app.use("/api/mailinglist", getOneMailingList);
 
 
 
@@ -73,11 +65,7 @@ app.use("/api/security", securityRefresh);
 const deleteCampaign = require("./api/Campaigns/deleteCampaign.js");
 app.use("/api/campaign/delete", deleteCampaign);
 
-const deleteMailingList = require("./api/Mailing_Lists/deleteMailingList.js");
-app.use("/api/mailinglist", deleteMailingList);
 
-const launchCampiagn = require("./api/Campaigns/launchCampaign.js");
-app.use("/api/campaign", launchCampiagn);
 
 const updateEmailLog = require("./api/Email_Log/updateEmailLog.js");
 app.use("/api/emaillog", updateEmailLog);
@@ -88,20 +76,32 @@ app.use("/api/emaillog", updateEmailLogCreds);
 const getEmailLogsClicked = require("./api/Email_Log/getEmailLogsClicked.js");
 app.use("/api/emaillog", getEmailLogsClicked);
 
-// Contacts
+const launchCampiagn = require("./api/Campaigns/launchCampaign.js");
+app.use("/api/campaign", launchCampiagn);
+
+// CONTACTS
 const deleteContact = require("./api/Contact/deleteContact.js");
 app.use("/api/contact", deleteContact);
-
 const getContactList = require("./api/Contact/getContactList.js");
 app.use("/api", getContactList);
-
 const addContact = require("./api/Contact/addContact.js");
 app.use("/api", addContact);
 
-// mailing lists
+// MAILING LISTS
+
+// GET ALL
+const getMailingLists = require("./api/Mailing_Lists/getMailingLists.js");
+app.use("/api/mailinglist", getMailingLists);
+// GET ONE
+const getOneMailingList = require("./api/Mailing_Lists/getOneMailingList.js");
+app.use("/api/mailinglist", getOneMailingList);
+
 const updateMailingList = require("./api/Mailing_Lists/updateMailingList.js");
 app.use("/api/mailinglists", updateMailingList);
-
+const newMailingList = require("./api/Mailing_Lists/newMailingList.js");
+app.use("/api/mailinglist", newMailingList);
+const deleteMailingList = require("./api/Mailing_Lists/deleteMailingList.js");
+app.use("/api/mailinglist", deleteMailingList);
 
 
 // Serve built React frontend in production
