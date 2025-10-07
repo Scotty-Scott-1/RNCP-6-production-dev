@@ -48,8 +48,6 @@ app.use("/api/security", securityFrontend);
 const securityRefresh = require("./api/Security/refreshToken.js");
 app.use("/api/security", securityRefresh);
 
-const deleteCampaign = require("./api/Campaigns/deleteCampaign.js");
-app.use("/api/campaign/delete", deleteCampaign);
 
 
 
@@ -105,16 +103,18 @@ app.use("/api/campaign", getOneCampaign);
 // NEW
 const newCampaign = require("./api/Campaigns/newCampaign.js");
 app.use("/api/campaign", newCampaign);
-// UPDATE (COMPLETE)
-const completeCampaign = require("./api/Campaigns/completeCampaign.js");
-app.use("/api/campaign", completeCampaign);
 // UPDATE
 const updateCampaign = require("./api/Campaigns/updateCampaign.js");
 app.use("/api/campaign", updateCampaign);
 // LAUNCH
 const launchCampiagn = require("./api/Campaigns/launchCampaign.js");
 app.use("/api/campaign", launchCampiagn);
-
+// DELETE
+const deleteCampaign = require("./api/Campaigns/deleteCampaign.js");
+app.use("/api/campaign", deleteCampaign);
+// UPDATE (COMPLETE)
+const completeCampaign = require("./api/Campaigns/completeCampaign.js");
+app.use("/api/campaign", completeCampaign);
 
 
 

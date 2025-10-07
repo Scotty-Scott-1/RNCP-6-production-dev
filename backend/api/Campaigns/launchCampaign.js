@@ -1,6 +1,7 @@
 const express = require("express");
-const Campaign = require("../../database/Models/Campaign.js");
-const MailingList = require("../../database/Models/MailingList.js");
+const Campaign = require("../../database/Maria/Models/Campaign.js");
+const MailingList = require("../../database/Maria/Models/MailingList.js");
+const Contact = require("../../database/Maria/Models/Contact.js");
 const EmailLog = require("../../database/Models/EmailLog.js");
 const verifyAccessToken = require("../Security/verifyTokenBackend.js")
 const sendMail = require("../../email/mailer.js")
@@ -9,7 +10,7 @@ const router = express.Router();
 router.post("/launch", verifyAccessToken, async (req, res) => {
   try {
     const userID = req.user.id;
-    const { listid: listID, id: campaignID, template } = req.body;
+    const { mailingListId: listID, id: campaignID, template } = req.body;
 
     console.log("-------------LAUNCH------------------");
     console.log("User ID:", userID);
@@ -18,12 +19,18 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
     console.log("Template:", template);
     console.log("-------------LAUNCH------------------");
 
-    const myList = await MailingList.findById(listID);
+  // Get the mailing list and its contacts
+    const myList = await MailingList.findOne({
+      where: { id: listID, createdBy: userID },
+      include: [{ model: Contact }]
+    });
+
     if (!myList) {
       return res.status(404).json({ message: "Mailing list not found" });
     }
 
-    const contacts = myList.contacts;
+
+    const contacts = myList.Contacts || []; // Sequelize pluralizes include
     let emailsSent = 0;
     let emailsFailed = 0;
     const errors = [];
@@ -31,7 +38,7 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
     for (let contact of contacts) {
       try {
 
-        const contactName = `${contact.name} ${contact.lastName}`
+        const contactName = `${contact.name || ""} ${contact.lastName || ""}`.trim();
 
 
         const emailLog = await EmailLog.create({
@@ -129,7 +136,11 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
       });
     }
 
-    const updatedCampaign = await Campaign.findByIdAndUpdate(campaignID, { status: "launched", emailsSent: emailsSent, emailsFailed: emailsFailed },{ new: true });
+    // Update campaign in MariaDB
+    await Campaign.update(
+      { status: "launched", emailsSent, emailsFailed },
+      { where: { id: campaignID, createdBy: userID } }
+    );
     return res.status(200).json({ message: "All emails sent successfully" });
 
   } catch (err) {

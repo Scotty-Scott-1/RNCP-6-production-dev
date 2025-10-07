@@ -4,13 +4,15 @@ import { useAuth } from "../../../security/authContext.jsx";
 import styles from './editCampaign.module.css';
 import { useGetOneCampaign } from "../../Hooks/useGetOneCampaign.jsx";
 import { getOneMailingList } from "../../Hooks/useGetOneMailingList.jsx";
+import { useUpdateCampaign } from "../../Hooks/useUpdateCampaign.jsx";
+
 import { DateTime } from "luxon";
-const { updateCampaign } = useUpdateCampaign(accessToken);
 
 const EditCampaign = () => {
   const navigate = useNavigate();
   const { accessToken } = useAuth();
   const { id } = useParams();
+  const { updateCampaign } = useUpdateCampaign(accessToken);
 
   const [campaignName, setCampaignName] = useState("");
   const [description, setDescription] = useState("");
@@ -19,7 +21,6 @@ const EditCampaign = () => {
   const [template, setTemplate] = useState("");
   const [status, setStatus] = useState("");
   const [mailingListId, setMailingListId] = useState("");
-  const [listId, setListId] = useState("");
 
   // load campaign and mailing list objs
   const myCampaign = useGetOneCampaign(id, accessToken);
@@ -66,7 +67,7 @@ useEffect(() => {
         },
         body: JSON.stringify({
           id,
-          listid,
+          mailingListId,
           template,
          }),
       });

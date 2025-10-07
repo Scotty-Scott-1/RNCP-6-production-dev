@@ -7,7 +7,7 @@ export const useDeleteCampaign = (accessToken, setCampaigns) => {
     if (!confirmed) return;
 
    try {
-      const response = await fetch(`/api/campaign/delete/${id}`, {
+      const response = await fetch(`/api/campaign/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -16,7 +16,7 @@ export const useDeleteCampaign = (accessToken, setCampaigns) => {
       });
 
       if (response.ok) {
-        setCampaigns((prev) => prev.filter((c) => c._id !== id));
+        setCampaigns((prev) => prev.filter((c) => c.id !== id));
       } else {
         const errorData = await response.json();
         console.error("Delete failed:", errorData);

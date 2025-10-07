@@ -36,8 +36,10 @@ const Campaigns = () => {
   if (loading) return <p>Loading campaigns...</p>;
   if (error) return <p>Error: {error}</p>;
   return (
-    <div className={styles.outerContainer}>
 
+
+
+    <div className={styles.outerContainer}>
       <div className={styles.container}>
 
         <div className={styles.header}>
@@ -81,10 +83,10 @@ const Campaigns = () => {
                       .toLocal()
                       .toFormat("yyyy-LL-dd HH:mm")}
                   </span>
-                  <span>{c.mailingList?.listName || "No mailing list"}</span>
+                  <span>{c.MailingList?.listName || "No mailing list"}</span>
                   <span className={styles.actions}>
-                    <button className={styles.trashcan} onClick={() => deleteCampaign(c._id)}><FaTrash /></button>
-                    {c.status?.toLowerCase() === "launched" && (<button className={styles.tickButton} onClick={() => completeCampaign(c._id) }><FaCheck /></button>)}
+                    <button className={styles.trashcan} onClick={() => deleteCampaign(c.id)}><FaTrash /></button>
+                    {c.status?.toLowerCase() === "launched" && (<button className={styles.tickButton} onClick={() => completeCampaign(c.id) }><FaCheck /></button>)}
                   </span>
                   <span className={`${styles.status} ${styles[c.status?.toLowerCase()]}`}>
                     {c.status || "Pending"}

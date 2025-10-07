@@ -4,7 +4,7 @@ export const useCompleteCampaign = (accessToken, setCampaigns) => {
 
   const completeCampaign = async (id) => {
    try {
-      const response = await fetch(`/api/campaign/complete/${id}`, {
+      const response = await fetch(`/api/campaign/${id}/complete`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -15,7 +15,7 @@ export const useCompleteCampaign = (accessToken, setCampaigns) => {
       if (response.ok) {
         setCampaigns((prevCampaigns) =>
           prevCampaigns.map((c) =>
-            c._id === id ? { ...c, status: "Completed" } : c
+            c.id === id ? { ...c, status: "Completed" } : c
           )
         );
 

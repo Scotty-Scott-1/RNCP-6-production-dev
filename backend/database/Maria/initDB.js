@@ -13,15 +13,15 @@ MailingList.belongsTo(User, { foreignKey: "createdBy" });
 
 // User -> Campaigns
 User.hasMany(Campaign, { foreignKey: "createdBy", onDelete: "CASCADE" });
-Campaign.belongsTo(User, { foreignKey: "createdBy" }); // no cascade needed, handled by hasMany
+Campaign.belongsTo(User, { foreignKey: "createdBy" });
 
 // MailingList -> Campaigns
 MailingList.hasMany(Campaign, { foreignKey: "mailingListId", onDelete: "CASCADE" });
-Campaign.belongsTo(MailingList, { foreignKey: "mailingListId" }); // no cascade needed, handled by hasMany
+Campaign.belongsTo(MailingList, { foreignKey: "mailingListId" });
 
 // MailingList -> Contacts
 MailingList.hasMany(Contact, { foreignKey: "mailingListId", onDelete: "CASCADE" });
-Contact.belongsTo(MailingList, { foreignKey: "mailingListId" }); // no cascade needed
+Contact.belongsTo(MailingList, { foreignKey: "mailingListId" });
 
 
 
