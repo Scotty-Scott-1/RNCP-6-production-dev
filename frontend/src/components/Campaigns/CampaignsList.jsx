@@ -14,7 +14,7 @@ const Campaigns = () => {
   const { accessToken } = useAuth();
   const [campaigns, setCampaigns] = useState([]);
 
-  const { loading, error } = useGetCampaigns(accessToken, filter, setCampaigns);
+  const { loading, error } = useGetCampaigns(accessToken, filter, setCampaigns, filter);
 
   const deleteCampaign = useDeleteCampaign(accessToken, setCampaigns);
   const completeCampaign = useCompleteCampaign(accessToken, setCampaigns);

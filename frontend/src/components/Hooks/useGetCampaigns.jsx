@@ -12,7 +12,7 @@ export const useGetCampaigns = (accessToken, filter, setCampaigns) => {
       setError(null);
 
       try {
-        const res = await fetch(`/api/campaign/get/${filter}`, {
+        const res = await fetch(`/api/campaign/?status=${filter}`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${accessToken}`,

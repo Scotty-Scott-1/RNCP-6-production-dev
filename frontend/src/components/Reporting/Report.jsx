@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../security/authContext.jsx";
-import { getOneCampaign } from "./hooks/GetOneCampaign.jsx";
-import { getOneMailingList } from "./hooks/GetOneMailingList.jsx";
+import { useGetOneCampaign } from "../Hooks/useGetOneCampaign.jsx";
+import { getOneMailingList } from "../Hooks/useGetOneMailingList.jsx";
 import { getEmailLogsClicked } from "./hooks/GetEmailLogsClicked.jsx";
 import { DateTime } from "luxon";
 import styles from "./Report.module.css";
@@ -24,7 +24,7 @@ const Report = () => {
   const navigate = useNavigate();
   const { accessToken } = useAuth();
   const { id, listid } = useParams();
-  const myCampaign = getOneCampaign(id, accessToken);
+  const myCampaign = useGetOneCampaign(id, accessToken);
   const myList = getOneMailingList(listid, accessToken);
   const emailLogsClicked = getEmailLogsClicked(id, accessToken);
 

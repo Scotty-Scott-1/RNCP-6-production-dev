@@ -4,13 +4,31 @@ const MailingList = require("../../database/Maria/Models/MailingList.js");
 const router = express.Router();
 const verifyAccessToken = require("../Security/verifyTokenBackend.js")
 
-router.get("/get/:filter", verifyAccessToken, async (req, res) => {
-  try {;
+router.get("/", verifyAccessToken, async (req, res) => {
+  try {
     const userId = req.user.id;
+    const { status } = req.query;
 
-    const campaigns = await Campaign.findAll({ where: { createdBy: userId }, include: [MailingList] });
+    console.log(status);
 
-    res.json(campaigns.map(list => list.toJSON()));
+    if (status === "Active") {
+      const campaigns = await Campaign.findAll({ where: { createdBy: userId, status: "active" }, include: [MailingList] });
+      return res.json(campaigns.map(list => list.toJSON()));
+    }
+
+    if (status === "Completed") {
+      const campaigns = await Campaign.findAll({ where: { createdBy: userId, status: "completed" }, include: [MailingList] });
+      return res.json(campaigns.map(list => list.toJSON()));
+
+    }
+
+    if (status === "Launched") {
+      const campaigns = await Campaign.findAll({ where: { createdBy: userId, status: "launched" }, include: [MailingList] });
+      return res.json(campaigns.map(list => list.toJSON()));
+    }
+
+      const campaigns = await Campaign.findAll({ where: { createdBy: userId }, include: [MailingList] });
+      return res.json(campaigns.map(list => list.toJSON()));
 
   } catch (err) {
     res.status(500).json({ message: err.message });
