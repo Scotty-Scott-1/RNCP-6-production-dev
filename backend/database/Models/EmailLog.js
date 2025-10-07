@@ -4,6 +4,7 @@ const emailLogSchema = new mongoose.Schema({
   campaign: String,
   contactID: String,
   contactName: String,
+  email: String,
   sentAt: { type: Date, default: Date.now },
   clicked: { type: Boolean, default: false },
   clickedAt: Date,

@@ -30,7 +30,7 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
     }
 
 
-    const contacts = myList.Contacts || []; // Sequelize pluralizes include
+    const contacts = myList.Contacts || [];
     let emailsSent = 0;
     let emailsFailed = 0;
     const errors = [];
@@ -43,7 +43,8 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
 
         const emailLog = await EmailLog.create({
           campaign: campaignID,
-          contact: contact._id,
+          contact: contact.id,
+          email: contact.email,
           template,
           contactName: contactName
         });
