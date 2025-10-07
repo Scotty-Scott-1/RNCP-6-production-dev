@@ -1,7 +1,7 @@
 const express = require("express");
 const EmailLog = require("../../database/Models/EmailLog.js");
 const { now } = require("mongoose");
-const Campaign = require("../../database/Models/Campaign.js");
+const Campaign = require("../../database/Maria/Models/Campaign.js");
 const router = express.Router();
 
 // POST /api/email-log/clicked/:logid
@@ -18,7 +18,11 @@ router.post("/submit/:logid", async (req, res) => {
 
   const campaignID = emailLog.campaign;
 
-  const updateCampaign = await Campaign.findByIdAndUpdate(campaignID, { $inc: { credentialsSumbitted: 1 } }, { new: true });
+const updatedCampaign = await Campaign.increment(
+  { credentialsSubmitted: 1 },
+  { where: { id: campaignID }, returning: true }
+);
+
 
   console.log(`Campaign ${campaignID} creds submitted updated.`);
   console.log(`Email log ${logid} marked as credentials submitted.`);

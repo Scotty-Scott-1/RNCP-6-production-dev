@@ -37,7 +37,7 @@ const Report = () => {
         data: [
           myCampaign?.emailsSent || 0,
           myCampaign?.linksClicked || 0,
-          myCampaign?.credentialsSumbitted || 0,
+          myCampaign?.credentialsSubmitted || 0,
           myCampaign?.emailsFailed || 0
         ],
         backgroundColor: ["#00fff7", "#00fff7", "#00fff7", "#00fff7"]
@@ -98,7 +98,7 @@ const Report = () => {
       <div className={styles.section}>
         <h2>Engagement</h2>
         <p><strong>Links Clicked:</strong> {myCampaign?.linksClicked}</p>
-        <p><strong>Credentials Submitted:</strong> {myCampaign?.credentialsSumbitted}</p>
+        <p><strong>Credentials Submitted:</strong> {myCampaign?.credentialsSubmitted}</p>
       </div>
 
       <button className={styles.backButton} onClick={() => navigate("/report")}>
