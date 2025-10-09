@@ -1,19 +1,20 @@
 .outerContainer {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   background: none;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   font-family: 'Courier New', Courier, monospace;
-  overflow:auto;
-  position: relative;
+  overflow-y: auto;
+  padding: 40px 0;
 }
 
 .container {
-  max-width: 1000px;
-  margin-top: 50px;
+  width: 40%;
+  max-width: 1200px;
   padding: 40px;
+  margin: 0 auto;
   background-color: rgba(0, 0, 0, 0.85);
   border: 2px solid #00fff7;
   border-radius: 16px;
@@ -23,16 +24,18 @@
   gap: 20px;
   z-index: 1;
   color: #00fff7;
+  height: auto;
+  box-sizing: border-box;
 }
 
 .title {
+  flex: 1;
+  max-width: 50%;
   font-size: 2rem;
   color: #00fff7;
-  margin-bottom: 20px;
   text-shadow: 0 0 10px #00fff7, 0 0 20px #00fff7;
 }
 
-p,
 .label,
 label {
   color: #00fff7;
@@ -42,10 +45,12 @@ label {
   margin-bottom: 0.25rem;
 }
 
+p,
 .input,
 .inputDatetime,
 select.input {
   width: 100%;
+  max-width: 500px;
   padding: 12px 16px;
   margin-bottom: 10px;
   border: 2px solid #00fff7;
@@ -190,6 +195,9 @@ select.input option {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 50%;
+  height: 45px;
+  margin: 1rem auto;
 }
 
 .launch:hover {
@@ -208,3 +216,30 @@ select.input option {
   transform: scale(0.97);
   box-shadow: 0 0 12px #615f5f inset;
 }
+
+
+.backButton {
+  padding: 8px 16px;
+  border: 2px solid #00fff7;
+  border-radius: 6px;
+  background: transparent;
+  color: #00fff7;
+  cursor: pointer;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.backButton:hover {
+  background-color: #00fff7;
+  color: #000;
+}
+
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-bottom: 10px;
+}
+

@@ -67,7 +67,7 @@ const Sign_in = () => {
 				placeholder="Password"
 				/>
 		<button type="submit" className={styles.button}> Sign In</button>
-		<p>Don’t have an account? <Link to="/signup">Sign up</Link></p>
+		<p className={styles.a}>Don’t have an account? <Link to="/signup">Sign up</Link></p>
 	</form>
 	</div>
   );

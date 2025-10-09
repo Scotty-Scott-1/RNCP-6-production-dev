@@ -86,8 +86,17 @@ useEffect(() => {
 
   return (
     <div className={styles.outerContainer}>
+
 <form className={styles.container} onSubmit={handleSubmit}>
-  <h1 className={styles.title}>Edit Campaign</h1>
+        <div className={styles.headerRow}>
+        <button
+          className={styles.backButton}
+          onClick={() => navigate("/campaigns")}
+        >
+          ← Back to Reports
+        </button>
+        <h1 className={styles.title}>Edit Campaign</h1>
+      </div>
 
   <div className={styles.formRow}>
     <label className={styles.label}>Campaign Name:</label>
