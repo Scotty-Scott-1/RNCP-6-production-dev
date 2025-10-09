@@ -22,6 +22,7 @@ import TemplatesPage from "./pages/Template/TemplatesList.jsx";
 import Rain from "./components/Background/Rain.jsx";
 import ReportListPage from "./pages/Reporting/ReportList.jsx";
 import ReportPage from "./pages/Reporting/Report.jsx";
+import VerifyEmail from "./pages/Entry/EmailVerification.jsx";
 
 const App = () => (
   <AuthProvider>
@@ -73,6 +74,7 @@ const App = () => (
         <Route path="/claim" element={<ClaimVoucher />} />
         <Route path="/appraisal" element={<AppraisalAlert />} />
         <Route path="/payroll" element={<Payroll />} />
+        <Route path="/emailverify" element={<VerifyEmail />} />
       </Routes>
     </Router>
   </AuthProvider>

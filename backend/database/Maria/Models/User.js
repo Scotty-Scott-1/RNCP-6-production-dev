@@ -23,7 +23,6 @@ const User = sequelize.define(
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: { name: 'email_unique', msg: 'Email must be unique' },
       validate: {
         isEmail: true,
       },
@@ -31,7 +30,6 @@ const User = sequelize.define(
     username: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: { name: 'username_unique', msg: 'Username must be unique' }
     },
     password: {
       type: DataTypes.STRING,
@@ -56,6 +54,18 @@ const User = sequelize.define(
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,
+    },
+    isVerified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    verificationToken: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    tokenExpiry: {
+      type: DataTypes.DATE,
+      allowNull: true,
     },
   },
   {

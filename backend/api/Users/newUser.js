@@ -2,6 +2,10 @@ const express = require("express");
 const Joi = require("joi");
 const User = require("../../database/Maria/Models/User.js");
 const router = express.Router();
+const crypto = require("crypto");
+const sendMail = require("../../email/mailer.js")
+
+
 
 const userSchema = Joi.object({
   firstName: Joi.string()
@@ -90,13 +94,75 @@ router.post("/new", async (req, res) => {
     const { error } = userSchema.validate(req.body);
     if (error) return res.status(400).json({ message: error.details[0].message });
 
-    const existingUser = await User.findOne({ where: { email: req.body.email } });
-    if (existingUser) return res.status(400).json({ message: "Email already in use" });
+    let existingVerifiedUser = await User.findOne({
+      where: {
+        isVerified: true,
+        email: req.body.email
+      }
+    });
+    if (existingVerifiedUser) {
+      return res.status(400).json({ message: "Email already in use" });
+    }
 
-    const user = await User.create(req.body);
+    existingVerifiedUser = await User.findOne({
+      where: {
+        isVerified: true,
+        username: req.body.username
+      }
+    });
+    if (existingVerifiedUser) {
+      return res.status(400).json({ message: "Username already in use" });
+    }
+
+    const verificationToken = crypto.randomBytes(32).toString("hex");
+    const tokenExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000);
+
+     const user = await User.create({
+      ...req.body,
+      isVerified: false,
+      verificationToken,
+      tokenExpiry,
+    });
+
+    if (user) {
+      try {
+        const info = {
+          to: user.email,
+          subject: "Verify your account",
+          text: `
+                Hello ${user.firstName} ${user.lastName},
+
+                Thanks for signing up the the simulator tool.
+
+                Please verify your account by clicking on the link below:
+
+                http://localhost:5173/emailverify?token=${verificationToken}
+
+                Kind regards,
+                Simulator
+              `,
+              html: `
+                Hello ${user.firstName} ${user.lastName},<br/><br/>
+                Thanks for signing up the the simulator tool.<br/><br/>
+                Please verify your account by clicking on the link below:<br/><br/>
+                <a href="http://localhost:5173/emailverify?token=${verificationToken}">Verify</a><br/><br/>
+                Kind regards,<br/>
+                Simulator
+              `
+        };
+          await sendMail(info);
+          console.log("_____________________________");
+          console.log(process.env.FRONTEND_URL_DEV);
+          console.log("_____________________________");
+
+      } catch {
+        res.status(500).json({ message: "Cerification email failed to send" });
+      }
+    }
 
     const { password, ...userData } = user.toJSON();
     res.status(201).json(userData);
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });

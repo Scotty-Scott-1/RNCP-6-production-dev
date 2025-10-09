@@ -39,18 +39,6 @@ const newUser = require("./api/Users/newUser.js");
 app.use("/api/user", newUser);
 
 
-
-
-
-const securityFrontend = require("./api/Security/verifyTokenFrontend.js");
-app.use("/api/security", securityFrontend);
-
-const securityRefresh = require("./api/Security/refreshToken.js");
-app.use("/api/security", securityRefresh);
-
-
-
-
 const updateEmailLog = require("./api/Email_Log/updateEmailLog.js");
 app.use("/api/emaillog", updateEmailLog);
 
@@ -115,6 +103,18 @@ app.use("/api/campaign", deleteCampaign);
 // UPDATE (COMPLETE)
 const completeCampaign = require("./api/Campaigns/completeCampaign.js");
 app.use("/api/campaign", completeCampaign);
+
+// SECURITY
+
+// FRONTEND
+const securityFrontend = require("./api/Security/verifyTokenFrontend.js");
+app.use("/api/security", securityFrontend);
+// REFRESH
+const securityRefresh = require("./api/Security/refreshToken.js");
+app.use("/api/security", securityRefresh);
+// VERIFY EMAIL
+const verifyEmail = require("./api/Security/verifyEmail.js");
+app.use("/api/Security", verifyEmail);
 
 
 
