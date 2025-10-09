@@ -26,6 +26,7 @@ const EditMailingList = () => {
   const { updateMailingList } = useUpdateMailingList(accessToken);
   const { addContact } = useAddContact(accessToken, id, setContactList);
   const { deleteContact } = useDeleteContact(accessToken, setContactList);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (myList) {
@@ -54,9 +55,18 @@ const handleDeleteContact = async (contactId) => {
 return (
   <div className={styles.background}>
     <form className={styles.container} onSubmit={handleSubmit}>
-      <h1 className={styles.title}>Edit Mailing List</h1>
+      <div className={styles.headerRow}>
+  <button
+    type="button"
+    className={styles.backButton}
+    onClick={() => navigate("/mailinglists")}
+  >
+    Back to Mailing Lists
+  </button>
+  <h1 className={styles.title}>Edit Mailing List</h1>
+</div>
 
-      <label htmlFor="listname"><p>Mailing List Name</p></label>
+      <label className={styles.inputLabel} htmlFor="listname">Mailing List Name</label>
       <input
         type="text"
         value={listName}
@@ -67,7 +77,7 @@ return (
         id='listname'
       />
 
-      <label htmlFor="desc"><p>Description</p></label>
+      <label className={styles.inputLabel} htmlFor="desc">Description:</label>
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
@@ -112,7 +122,7 @@ return (
         )}
       </div>
 
-      <h2 style={{ marginTop: "1.5rem" }}>Add New Contact</h2>
+      <h2 className={styles.title}>Add New Contact</h2>
       <div className={styles.listItem}>
         <input className={styles.input} placeholder="First Name" value={newContact.name} onChange={(e) => setNewContact({ ...newContact, name: e.target.value })} />
         <input className={styles.input} placeholder="Last Name" value={newContact.lastName} onChange={(e) => setNewContact({ ...newContact, lastName: e.target.value })} />

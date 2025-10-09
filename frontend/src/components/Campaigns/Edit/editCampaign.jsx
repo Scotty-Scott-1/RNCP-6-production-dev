@@ -93,7 +93,7 @@ useEffect(() => {
           className={styles.backButton}
           onClick={() => navigate("/campaigns")}
         >
-          ← Back to Reports
+          Back to Campaigns
         </button>
         <h1 className={styles.title}>Edit Campaign</h1>
       </div>

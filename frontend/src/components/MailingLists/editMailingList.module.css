@@ -26,11 +26,19 @@
 }
 
 .title {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
+  all: unset;
+  display: block;
+  width: 100%;
   text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.8rem;
+  font-weight: bold;
   color: #00fff7;
+  text-shadow: 0 0 5px #00fff7aa, 0 0 10px #00fff733;
+  margin: 1rem 0;
+  box-sizing: border-box;
 }
+
 
 .input {
   background: #000000;
@@ -114,4 +122,34 @@
 .deleteButton:active {
   transform: scale(0.97);
   box-shadow: 0 0 12px #ff3b3b inset;
+}
+
+.inputLabel {
+  color: #00fff7;
+  text-shadow: 0 0 5px #00fff7aa, 0 0 10px #00fff733;
+}
+
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.backButton {
+  padding: 8px 16px;
+  border: 2px solid #00fff7;
+  border-radius: 6px;
+  background: transparent;
+  color: #00fff7;
+  cursor: pointer;
+  font-weight: bold;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.backButton:hover {
+  background-color: #00fff7;
+  color: #000;
 }
