@@ -42,7 +42,7 @@ const Sign_in = () => {
 				setAccessToken(data.accessToken);
 				setTimeout(() => navigate("/dashboard"), 0);
 			} else {
-				alert("Login failed. Please try again.");
+				alert(data.message);
 			}
 		} catch (err) {
 			console.error("Error logging in:", err);

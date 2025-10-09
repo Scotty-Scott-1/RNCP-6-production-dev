@@ -15,9 +15,9 @@ router.post("/auth", async (req, res) => {
   try {
     // Find user by username
     const userToCheck = await User.findOne({ where: { username } });
-    if (!userToCheck) {
-      return res.status(403).json({ message: "Invalid credentials" });
-    }
+
+    if (!userToCheck) return res.status(403).json({ message: "Invalid credentials" });
+    if (!userToCheck.isVerified) return res.status(403).json({ message: "Email adress not verified" });
 
     const isMatch = await userToCheck.checkPassword(password);
     if (!isMatch) {
