@@ -14,6 +14,7 @@ const Navbar = () => {
 		<Link to="/mailinglists" className={styles.navLink}>Mailing Lists</Link>
 		<Link to="/template" className={styles.navLink}>Templates</Link>
 		<Link to="/signin" className={styles.navLink}>Sign Out</Link>
+		<Link to="/mfa" className={styles.navLink}>MFA</Link>
 
 	</nav>
 	</div>
