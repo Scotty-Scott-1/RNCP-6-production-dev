@@ -32,11 +32,32 @@ app.use(cookieParser());
 app.use(express.json());
 
 // --- API Routes ---
+
+// USER
+
+// AUTH
 const authUser = require("./api/Users/authUser.js");
 app.use("/api/user", authUser);
-
+// NEW
 const newUser = require("./api/Users/newUser.js");
 app.use("/api/user", newUser);
+
+// MFA
+
+// GET STATUS
+const getMfaStatus = require("./api/Users/getMfaStatus.js");
+app.use("/api/mfa", getMfaStatus);
+// SET UP
+const mfaConfig = require("./api/Security/mfaConfig.js");
+app.use("/api/mfa", mfaConfig);
+// VERIFY
+const mfaVerify = require("./api/Security/mfaVerify.js");
+app.use("/api/mfa", mfaVerify);
+// DISABLE
+const mfaDisable = require("./api/Security/mfaDisable.js");
+app.use("/api/mfa", mfaDisable);
+
+
 
 
 const updateEmailLog = require("./api/Email_Log/updateEmailLog.js");

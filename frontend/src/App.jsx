@@ -23,6 +23,8 @@ import Rain from "./components/Background/Rain.jsx";
 import ReportListPage from "./pages/Reporting/ReportList.jsx";
 import ReportPage from "./pages/Reporting/Report.jsx";
 import VerifyEmail from "./pages/Entry/EmailVerification.jsx";
+import MFA from "./pages/Entry/MFA.jsx";
+
 
 const App = () => (
   <AuthProvider>
@@ -69,6 +71,13 @@ const App = () => (
           path="/report/:id/:listid"
           element={<ProtectRoute><ReportPage /></ProtectRoute>}
         />
+        <Route
+          path="/mfa"
+          element={<ProtectRoute><MFA /></ProtectRoute>}
+        />
+
+
+
         <Route path="/template" element={<TemplatesPage />} />
         <Route path="/reset" element={<ResetPassword />} />
         <Route path="/claim" element={<ClaimVoucher />} />
