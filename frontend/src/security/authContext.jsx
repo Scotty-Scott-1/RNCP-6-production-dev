@@ -13,9 +13,11 @@ const AuthContext = createContext({
 export const AuthProvider = ({ children }) => {
   console.log("AuthProvider rendering");
   const [accessToken, setAccessToken] = useState();
+  const [tempMfaToken, setTempMfaToken] = useState();
+
 
   return (
-    <AuthContext.Provider value={{ accessToken, setAccessToken }}>
+    <AuthContext.Provider value={{ accessToken, setAccessToken, tempMfaToken, setTempMfaToken }}>
       {children}
     </AuthContext.Provider>
   );

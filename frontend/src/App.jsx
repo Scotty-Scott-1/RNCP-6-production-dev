@@ -24,6 +24,7 @@ import ReportListPage from "./pages/Reporting/ReportList.jsx";
 import ReportPage from "./pages/Reporting/Report.jsx";
 import VerifyEmail from "./pages/Entry/EmailVerification.jsx";
 import MFA from "./pages/Entry/MFA.jsx";
+import MFAInputPage from "./pages/Entry/MFAInput.jsx";
 
 
 const App = () => (
@@ -78,6 +79,7 @@ const App = () => (
 
 
 
+        <Route path="/mfainput" element={<MFAInputPage />} />
         <Route path="/template" element={<TemplatesPage />} />
         <Route path="/reset" element={<ResetPassword />} />
         <Route path="/claim" element={<ClaimVoucher />} />

@@ -56,7 +56,9 @@ app.use("/api/mfa", mfaVerify);
 // DISABLE
 const mfaDisable = require("./api/Security/mfaDisable.js");
 app.use("/api/mfa", mfaDisable);
-
+// LOG IN
+const mfaLogin = require("./api/Users/authUserMfa.js");
+app.use("/api/auth", mfaLogin);
 
 
 

@@ -8,7 +8,7 @@ const Sign_in = () => {
 	const navigate = useNavigate();
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const { setAccessToken } = useAuth();
+	const { setAccessToken, setTempMfaToken } = useAuth();
 
 	const handleSubmit = async (e) => {
 
@@ -37,11 +37,17 @@ const Sign_in = () => {
 
 			const data = await res.json();
 			/*HANDLE RESPONSE: If login is successful, store the accessToken in context and navigate to dashboard*/
-			if (res.ok) {
+			if (data.message === "Login successful") {
 				console.log("Login successful:", data);
 				setAccessToken(data.accessToken);
-				setTimeout(() => navigate("/dashboard"), 0);
-			} else {
+				navigate("/dashboard");
+			}
+			else if (data.message === "MFA code required") {
+				alert(data.message);
+				setTempMfaToken(data.tempToken);
+				navigate("/mfainput");
+			}
+			 else {
 				alert(data.message);
 			}
 		} catch (err) {

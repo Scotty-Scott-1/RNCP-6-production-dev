@@ -23,6 +23,14 @@ router.post("/auth", async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid password" });
     }
+    if (userToCheck.mfaEnabled) {
+
+      const tempToken = jwt.sign({ id: userToCheck.id }, JWT_SECRET, { expiresIn: "5m" });
+
+      return res.status(200).json({ message: "MFA code required", tempToken });
+    }
+
+
 
     // Create JWTs
     const accessToken = jwt.sign(
