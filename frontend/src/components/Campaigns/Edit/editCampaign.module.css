@@ -36,8 +36,7 @@
   text-shadow: 0 0 10px #00fff7, 0 0 20px #00fff7;
 }
 
-.label,
-label {
+.label {
   color: #00fff7;
   text-shadow: 0 0 5px #00fff755;
   font-weight: 500;
@@ -45,7 +44,6 @@ label {
   margin-bottom: 0.25rem;
 }
 
-p,
 .input,
 .inputDatetime,
 select.input {
