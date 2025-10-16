@@ -8,6 +8,7 @@ import { FaTrash } from "react-icons/fa";
 import { useUpdateMailingList } from "../Hooks/useUpdateMailingList.jsx";
 import { useAddContact } from "../Hooks/useAddContact.jsx";
 import { useDeleteContact } from "../Hooks/useDeleteContact.jsx";
+import Header from '../Header/Header.jsx'
 
 const EditMailingList = () => {
   const { accessToken } = useAuth();
@@ -53,7 +54,8 @@ const handleDeleteContact = async (contactId) => {
 
 
 return (
-  <div className={styles.background}>
+  <div className={styles.outerContainer}>
+    <Header />
     <form className={styles.container} onSubmit={handleSubmit}>
       <div className={styles.headerRow}>
   <button

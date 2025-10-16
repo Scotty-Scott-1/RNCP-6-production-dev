@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './Sign_in.module.css';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../security/authContext';
+import Navbar from '../Header/Nav/nav.jsx';
 
 
 const Sign_in = () => {
@@ -58,6 +59,7 @@ const Sign_in = () => {
 
 	return (
 		<div className={styles.outerContainer}>
+		<Navbar />
 		<h1 className={styles.title}>Sign in or create an account</h1>
 		<form className={styles.container} onSubmit={handleSubmit}>
 			<input

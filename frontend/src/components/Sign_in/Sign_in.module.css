@@ -3,13 +3,20 @@
   width: 100vw;
   background: none;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   font-family: 'Courier New', Courier, monospace;
   overflow: hidden;
   position: relative;
-  flex-direction: column;
 }
+
+@media (max-width: 600px) {
+  .outerContainer {
+    padding-top: 100px;
+  }
+}
+
 
 .container {
   display: flex;

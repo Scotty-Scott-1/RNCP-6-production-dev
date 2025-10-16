@@ -241,3 +241,89 @@ select.input option {
   margin-bottom: 10px;
 }
 
+@media (max-width: 1200px) {
+  .container {
+    width: 70%;
+    padding: 32px;
+  }
+  .title { font-size: 1.75rem; max-width: 60%; }
+}
+
+@media (max-width: 900px) {
+  .container {
+    width: 88%;
+    padding: 28px;
+  }
+  .title { font-size: 1.5rem; max-width: 70%; }
+  .input, .inputDatetime, select.input { max-width: 100%; font-size: 15px; padding: 10px 14px; }
+  .button, .button2, .launch { width: 100%; max-width: none; }
+  .headerRow { gap: 0.5rem; flex-wrap: wrap; }
+  .header { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+  .filterBox { width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .outerContainer { padding: 20px 0; }
+  .container {
+    width: 96%;
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .formRow {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    align-items: start;
+    margin-bottom: 12px;
+  }
+  .formRow > label,
+  .formRow > .label {
+    order: -1;
+    margin-bottom: 4px;
+    display: block;
+    width: 100%;
+  }
+  .formRow > .input,
+  .formRow > .inputDatetime,
+  .formRow > select.input,
+  .formRow > .readonly {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .title { font-size: 1.25rem; max-width: 100%; text-align: left; }
+  .button2 { width: 100%; padding: 10px 12px; }
+
+  .listHeader,
+  .listItem {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 0.6rem 0.8rem;
+  }
+  .listHeader { display: none; }
+  .listItem {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 6px;
+    align-items: start;
+  }
+  .listItem span,
+  .listItem .campaignButton,
+  .listItem .actions,
+  .listItem .status {
+    display: block;
+    width: 100%;
+  }
+  .campaignButton { text-align: left; padding: 0; font-size: 1rem; }
+
+  .pagination { gap: 0.5rem; flex-wrap: wrap; }
+  .pagination button { width: auto; padding: 8px 12px; }
+
+  .container { gap: 12px; }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .container { padding: 12px; }
+  .input, .inputDatetime, select.input { padding: 8px 10px; font-size: 14px; }
+}
