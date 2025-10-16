@@ -5,6 +5,7 @@ import { useAuth } from "../../security/authContext.jsx";
 import { FaTrash } from "react-icons/fa";
 import { useDeleteMailingList } from "../Hooks/useDeleteMailingList.jsx";
 import { useGetMailingLists } from "../Hooks/useGetMailingLists.jsx";
+import Header from '../Header/Header.jsx'
 
 
 
@@ -38,6 +39,7 @@ const handleDeleteList = async (id) => {
 
   return (
     <div className={styles.outerContainer}>
+      <Header />
       <div className={styles.container}>
         <div className={styles.header}>
           <h1 className={styles.title}>Mailing Lists</h1>

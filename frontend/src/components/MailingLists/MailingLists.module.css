@@ -1,16 +1,15 @@
-.background {
-  height: 100vh;
+.outerContainer {
+  min-height: 100vh;
   width: 100vw;
   background: none;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   font-family: 'Courier New', Courier, monospace;
-  overflow: hidden;
+  overflow-y: auto;
   position: relative;
-  padding-top: 50px;
-  color: #00fff7;
-
+  padding: 0;
 }
 
 p {
