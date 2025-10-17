@@ -8,12 +8,10 @@ router.get("/", verifyAccessToken, async (req, res) => {
   try {
     const userId = req.user.id;
 
-    // Find all mailing lists for this user
     const mailingLists = await MailingList.findAll({
       where: { createdBy: userId }
     });
 
-    // Convert Sequelize instances to plain objects
     res.json(mailingLists.map(list => list.toJSON()));
 
   } catch (err) {
