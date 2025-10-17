@@ -37,6 +37,8 @@ const handleDeleteList = async (id) => {
 };
 
 
+
+
   return (
     <div className={styles.outerContainer}>
       <Header />
@@ -47,6 +49,13 @@ const handleDeleteList = async (id) => {
             + Add Mailing List
           </button>
         </div>
+
+        {/* Loading State */}
+        {loading && <p>Loading mailing lists...</p>}
+
+        {/* Error State */}
+        {error && <p style={{ color: "red" }}>Error: {error}</p>}
+
 
         {myLists.length > 0 ? (
           <>

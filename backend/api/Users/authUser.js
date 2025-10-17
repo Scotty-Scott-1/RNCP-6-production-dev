@@ -1,4 +1,3 @@
-// rncp6/DB/Routes/auth.js
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
@@ -8,29 +7,20 @@ const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || "superrefreshsecret";
 const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
 
-// LOGIN ROUTE
 router.post("/auth", async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // Find user by username
     const userToCheck = await User.findOne({ where: { username } });
-
     if (!userToCheck) return res.status(403).json({ message: "Invalid credentials" });
-    if (!userToCheck.isVerified) return res.status(403).json({ message: "Email adress not verifiedqqqqqq" });
-
+    if (!userToCheck.isVerified) return res.status(403).json({ message: "Email adress not verified" });
     const isMatch = await userToCheck.checkPassword(password);
-    if (!isMatch) {
-      return res.status(401).json({ message: "Invalid password" });
-    }
+    if (!isMatch) return res.status(401).json({ message: "Invalid password" });
+
     if (userToCheck.mfaEnabled) {
-
       const tempToken = jwt.sign({ id: userToCheck.id }, JWT_SECRET, { expiresIn: "5m" });
-
       return res.status(200).json({ message: "MFA code required", tempToken });
     }
-
-
 
     // Create JWTs
     const accessToken = jwt.sign(
