@@ -58,15 +58,14 @@ return (
     <Header />
     <form className={styles.container} onSubmit={handleSubmit}>
       <div className={styles.headerRow}>
-  <button
-    type="button"
-    className={styles.backButton}
-    onClick={() => navigate("/mailinglists")}
-  >
-    Back to Mailing Lists
-  </button>
-  <h1 className={styles.title}>Edit Mailing List</h1>
-</div>
+        <button
+          type="button"
+          className={styles.backButton}
+          onClick={() => navigate("/mailinglists")}>
+          Back to Mailing Lists
+        </button>
+        <h1 className={styles.title}>Edit Mailing List</h1>
+      </div>
 
       <label className={styles.inputLabel} htmlFor="listname">Mailing List Name</label>
       <input
@@ -126,14 +125,55 @@ return (
 
       <h2 className={styles.title}>Add New Contact</h2>
       <div className={styles.listItem}>
-        <input className={styles.input} placeholder="First Name" value={newContact.name} onChange={(e) => setNewContact({ ...newContact, name: e.target.value })} />
-        <input className={styles.input} placeholder="Last Name" value={newContact.lastName} onChange={(e) => setNewContact({ ...newContact, lastName: e.target.value })} />
-        <input className={styles.input} placeholder="Email" value={newContact.email} onChange={(e) => setNewContact({ ...newContact, email: e.target.value })} />
-        <input className={styles.input} placeholder="Department" value={newContact.department} onChange={(e) => setNewContact({ ...newContact, department: e.target.value })} />
-        <input className={styles.input} placeholder="Role" value={newContact.role} onChange={(e) => setNewContact({ ...newContact, role: e.target.value })} />
+        <input
+          className={styles.input}
+          placeholder="First Name"
+          value={newContact.name}
+          onChange={(e) => setNewContact({ ...newContact, name: e.target.value })}
+        />
+
+        <input
+          className={styles.input}
+          placeholder="Last Name"
+          value={newContact.lastName}
+          onChange={(e) => setNewContact({ ...newContact, lastName: e.target.value })}
+        />
+
+        <input
+          className={styles.input}
+          placeholder="Email"
+          value={newContact.email}
+          onChange={(e) => setNewContact({ ...newContact, email: e.target.value })}
+        />
+
+        <input
+          className={styles.input}
+          placeholder="Department"
+          value={newContact.department}
+          onChange={(e) => setNewContact({ ...newContact, department: e.target.value })}
+        />
+
+        <input
+          className={styles.input}
+          placeholder="Role"
+          value={newContact.role}
+          onChange={(e) => setNewContact({ ...newContact, role: e.target.value })}
+        />
+
       </div>
-      <button type="button" className={styles.button2} onClick={handleAddContact}> Add Contact </button>
-      <button type="submit" className={styles.button2} style={{ marginTop: "1rem" }}> Save </button>
+
+      <button
+        type="button"
+        className={styles.button2}
+        onClick={handleAddContact}> Add Contact
+      </button>
+
+      <button
+        type="submit"
+        className={styles.button2}
+        style={{ marginTop: "1rem" }}> Save
+      </button>
+
     </form>
   </div>
 );

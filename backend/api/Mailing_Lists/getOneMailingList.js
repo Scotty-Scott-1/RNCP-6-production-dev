@@ -6,8 +6,8 @@ const verifyAccessToken = require("../Security/verifyTokenBackend.js");
 // GET one mailing list by ID
 router.get("/:id", verifyAccessToken, async (req, res) => {
   try {
-    const userId = req.user.id;         // authenticated user
-    const listId = req.params.id;       // ID from the URL
+    const userId = req.user.id;
+    const listId = req.params.id;
 
     // Find the mailing list owned by this user
     const list = await MailingList.findOne({

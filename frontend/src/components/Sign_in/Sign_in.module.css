@@ -9,6 +9,7 @@
   font-family: 'Courier New', Courier, monospace;
   overflow: hidden;
   position: relative;
+  padding-top: 0px;
 }
 
 @media (max-width: 600px) {
