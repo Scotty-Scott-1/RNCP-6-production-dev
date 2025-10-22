@@ -7,7 +7,6 @@ import { data } from "react-router-dom";
 const MFADashboard = () => {
   const { accessToken } = useAuth();
   const [mfaEnabled, setMfaEnabled] = useState(false);
-  const [secret, setSecret] = useState("");
   const [qrCode, setQrCode] = useState("");
   const [token, setToken] = useState("");
   const [message, setMessage] = useState("");
@@ -48,7 +47,6 @@ const MFADashboard = () => {
       if (!res.ok) throw new Error("Failed to setup MFA");
 
       const data = await res.json();
-      setSecret(data.secret);
       setQrCode(data.qrCode);
       setMessage(
         "Scan the QR code with your authenticator app and enter the 6-digit code below."
@@ -76,7 +74,6 @@ const MFADashboard = () => {
       if (res.ok) {
         setMfaEnabled(true);
         setMessage("MFA enabled successfully!");
-        setSecret("");
         setQrCode("");
         setToken("");
       }

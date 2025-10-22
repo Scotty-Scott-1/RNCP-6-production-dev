@@ -1,10 +1,9 @@
-// rncp6/DB/Routes/mfa.js
 const express = require("express");
 const router = express.Router();
 const User = require("../../database/Maria/Models/User.js");
 const speakeasy = require("speakeasy");
 const jwt = require("jsonwebtoken");
-const verifyAccessToken = require("../Security/verifyTokenBackend.js"); // existing function
+const verifyAccessToken = require("../Security/verifyTokenBackend.js");
 
 const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || "superrefreshsecret";
