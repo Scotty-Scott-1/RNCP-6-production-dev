@@ -9,23 +9,23 @@ const sendMail = require("../../email/mailer.js")
 
 const userSchema = Joi.object({
   firstName: Joi.string()
-    .min(2)
+    .min(1)
     .max(30)
-    .pattern(/^[a-zA-Z]+$/)
+    .pattern(/^[a-zA-Z'\-]+$/)
     .required()
     .messages({
       "string.empty": "First name is required",
-      "string.pattern.base": "First name can only contain letters"
+      "string.pattern.base": "First name can only contain letters, hypthens and apostrophes"
     }),
 
   lastName: Joi.string()
-    .min(2)
+    .min(1)
     .max(30)
-    .pattern(/^[a-zA-Z]+$/)
+    .pattern(/^[a-zA-Z'\-]+$/)
     .required()
     .messages({
       "string.empty": "Last name is required",
-      "string.pattern.base": "Last name can only contain letters"
+      "string.pattern.base": "Last name can only contain letters, hypthens and apostrophes"
     }),
 
   email: Joi.string()
@@ -38,7 +38,7 @@ const userSchema = Joi.object({
 
   username: Joi.string()
     .alphanum()
-    .min(3)
+    .min(1)
     .max(20)
     .required()
     .messages({
@@ -56,27 +56,31 @@ const userSchema = Joi.object({
     }),
 
   companyName: Joi.string()
-    .min(2)
+    .min(1)
     .max(50)
     .required()
+    .pattern(/^[a-zA-Z'\-]+$/)
     .messages({
-      "string.empty": "Company name is required"
+      "string.empty": "Company name is required",
+      "string.pattern.base": "Company name can only contain letters, hypthens and apostrophes"
     }),
 
   companyAddress: Joi.string()
-    .min(5)
-    .max(100)
+    .min(1)
+    .max(50)
     .required()
+    .pattern(/^[a-zA-Z0-9\s',.-]+$/)
     .messages({
-      "string.empty": "Company address is required"
+      "string.empty": "Company address is required",
+      "string.pattern.base": "Company address can only contain letters, numbers, spaces, commas, periods, apostrophes, and hyphens"
     }),
 
   companyWebsite: Joi.string()
-    .uri()
+    .min(1)
+    .max(50)
     .required()
     .messages({
-      "string.uri": "Company website must be a valid URL",
-      "string.empty": "Company website is required"
+      "string.empty": "Company website is required",
     }),
 
   agree: Joi.boolean()
