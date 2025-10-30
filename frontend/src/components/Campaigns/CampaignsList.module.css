@@ -1,15 +1,31 @@
+* { box-sizing: border-box; }
+
+html, body {
+  overflow-x: clip;
+}
+
+
 .outerContainer {
-  height: 100vh;
-  width: 100vw;
-  background: none;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  min-height: 100vh;
+  width: 100%;
   font-family: 'Courier New', Courier, monospace;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   position: relative;
-  padding-top: 50px;
+  padding: 2rem 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: none;
+}
+
+.text, span {
+  font-size: 1rem;
   color: #00fff7;
+  margin-top: 0.5rem;
+  word-wrap: break-word;
+  text-align: center;
 }
 
 .container {
@@ -30,7 +46,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .title {
@@ -56,7 +73,6 @@
   box-shadow: 0 0 10px #00fff7;
   transition: all 0.3s ease;
 }
-
 .button2:hover {
   background-color: #00fff7;
   color: #000;
@@ -64,10 +80,14 @@
   transform: scale(1.05);
 }
 
-.listHeader {
+.listHeader, .listItem {
   display: grid;
   grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr 80px 100px;
   gap: 1rem;
+  align-items: center;
+}
+
+.listHeader {
   font-weight: bold;
   color: #00fff7;
   text-transform: uppercase;
@@ -76,15 +96,10 @@
 }
 
 .listItem {
-  display: grid;
-  grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr 80px 100px;
-  gap: 1rem;
   padding: 0.5rem 0;
   border-bottom: 1px solid #00fff733;
-  align-items: center;
   transition: background 0.2s ease;
 }
-
 .listItem:hover {
   background-color: #00fff711;
 }
@@ -98,60 +113,53 @@
   text-align: left;
   padding: 0;
 }
-
 .campaignButton:hover {
   color: #00d7e0;
   text-decoration: underline;
 }
 
-.trashcan {
-  border: 2px solid #ff3b3b;
+.trashcan, .tickButton {
   border-radius: 6px;
   background: transparent;
-  color: #ff3b3b;
   font-weight: bold;
   padding: 6px 10px;
   cursor: pointer;
-  box-shadow: 0 0 8px #ff3b3b;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.trashcan {
+  border: 2px solid #ff3b3b;
+  color: #ff3b3b;
+  box-shadow: 0 0 8px #ff3b3b;
+}
 .trashcan:hover {
   background-color: #ff3b3b;
   color: #000;
   box-shadow: 0 0 16px #ff3b3b, 0 0 25px #ff3b3b inset;
   transform: translateY(-2px) scale(1.03);
 }
-
 .trashcan:active {
   transform: scale(0.97);
   box-shadow: 0 0 12px #ff3b3b inset;
 }
 
-.status {
-  font-weight: bold;
-  text-transform: capitalize;
-  padding: 4px 8px;
-  border-radius: 6px;
-  text-align: center;
-  font-size: 0.9rem;
+.tickButton {
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  box-shadow: 0 0 8px #00ff00;
 }
-
-.status.active {
-  color: #00fff7;
+.tickButton:hover {
+  background-color: #00ff00;
+  color: #000;
+  box-shadow: 0 0 16px #00ff00, 0 0 25px #00ff00 inset;
+  transform: translateY(-2px) scale(1.03);
 }
-
-.status.inactive {
-  background-color: #dc354533;
-  color: #dc3545;
-}
-
-.status.pending {
-  background-color: #ffc10733;
-  color: #ffc107;
+.tickButton:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 12px #00ff00 inset;
 }
 
 .input {
@@ -167,58 +175,10 @@
   box-shadow: 0 0 4px #00fff733;
   margin-bottom: 0.75rem;
 }
-
 .input:focus {
   border-color: #00d7e0;
   box-shadow: 0 0 6px #00d7e0aa;
   background-color: #121823;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.pagination button {
-  background: transparent;
-  border: 1px solid #00fff7;
-  color: #00fff7;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.pagination button:hover:not(:disabled) {
-  background-color: #00fff7;
-  color: #000;
-  box-shadow: 0 0 10px #00fff788;
-}
-
-.pagination button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-
-
-
-
-.filterBox option {
-  background-color: #000000;
-  color: #00fff7;
-  font-weight: bold;
-  padding: 10px;
-  border: #00d7e0;
-}
-
-/* Hover effect on options */
-.filterBox option:hover {
-  background-color: #00fff7;
-  color: #000;
 }
 
 select {
@@ -234,40 +194,89 @@ select {
   transition: all 0.3s ease;
 }
 select:hover {
-    background-color: #00fff7;
+  background-color: #00fff7;
   color: #000;
   box-shadow: 0 0 20px #00fff7, 0 0 40px #00fff7 inset;
   transform: scale(1.05);
 }
-
-.actions {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.tickButton {
-  border: 2px solid #00ff00;
-  border-radius: 6px;
-  background: transparent;
-  color: #00ff00;
+.filterBox option {
+  background-color: #000;
+  color: #00fff7;
   font-weight: bold;
-  padding: 6px 10px;
-  cursor: pointer;
-  box-shadow: 0 0 8px #00ff00;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 10px;
 }
-
-.tickButton:hover {
-  background-color: #00ff00;
+.filterBox option:hover {
+  background-color: #00fff7;
   color: #000;
-  box-shadow: 0 0 16px #00ff00, 0 0 25px #00ff00 inset;
-  transform: translateY(-2px) scale(1.03);
 }
 
-.tickButton:active {
-  transform: scale(0.97);
-  box-shadow: 0 0
+.status {
+  font-weight: bold;
+  text-transform: capitalize;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.status.active { color: #00fff7; }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.pagination button {
+  background: transparent;
+  border: 1px solid #00fff7;
+  color: #00fff7;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.pagination button:hover:not(:disabled) {
+  background-color: #00fff7;
+  color: #000;
+  box-shadow: 0 0 10px #00fff788;
+}
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+
+@media (max-width: 992px) {
+  .title { font-size: 1.6rem; }
+  .listHeader, .listItem {
+    grid-template-columns: 2fr 1fr 1fr 1fr 60px 80px;
+    font-size: 0.9rem;
+  }
+  .button2 { padding: 8px 14px; font-size: 0.9rem; }
+}
+
+@media (max-width: 768px) {
+  .container { padding: 20px; }
+  .listHeader, .listItem {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .listHeader div:nth-last-child(-n+2),
+  .listItem div:nth-last-child(-n+2) {
+    display: none;
+  }
+  .title { font-size: 1.4rem; }
+}
+
+@media (max-width: 480px) {
+  .container { width: 100%; padding: 16px; }
+  .listHeader, .listItem {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+  }
+  .header { flex-direction: column; text-align: center; }
+  .button2, select { width: 100%; }
+  .title { font-size: 1.2rem; }
 }
