@@ -5,7 +5,6 @@ import Navbar from "../Header/Nav/nav.jsx";
 
 const Welcome = () => {
   const navigate = useNavigate();
-  const canvasRef = useRef(null);
 
   const goToLogin = () => {
     navigate("/signin");
@@ -16,7 +15,6 @@ const Welcome = () => {
   return (
     <div className={styles.outerContainer}>
       <Navbar />
-      <canvas ref={canvasRef} className={styles.canvas}></canvas>
       <div className={styles.container}>
         <h1 className={styles.title}>Phishing Simulator</h1>
         <button type="button" onClick={goToLogin} className={styles.button}>

@@ -1,94 +1,67 @@
+* { box-sizing: border-box; }
+
+html, body {
+  overflow-x: clip;
+}
+
 .outerContainer {
-  height: 100vh;
-  width: 100vw;
-  background: none;
+  min-height: 100vh;
+  width: 100%;
+  font-family: 'Courier New', Courier, monospace;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  font-family: 'Courier New', Courier, monospace;
-  overflow: hidden;
   position: relative;
-  padding-top: 0px;
+  padding: 2rem 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: none;
 }
-
-@media (max-width: 600px) {
-  .outerContainer {
-    padding-top: 100px;
-  }
-}
-
 
 .container {
+  margin-top: 5rem;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 40px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.5rem;
+  width: 95%;
+  max-width: 500px;
+  padding: 2rem;
   border: 2px solid #00fff7;
   border-radius: 12px;
   background-color: rgba(0, 0, 0, 0.85);
   box-shadow: 0 0 30px #00fff7, 0 0 60px #00fff7 inset;
+  text-align: center;
   z-index: 1;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  color: #00fff7;
-  margin-bottom: 400px
+  word-wrap: break-word;
 }
 
-/* Form title */
 .title {
-  display: block;
   font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-align: center;
   color: #00fff7;
+  margin-bottom: 1rem;
   text-shadow: 0 0 10px #00fff7, 0 0 20px #00fff7;
-  margin-bottom: 30px;
+  word-wrap: break-word;
+  text-align: center;
 }
 
-/* Input fields */
-.input {
-  width: 100%;
-  padding: 10px 14px;
-  margin-bottom: 15px;
-  border: 1.5px solid #00fff7;
-  border-radius: 4px;
-  background-color: #000000;
-  color: #00fff7;
-  font-size: 16px;
-  box-sizing: border-box;
-  outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-  box-shadow: 0 0 4px #00fff733;
-}
-
-.input:focus {
-  border-color: #00d7e0;
-  box-shadow: 0 0 6px #00d7e0aa;
-  background-color: #000000;
-}
-
-/* Placeholder text */
-.input::placeholder {
-  color: #00fff7aa;
-  font-style: italic;
-}
-
-/* Button */
 .button {
   background-color: transparent;
   color: #00fff7;
   border: 2px solid #00fff7;
   border-radius: 8px;
-  padding: 12px 24px;
-  font-size: 1.2rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
   box-shadow: 0 0 10px #00fff7;
+  max-width: 200px;
+  width: 100%;
+  text-align: center;
 }
 
 .button:hover {
@@ -103,24 +76,99 @@
   box-shadow: 0 0 15px #00fff7 inset;
 }
 
-/* Links */
+/* Input fields */
+.input {
+  width: 65%;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid #00fff7;
+  border-radius: 6px;
+  background-color: #000;
+  color: #00fff7;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 4px #00fff733;
+}
+
+.input:focus {
+  border-color: #00d7e0;
+  box-shadow: 0 0 6px #00d7e0aa;
+}
+
+.input::placeholder {
+  color: #00fff7aa;
+  font-style: italic;
+}
+
+
+
 .link {
   color: #00fff7;
   text-decoration: none;
   transition: color 0.3s ease;
-  cursor: pointer;
 }
 
 .link:hover {
   color: #fff;
 }
 
-.a {
-  border: none;
-  box-shadow: none;
-  background: none;
-  text-shadow: none;
-  margin: 0;
-  padding: 0;
-  font-family: 'Courier New', Courier, monospace;
+@media (max-width: 350px) {
+  .container {
+    width: 95%;
+    padding: 1rem;
+    gap: 1rem;
+    margin-top: 200px;
+  }
+  .title {
+    font-size: 1.5rem;
+  }
+  .button {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+  .input {
+    width: 100%;
+  }
+  .button {
+    width: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 95%;
+    padding: 0;
+    gap: 1rem;
+    margin-top: 100px;
+  }
+  .title {
+    font-size: 1.5rem;
+  }
+  .input {
+    width: 85%;
+  }
+  .button {
+    width: 60%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+  .title {
+    font-size: 1.8rem;
+  }
+    .input {
+    width: 70%;
+  }
+  .button {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 600px;
+  }
 }

@@ -56,7 +56,7 @@ const Rain = () => {
         width: "100%",
         height: "100%",
         zIndex: -1,
-        background: "black", // ensures full black background
+        background: "black",
       }}
     />
   );

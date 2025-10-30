@@ -45,8 +45,8 @@ const Sign_in = () => {
   return (
     <div className={styles.outerContainer}>
       <Navbar />
-      <h1 className={styles.title}>Sign in or create an account</h1>
       <form className={styles.container} onSubmit={handleSubmit}>
+        <h1 className={styles.title}>Phishing Simulator</h1>
         <input
           type="text"
           value={username} onChange={(e) => setUsername(e.target.value)}
