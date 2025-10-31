@@ -141,17 +141,7 @@ app.use("/api/Security", verifyEmail);
 
 
 
-// Serve built React frontend in production
-if (isProduction) {
-  app.use(express.static(path.join(__dirname, "public")));
-
-  // Catch-all for SPA routing
-  app.get(/.*/, (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "index.html"));
-  });
-}
-
 // Start server
 app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });
