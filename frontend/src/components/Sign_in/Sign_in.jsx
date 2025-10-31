@@ -10,6 +10,12 @@ const Sign_in = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { setAccessToken, setTempMfaToken } = useAuth();
+  const prod = import.meta.env.VITE_PROD;
+  let apiBase = "";
+
+  if (prod === "true") {
+      apiBase = import.meta.env.VITE_API_BASE;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +25,7 @@ const Sign_in = () => {
       return;
     }
     try {
-      const res = await fetch("/api/user/auth", {
+      const res = await fetch(`${apiBase}/api/user/auth`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({ username, password }),
