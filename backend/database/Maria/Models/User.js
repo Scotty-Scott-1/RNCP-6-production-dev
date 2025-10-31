@@ -46,9 +46,6 @@ const User = sequelize.define(
     companyWebsite: {
       type: DataTypes.STRING,
       allowNull: true,
-      validate: {
-        isUrl: true,
-      },
     },
     agree: {
       type: DataTypes.BOOLEAN,

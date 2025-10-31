@@ -13,7 +13,12 @@ const SignUp = () => {
   const [companyAddress, setCompanyAddress] = useState("");
   const [companyWebsite, setCompanyWebsite] = useState("");
   const [agree, setAgree] = useState(false);
+  const prod = import.meta.env.VITE_PROD;
+  let apiBase = "";
 
+  if (prod === "true") {
+      apiBase = import.meta.env.VITE_API_BASE;
+  }
 
   // Submit handler
   const handleSubmit = async (e) => {
@@ -23,7 +28,7 @@ const SignUp = () => {
           return;
     }
     try {
-      const response = await fetch("/api/user/new", {
+      const response = await fetch(`${apiBase}/api/user/new`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
