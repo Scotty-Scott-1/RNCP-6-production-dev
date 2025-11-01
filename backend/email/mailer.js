@@ -10,6 +10,15 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+
+transporter.verify(function (error, success) {
+  if (error) {
+    console.error("Email transporter verification failed:", error);
+  } else {
+    console.log("Email transporter is ready to send messages");
+  }
+});
+
 // Function to send email
 const sendMail = async ({ to, subject, text, html }) => {
   try {
