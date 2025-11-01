@@ -3,7 +3,7 @@ const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 const sequelize = require('./database/Maria/connect.js');
 const initDB = require("./database/Maria/initDB.js");
-
+const resendTest = require("./email/resendStartTest.js");
 const express = require("express");
 const connectDB = require("./database/connect.js");
 const cors = require("cors");
@@ -139,7 +139,7 @@ app.use("/api/security", securityRefresh);
 const verifyEmail = require("./api/Security/verifyEmail.js");
 app.use("/api/Security", verifyEmail);
 
-
+resendTest();
 
 // Start server
 app.listen(PORT, () => {

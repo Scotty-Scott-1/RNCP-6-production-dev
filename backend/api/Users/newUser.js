@@ -3,8 +3,8 @@ const Joi = require("joi");
 const User = require("../../database/Maria/Models/User.js");
 const router = express.Router();
 const crypto = require("crypto");
-const sendMail = require("../../email/mailer.js")
-
+const sendMail2 = require("../../email/resendMailer.js")
+let myUrl = "";
 
 
 const userSchema = Joi.object({
@@ -121,46 +121,55 @@ router.post("/new", async (req, res) => {
     const verificationToken = crypto.randomBytes(32).toString("hex");
     const tokenExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
-     const user = await User.create({
+    const user = await User.create({
       ...req.body,
       isVerified: false,
       verificationToken,
       tokenExpiry,
     });
 
+    if (process.env.NODE_ENV === "development") {
+      myUrl = process.env.FRONTEND_URL_DEV;
+    } else {
+      myUrl = process.env.FRONTEND_URL_PROD;
+    }
+
     if (user) {
       try {
-        const info = {
+        await sendMail2({
           to: user.email,
           subject: "Verify your account",
           text: `
-                Hello ${user.firstName} ${user.lastName},
+            Hello ${user.firstName} ${user.lastName},
 
-                Thanks for signing up the the simulator tool.
+            Thanks for signing up for the simulator tool.
 
-                Please verify your account by clicking on the link below:
+            Please verify your account by clicking the link below:
 
-                http://localhost:5173/emailverify?token=${verificationToken}
+            ${myUrl}/emailverify?token=${verificationToken}
 
-                Kind regards,
-                Simulator
-              `,
-              html: `
-                Hello ${user.firstName} ${user.lastName},<br/><br/>
-                Thanks for signing up the the simulator tool.<br/><br/>
-                Please verify your account by clicking on the link below:<br/><br/>
-                <a href="http://localhost:5173/emailverify?token=${verificationToken}">Verify</a><br/><br/>
-                Kind regards,<br/>
-                Simulator
-              `
-        };
-          await sendMail(info);
-          console.log("_____________________________");
-          console.log(process.env.FRONTEND_URL_DEV);
-          console.log("_____________________________");
+            Kind regards,
+            Simulator
+          `,
+          html: `
+            <p>Hello ${user.firstName} ${user.lastName},</p>
+            <p>Thanks for signing up for the simulator tool.</p>
+            <p>
+              Please verify your account by clicking the link below:
+            </p>
+            <p>
+              <a href="${myUrl}/emailverify?token=${verificationToken}">
+                Verify your account
+              </a>
+            </p>
+            <p>Kind regards,<br/>Simulator</p>
+          `,
+        });
 
-      } catch {
-        res.status(500).json({ message: "Cerification email failed to send" });
+        console.log("✉️ [New User] Account verification email sent successfully");
+      } catch (err) {
+        console.error("✉️ [New User] Tried and failed to send account verification email", err);
+        res.status(500).json({ message: "Verification email failed to send" });
       }
     }
 

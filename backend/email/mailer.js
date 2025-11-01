@@ -13,9 +13,9 @@ const transporter = nodemailer.createTransport({
 
 transporter.verify(function (error, success) {
   if (error) {
-    console.error("Email transporter verification failed:", error);
+    console.error("❌ [Nodemailer] Email transporter verification failed:", error);
   } else {
-    console.log("Email transporter is ready to send messages");
+    console.log("✅ [Nodemailer] Email transporter is ready to send messages");
   }
 });
 
