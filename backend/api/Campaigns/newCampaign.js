@@ -10,7 +10,7 @@ router.post("/new", verifyAccessToken, async (req, res) => {
     const campaign = await Campaign.create({
       ...req.body,
       createdBy: userId,
-      status: "active",
+      status: "pending",
     });
 
 		console.log(campaign);
@@ -19,6 +19,5 @@ router.post("/new", verifyAccessToken, async (req, res) => {
 		res.status(400).json({ message: error.message });
 	}
 });
-
 
 module.exports = router;

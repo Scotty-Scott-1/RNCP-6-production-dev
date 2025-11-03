@@ -76,8 +76,8 @@ useEffect(() => {
         return;
       }
       const data = await response.json();
-      if(data.message === "pending") {
-        alert("No emails sent until authorised by Admin");
+      if(data.message === "Requires Authorisation") {
+        alert("No emails sent until authorised by Admin. You'll be notifed if the campaign is lauched or rejected.");
         return;
       }
       alert("Campaign launched successfully!");

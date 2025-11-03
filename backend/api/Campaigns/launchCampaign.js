@@ -3,6 +3,7 @@ const Campaign = require("../../database/Maria/Models/Campaign.js");
 const MailingList = require("../../database/Maria/Models/MailingList.js");
 const Contact = require("../../database/Maria/Models/Contact.js");
 const EmailLog = require("../../database/Models/EmailLog.js");
+const Admin = require("../../database/Models/Admin.js");
 const verifyAccessToken = require("../Security/verifyTokenBackend.js")
 const sendMail = require("../../email/mailer.js")
 const router = express.Router();
@@ -32,10 +33,26 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
     }
 
     if (process.env.NODE_ENV !== "development") {
+      const contacts = myList.Contacts || [];
+      await Campaign.update(
+        { status: "requires authorisation" },
+        { where: { id: campaignID, createdBy: userID } }
+      );
+
+      const admin = await Admin.create({
+        mdbCampaignID: campaignID,
+        mdbUserID: userID,
+        mdbListID: listID,
+        contactList: contacts,
+        template: template,
+        status: "Requires Authorisation"
+      });
+
+
       console.log("-------------PRODUCTION ENV------------------");
       console.log("Sent the back a pending message. No emails sent until authorised by admin")
       console.log("-------------PRODUCTION ENV------------------");
-      return res.status(200).json({message: "pending"});
+      return res.status(200).json({message: "Requires Authorisation"});
     }
 
 

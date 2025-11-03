@@ -9,8 +9,13 @@ router.get("/", verifyAccessToken, async (req, res) => {
     const userId = req.user.id;
     const { status } = req.query;
 
-    if (status === "Active") {
-      const campaigns = await Campaign.findAll({ where: { createdBy: userId, status: "active" }, include: [MailingList] });
+    if (status === "Pending") {
+      const campaigns = await Campaign.findAll({ where: { createdBy: userId, status: "pending" }, include: [MailingList] });
+      return res.json(campaigns.map(list => list.toJSON()));
+    }
+
+    if (status === "Requires Authorisation") {
+      const campaigns = await Campaign.findAll({ where: { createdBy: userId, status: "requires authorisation" }, include: [MailingList] });
       return res.json(campaigns.map(list => list.toJSON()));
     }
 

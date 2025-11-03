@@ -46,9 +46,10 @@ const Campaigns = () => {
           <div className={styles.filterBox}>
             <select id="statusFilter" value={filter} onChange={(e) => setFilter(e.target.value)}>
               <option value="All">All</option>
-              <option value="Active">Active</option>
+              <option value="Pending">Pending</option>
               <option value="Completed">Completed</option>
               <option value="Launched">Launched</option>
+              <option value="Requires Authorisation">Requires Authorisation</option>
             </select>
           </div>
           <h1 className={styles.title}>Campaigns</h1>

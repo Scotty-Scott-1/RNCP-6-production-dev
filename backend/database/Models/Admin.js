@@ -5,7 +5,8 @@ const adminSchema = new mongoose.Schema({
   mdbUserID: Number,
   mdbListID: Number,
   contactList: Array,
-  template: String
+  template: String,
+  status: String
 });
 
 module.exports = mongoose.model("Admin", adminSchema);
