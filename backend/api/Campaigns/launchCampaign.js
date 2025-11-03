@@ -1,5 +1,4 @@
 const express = require("express");
-require("dotenv").config();
 const Campaign = require("../../database/Maria/Models/Campaign.js");
 const MailingList = require("../../database/Maria/Models/MailingList.js");
 const Contact = require("../../database/Maria/Models/Contact.js");

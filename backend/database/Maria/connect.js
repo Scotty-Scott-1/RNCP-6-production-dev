@@ -1,5 +1,9 @@
 const { Sequelize } = require('sequelize');
-require("dotenv").config();
+
+if (!process.env.DB_NAME || !process.env.DB_USER || !process.env.DB_PASSWORD ) {
+  console.log("❌ [MariaDB]: File: connect.js | Info: .env is not available");
+}
+
 const name = process.env.DB_NAME;
 const user = process.env.DB_USER;
 const password = process.env.DB_PASSWORD;
