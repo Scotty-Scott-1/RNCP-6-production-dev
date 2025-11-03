@@ -9,14 +9,12 @@ router.post("/frontend", (req, res) => {
     return res.status(403).json({ valid: false, message: "No token provided" });
   }
 
-  console.log("Checking if .env is accessible...");
-  if (!process.env.JWT_SECRET) {
-    console.log(".env is not available")
-  }
+  if (!process.env.JWT_SECRET) console.log("❌ [Express]: File: verifyTokenFrontend.js Info: .env is not available");
+  if (process.env.JWT_SECRET) console.log("✅ [Express]: File: verifyTokenFrontend.js Info: .env is available");
+
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("Decoded token:", decoded);
+    jwt.verify(token, process.env.JWT_SECRET);
     return res.status(200).json({ valid: true, message: "Token is valid" });
   } catch (err) {
     if (err.name === "TokenExpiredError") {

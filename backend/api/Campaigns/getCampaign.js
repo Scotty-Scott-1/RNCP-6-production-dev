@@ -9,8 +9,6 @@ router.get("/", verifyAccessToken, async (req, res) => {
     const userId = req.user.id;
     const { status } = req.query;
 
-    console.log(status);
-
     if (status === "Active") {
       const campaigns = await Campaign.findAll({ where: { createdBy: userId, status: "active" }, include: [MailingList] });
       return res.json(campaigns.map(list => list.toJSON()));
