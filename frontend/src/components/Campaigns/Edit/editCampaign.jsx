@@ -72,14 +72,16 @@ useEffect(() => {
          }),
       });
       if (!response.ok) {
-        const errorData = await response.json();
-        console.error("Launch failed:", errorData);
         alert("Failed to launch campaign");
+        return;
+      }
+      const data = await response.json();
+      if(data.message === "pending") {
+        alert("No emails sent until authorised by Admin");
         return;
       }
       alert("Campaign launched successfully!");
     } catch (err) {
-      console.error("Error launching campaign:", err);
       alert("Something went wrong launching the campaign.");
     }
   }

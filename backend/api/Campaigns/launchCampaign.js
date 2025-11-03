@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const Campaign = require("../../database/Maria/Models/Campaign.js");
 const MailingList = require("../../database/Maria/Models/MailingList.js");
 const Contact = require("../../database/Maria/Models/Contact.js");
@@ -19,6 +20,8 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
     console.log("Template:", template);
     console.log("-------------LAUNCH------------------");
 
+
+
   // Get the mailing list and its contacts
     const myList = await MailingList.findOne({
       where: { id: listID, createdBy: userID },
@@ -27,6 +30,13 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
 
     if (!myList) {
       return res.status(404).json({ message: "Mailing list not found" });
+    }
+
+    if (process.env.NODE_ENV !== "development") {
+      console.log("-------------PRODUCTION ENV------------------");
+      console.log("Sent the back a pending message. No emails sent until authorised by admin")
+      console.log("-------------PRODUCTION ENV------------------");
+      return res.status(200).json({message: "pending"});
     }
 
 
