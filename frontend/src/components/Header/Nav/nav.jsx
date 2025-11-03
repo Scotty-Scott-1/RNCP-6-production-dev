@@ -25,8 +25,11 @@ const Navbar = () => {
         <Link to="/campaigns" className={styles.navLink}>Campaigns</Link>
         <Link to="/mailinglists" className={styles.navLink}>Mailing Lists</Link>
         <Link to="/template" className={styles.navLink}>Templates</Link>
-      <button className={styles.navLink} onClick={handleLogout}>Sign Out</button>
+        <button className={styles.navLink} onClick={handleLogout}>Sign Out</button>
         <Link to="/mfa" className={styles.navLink}>MFA</Link>
+        {import.meta.env.VITE_ENV === "dev" && (
+          <Link to="/admin" className={styles.navLink}>admin</Link>
+        )}
       </nav>
     </div>
   );
