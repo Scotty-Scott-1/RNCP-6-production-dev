@@ -20,9 +20,13 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
     console.log("Template:", template);
     console.log("-------------LAUNCH------------------");
 
+    if (process.env.NODE_ENV === "development") {
+      myUrl = process.env.FRONTEND_URL_DEV;
+    } else {
+      myUrl = process.env.FRONTEND_URL_PROD;
+    }
 
-
-  // Get the mailing list and its contacts
+    // Get the mailing list and its contacts
     const myList = await MailingList.findOne({
       where: { id: listID, createdBy: userID },
       include: [{ model: Contact }]
@@ -88,7 +92,7 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
               Your organisation has gifted you a voucher.
 
               Click the link below to claim it:
-              http://localhost:5173/claim?logid=${emailLog._id}
+              ${myUrl}/claim?logid=${emailLog._id}
 
               Kind regards,
               Rewards team.
@@ -96,7 +100,7 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
             html: `
               Hi ${contact.name}, <br/><br/>
               Your organisation has gifted you a voucher.<br/><br/>
-              Click <a href="http://localhost:5173/claim?logid=${emailLog._id}">here</a> to claim it.<br/><br/>
+              Click <a href="${myUrl}/claim?logid=${emailLog._id}">here</a> to claim it.<br/><br/>
               Kind regards,<br/><br/>
               Rewards team.
             `
@@ -110,7 +114,7 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
 
               Your annual appraisal is ready for review. Please acknowledge receipt by clicking the link below:
 
-              http://localhost:5173/appraisal?logid=${emailLog._id}
+              ${myUrl}/appraisal?logid=${emailLog._id}
 
               Kind regards,
               HR team
@@ -118,7 +122,7 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
             html: `
               Hello ${contact.name} ${contact.lastName}, <br/><br/>
               Your annual appraisal is ready for review.<br/><br/>
-              <a href="http://localhost:5173/appraisal?logid=${emailLog._id}">Your appraisal</a><br/><br/>
+              <a href="${myUrl}/appraisal?logid=${emailLog._id}">Your appraisal</a><br/><br/>
               Kind regards,<br/>
               HR team.
             `
@@ -132,7 +136,7 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
 
               Please confirm that your bank account details are correct:
 
-              http://localhost:5173/payroll?logid=${emailLog._id}
+              ${myUrl}/payroll?logid=${emailLog._id}
 
               Thank you,
               Payroll Team
@@ -140,7 +144,7 @@ router.post("/launch", verifyAccessToken, async (req, res) => {
             html: `
               Hello ${contact.name} ${contact.lastName}, <br/><br/>
               Please confirm your bank account details:<br/><br/>
-              <a href="http://localhost:5173/payroll?logid=${emailLog._id}">Payroll Update</a><br/><br/>
+              <a href="${myUrl}/payroll?logid=${emailLog._id}">Payroll Update</a><br/><br/>
               Thank you,<br/>
               Payroll Team
             `
