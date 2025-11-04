@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './MailingLists.module.css';
+import styles from './newMailingList.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../security/authContext.jsx";
 

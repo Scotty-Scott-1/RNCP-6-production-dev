@@ -1,19 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+  font-family: 'Courier New', Courier, monospace;
+}
+
 .reportContainer {
-  background-color: rgba(0,0,0,0.85);
+  background-color: rgba(0, 0, 0, 0.85);
   border: 2px solid #00fff7;
   border-radius: 12px;
-  padding: 30px;
+  padding: clamp(1.5rem, 4vw, 2rem);
   color: #00fff7;
-  font-family: 'Courier New', monospace;
   max-width: 900px;
   margin: 2rem auto;
+  box-shadow: 0 0 30px #00fff7, inset 0 0 60px #00fff733;
 }
 
 .title {
-  font-size: 1.8rem;
+  font-size: clamp(1.5rem, 4vw, 1.8rem);
   margin-bottom: 1.5rem;
   text-align: center;
   color: #00fff7;
+  text-shadow: 0 0 10px #00fff7aa;
 }
 
 .section {
@@ -24,8 +36,9 @@
 
 .section h2 {
   margin-bottom: 0.5rem;
-  font-size: 1.2rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.2rem);
   text-decoration: underline;
+  color: #00fff7;
 }
 
 .backButton {
@@ -36,13 +49,13 @@
   color: #00fff7;
   cursor: pointer;
   font-weight: bold;
+  transition: all 0.3s ease;
 }
 
 .backButton:hover {
   background-color: #00fff7;
   color: #000;
 }
-
 
 .resulatCard,
 .email-log-card {
@@ -69,13 +82,35 @@
   font-size: 0.95rem;
 }
 
+.email-log-card strong {
+  color: #00fff7;
+  text-shadow: 0 0 8px #00fff7, 0 0 16px #00fff7;
+}
+
 .date {
   color: #00fff7aa;
   font-style: italic;
   text-shadow: 0 0 6px #00fff7;
 }
 
-.email-log-card strong {
-  color: #00fff7;
-  text-shadow: 0 0 8px #00fff7, 0 0 16px #00fff7;
+@media (max-width: 600px) {
+  .reportContainer {
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    text-align: left;
+  }
+
+  .backButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .resulatCard,
+  .email-log-card {
+    padding: 1rem;
+  }
 }
