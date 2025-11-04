@@ -3,6 +3,11 @@
 html, body {
   overflow-x: clip;
 }
+.actions {
+  display: flex;
+  gap: 0.5rem; /* space between buttons */
+  justify-content: flex-end; /* optional: align to right */
+}
 
 
 .outerContainer {

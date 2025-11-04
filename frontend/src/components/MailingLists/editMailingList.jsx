@@ -61,7 +61,8 @@ return (
         <button
           type="button"
           className={styles.backButton}
-          onClick={() => navigate("/mailinglists")}>
+          onClick={() => navigate("/mailinglists")}
+        >
           Back to Mailing Lists
         </button>
         <h1 className={styles.title}>Edit Mailing List</h1>
@@ -75,7 +76,7 @@ return (
         className={styles.input}
         placeholder="Mailing List Name"
         required
-        id='listname'
+        id="listname"
       />
 
       <label className={styles.inputLabel} htmlFor="desc">Description:</label>
@@ -124,56 +125,78 @@ return (
       </div>
 
       <h2 className={styles.title}>Add New Contact</h2>
-      <div className={styles.listItem}>
-        <input
-          className={styles.input}
-          placeholder="First Name"
-          value={newContact.name}
-          onChange={(e) => setNewContact({ ...newContact, name: e.target.value })}
-        />
+      <div className={styles.addContactRow}>
+        <div className={styles.contactInputGroup}>
+          <label htmlFor="firstName">First Name</label>
+          <input
+            id="firstName"
+            className={styles.input}
+            placeholder="First Name"
+            value={newContact.name}
+            onChange={(e) => setNewContact({ ...newContact, name: e.target.value })}
+          />
+        </div>
 
-        <input
-          className={styles.input}
-          placeholder="Last Name"
-          value={newContact.lastName}
-          onChange={(e) => setNewContact({ ...newContact, lastName: e.target.value })}
-        />
+        <div className={styles.contactInputGroup}>
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            id="lastName"
+            className={styles.input}
+            placeholder="Last Name"
+            value={newContact.lastName}
+            onChange={(e) => setNewContact({ ...newContact, lastName: e.target.value })}
+          />
+        </div>
 
-        <input
-          className={styles.input}
-          placeholder="Email"
-          value={newContact.email}
-          onChange={(e) => setNewContact({ ...newContact, email: e.target.value })}
-        />
+        <div className={styles.contactInputGroup}>
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            className={styles.input}
+            placeholder="Email"
+            value={newContact.email}
+            onChange={(e) => setNewContact({ ...newContact, email: e.target.value })}
+          />
+        </div>
 
-        <input
-          className={styles.input}
-          placeholder="Department"
-          value={newContact.department}
-          onChange={(e) => setNewContact({ ...newContact, department: e.target.value })}
-        />
+        <div className={styles.contactInputGroup}>
+          <label htmlFor="department">Department</label>
+          <input
+            id="department"
+            className={styles.input}
+            placeholder="Department"
+            value={newContact.department}
+            onChange={(e) => setNewContact({ ...newContact, department: e.target.value })}
+          />
+        </div>
 
-        <input
-          className={styles.input}
-          placeholder="Role"
-          value={newContact.role}
-          onChange={(e) => setNewContact({ ...newContact, role: e.target.value })}
-        />
-
+        <div className={styles.contactInputGroup}>
+          <label htmlFor="role">Role</label>
+          <input
+            id="role"
+            className={styles.input}
+            placeholder="Role"
+            value={newContact.role}
+            onChange={(e) => setNewContact({ ...newContact, role: e.target.value })}
+          />
+        </div>
       </div>
 
       <button
         type="button"
         className={styles.button2}
-        onClick={handleAddContact}> Add Contact
+        onClick={handleAddContact}
+      >
+        Add Contact
       </button>
 
       <button
         type="submit"
         className={styles.button2}
-        style={{ marginTop: "1rem" }}> Save
+        style={{ marginTop: "1rem" }}
+      >
+        Save
       </button>
-
     </form>
   </div>
 );
