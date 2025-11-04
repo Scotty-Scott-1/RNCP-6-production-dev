@@ -139,6 +139,11 @@ app.use("/api/security", securityRefresh);
 const verifyEmail = require("./api/Security/verifyEmail.js");
 app.use("/api/Security", verifyEmail);
 
+// ADMIN
+const adminCheckReqs = require("./api/Admin/adminCheckReqs.js");
+app.use("/api", adminCheckReqs );
+
+
 // resendTest();
 
 // Start server

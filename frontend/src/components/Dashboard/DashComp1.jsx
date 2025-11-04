@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./DashComp1.module.css";
+import { useCheckReqs } from "../Hooks/useCheckReqs.jsx";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../security/authContext.jsx";
 
 const Comp1 = () => {
+  const { accessToken } = useAuth();
   const navigate = useNavigate();
+  const { message } = useCheckReqs(accessToken);
+
+  useEffect(() => {
+    if (message === "A campaign has been authorised") {
+      alert(message);
+    }
+  }, [message]);
+
+
 
   const handleClick = (section) => {
     switch (section) {

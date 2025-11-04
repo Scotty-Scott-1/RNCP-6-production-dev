@@ -25,8 +25,6 @@ import ReportPage from "./pages/Reporting/Report.jsx";
 import VerifyEmail from "./pages/Entry/EmailVerification.jsx";
 import MFA from "./pages/Entry/MFA.jsx";
 import MFAInputPage from "./pages/Entry/MFAInput.jsx";
-import AdminSignIn from "./pages/Admin/Admin_Sign_In.jsx";
-
 
 const App = () => (
   <AuthProvider>
@@ -36,7 +34,6 @@ const App = () => (
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/signup" element={<Signupform />} />
-        <Route path="/admin" element={<AdminSignIn />} />
         <Route path="/signin" element={<SignIn />} />
         <Route
           path="/dashboard"
