@@ -304,10 +304,19 @@ select.input:focus {
     row-gap: 6px;
     align-items: start;
   }
-  .listHeader { display: none; }
+  .listHeader {
+    display: none;
+  }
+  .container {
+    width: 80%;
+  }
+
 }
 
 @media (max-height: 500px) and (orientation: landscape) {
-  .container { padding: 10px; gap: 8px; }
+  .container {
+    padding: 10px;
+    gap: 8px;
+  }
   .input, .inputDatetime, select.input { padding: 6px 8px; font-size: 13px; }
 }

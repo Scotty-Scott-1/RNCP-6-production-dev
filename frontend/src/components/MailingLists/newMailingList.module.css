@@ -116,3 +116,44 @@ label p {
     width: 100%;
   }
 }
+
+@media (max-width: 480px) {
+  .background {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .container {
+    width: 91%;
+    padding: 1.25rem;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+
+  .title {
+    font-size: 1.3rem;
+    text-align: left;
+    margin-bottom: 0.75rem;
+  }
+
+  .input {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .button2 {
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+  }
+
+  label {
+    font-size: 0.95rem;
+  }
+
+  label p {
+    font-size: 0.95rem;
+  }
+}
+

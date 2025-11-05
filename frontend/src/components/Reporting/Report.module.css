@@ -114,3 +114,49 @@ html, body {
     padding: 1rem;
   }
 }
+
+@media (max-width: 480px) {
+  .reportContainer {
+    width: 87%;
+    margin: 1.5rem auto;
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+
+  .title {
+    font-size: 1.3rem;
+    text-align: left;
+    margin-bottom: 1rem;
+  }
+
+  .section {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .section h2 {
+    font-size: 1.1rem;
+  }
+
+  .backButton {
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+  }
+
+  .resulatCard,
+  .email-log-card {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .email-log-card div {
+    font-size: 0.9rem;
+  }
+
+  .email-log-card strong {
+    font-size: 0.95rem;
+  }
+}

@@ -34,7 +34,7 @@ html, body {
 }
 
 .container {
-  width: 95%;
+  width: 100%;
   max-width: 1500px;
   background-color: rgba(0, 0, 0, 0.85);
   border: 2px solid #00fff7;
@@ -275,7 +275,9 @@ select:hover {
 }
 
 @media (max-width: 480px) {
-  .container { width: 100%; padding: 16px; }
+  .container {
+    width: 93%;
+    padding: 16px; }
   .listHeader, .listItem {
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
